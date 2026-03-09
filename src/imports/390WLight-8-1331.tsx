@@ -5,6 +5,8 @@ import imgYourPrivacyChoicesIcon from "figma:asset/ed35f48a9fd142447684c5717a326
 import imgTravisMathew from "figma:asset/11686a68dd8bd8e6264c12a51c7adc896867d422.png";
 import imgYouveGotAMysteryDiscount from "figma:asset/4693b38e4ccb7d30410afad3fe394fca43815200.png";
 import { imgGroup, imgGroup1, imgGroup2 } from "./svg-xc2ji";
+import WhiteLogo from "../assets/White.svg";
+import BlackLogo from "../assets/Black.svg";
 
 function Wrapper({ children }: React.PropsWithChildren<{}>) {
   return (
@@ -311,34 +313,7 @@ export default function Component390WLight() {
       <div className="absolute bg-[#090c0f] content-stretch flex flex-col gap-[44px] items-start left-0 pb-[44px] pt-[64px] px-[20px] right-0 top-[1357.34px]" data-name="div.block">
         <div className="content-stretch flex flex-col h-[27px] items-center relative shrink-0 w-full" data-name="div.relative">
           <div className="content-stretch flex flex-col h-[27px] items-start max-w-[350px] overflow-clip relative shrink-0 w-[306px]" data-name="TravisMathew">
-            <div className="content-stretch flex flex-col h-[27px] items-center justify-center overflow-clip relative shrink-0 w-[306px]" data-name="TM_Logo_Full_3.svg fill">
-              <div className="h-[27px] overflow-clip relative shrink-0 w-[306px]" data-name="TM_Logo_Full_3.svg">
-                <div className="absolute contents inset-0" data-name="Clip path group">
-                  <div className="absolute inset-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[306px_27px]" data-name="Group" style={{ maskImage: `url('${imgGroup}')` }}>
-                    <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 305.995 27.0003">
-                      <g id="Group">
-                        <path clipRule="evenodd" d={svgPaths.p329d4680} fill="var(--fill-0, white)" fillRule="evenodd" id="Vector" />
-                        <path clipRule="evenodd" d={svgPaths.p17cd0500} fill="var(--fill-0, white)" fillRule="evenodd" id="Vector_2" />
-                        <path d={svgPaths.p31f81600} fill="var(--fill-0, white)" id="Vector_3" />
-                        <path d={svgPaths.p9e57d00} fill="var(--fill-0, white)" id="Vector_4" />
-                        <path d={svgPaths.p3bb1500} fill="var(--fill-0, white)" id="Vector_5" />
-                        <path d={svgPaths.p368003c0} fill="var(--fill-0, white)" id="Vector_6" />
-                        <path d={svgPaths.pe67f872} fill="var(--fill-0, white)" id="Vector_7" />
-                        <path d={svgPaths.p16723600} fill="var(--fill-0, white)" id="Vector_8" />
-                        <path d={svgPaths.pccde900} fill="var(--fill-0, white)" id="Vector_9" />
-                        <path d={svgPaths.p311e3580} fill="var(--fill-0, white)" id="Vector_10" />
-                        <path d={svgPaths.p17d49000} fill="var(--fill-0, white)" id="Vector_11" />
-                        <path d={svgPaths.p10f82100} fill="var(--fill-0, white)" id="Vector_12" />
-                        <path d={svgPaths.p38850a00} fill="var(--fill-0, white)" id="Vector_13" />
-                        <path d={svgPaths.pc94f600} fill="var(--fill-0, white)" id="Vector_14" />
-                        <path d={svgPaths.p15e41600} fill="var(--fill-0, white)" id="Vector_15" />
-                        <path d={svgPaths.p22095e20} fill="var(--fill-0, white)" id="Vector_16" />
-                      </g>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <img src={WhiteLogo} alt="TravisMathew Logo" className="h-full w-auto object-contain" />
           </div>
         </div>
         <div className="content-stretch flex flex-col items-start pb-[44px] relative shrink-0 w-full" data-name="div">
@@ -629,22 +604,7 @@ export default function Component390WLight() {
                     <div className="content-stretch flex items-center justify-between max-h-[inherit] pb-[10px] pt-[20px] px-[20px] relative w-full">
                       <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="a">
                         <div className="content-stretch flex flex-col h-[30px] items-start overflow-clip relative shrink-0 w-[44px]" data-name="TravisMathew">
-                          <div className="content-stretch flex flex-col h-[30px] items-center justify-center overflow-clip relative shrink-0 w-[44px]" data-name="tm-mobile-logo.svg fill">
-                            <div className="h-[30px] overflow-clip relative shrink-0 w-[44px]" data-name="tm-mobile-logo.svg">
-                              <div className="absolute contents inset-0" data-name="Clip path group">
-                                <div className="absolute inset-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[44px_30px]" data-name="Group" style={{ maskImage: `url('${imgGroup2}')` }}>
-                                  <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 44 30">
-                                    <g id="Group">
-                                      <path clipRule="evenodd" d={svgPaths.p2fa8bd30} fill="var(--fill-0, #090C0F)" fillRule="evenodd" id="Vector" />
-                                      <path clipRule="evenodd" d={svgPaths.p21327100} fill="var(--fill-0, #090C0F)" fillRule="evenodd" id="Vector_2" />
-                                      <path d={svgPaths.p17296a00} fill="var(--fill-0, #090C0F)" id="Vector_3" />
-                                      <path d={svgPaths.p499f500} fill="var(--fill-0, #090C0F)" id="Vector_4" />
-                                    </g>
-                                  </svg>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <img src={BlackLogo} alt="TravisMathew Logo" className="h-full w-auto object-contain" />
                         </div>
                       </div>
                       <div className="content-stretch flex gap-[36px] items-start relative shrink-0" data-name="ul.flex">

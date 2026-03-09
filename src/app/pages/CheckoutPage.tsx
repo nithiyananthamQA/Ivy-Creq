@@ -62,7 +62,7 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <>
-        <SEOHead title="Checkout" description="Complete your purchase at TravisMathew." />
+        <SEOHead title="Checkout" description="Complete your purchase at Ivy Crew." />
         <div className="max-w-[600px] mx-auto px-4 py-16 text-center">
           <h1 className="text-2xl font-bold text-[#1a2026] mb-4">Your cart is empty</h1>
           <Link

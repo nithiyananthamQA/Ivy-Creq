@@ -49,7 +49,7 @@ const sections = [
   },
   {
     title: '7. Contact Us',
-    content: 'If you have any questions about this Privacy Policy, please contact us at privacy@travismathew.com or call 1-800-TRAVIS-M.',
+    content: 'If you have any questions about this Privacy Policy, please contact us at privacy@ivycrew.com or call 1-800-IVY-CREW.',
   },
 ];
 
@@ -58,7 +58,7 @@ export default function PrivacyPolicyPage() {
     <>
       <SEOHead
         title="Privacy Policy"
-        description="Read the TravisMathew Privacy Policy to understand how we collect, use, and protect your personal information."
+        description="Read the Ivy Crew Privacy Policy to understand how we collect, use, and protect your personal information."
       />
 
       <section className="bg-[#1a2026] text-white py-8 md:py-10">

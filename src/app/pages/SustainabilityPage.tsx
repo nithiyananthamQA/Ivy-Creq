@@ -6,7 +6,7 @@ export default function SustainabilityPage() {
     <>
       <SEOHead
         title="Sustainability"
-        description="Learn about TravisMathew's commitment to sustainability, responsible sourcing, and reducing our environmental impact."
+        description="Learn about Ivy Crew's commitment to sustainability, responsible sourcing, and reducing our environmental impact."
       />
 
       <section className="bg-[#1a2026] text-white py-8 md:py-10">
@@ -28,7 +28,7 @@ export default function SustainabilityPage() {
           </div>
 
           <p className="text-sm text-[#333b42] leading-relaxed mb-10">
-            At TravisMathew, we believe that great style and environmental responsibility go hand in hand. We're committed to making meaningful progress in reducing our environmental footprint while continuing to deliver the quality and comfort you expect.
+            At Ivy Crew, we believe that great style and environmental responsibility go hand in hand. We're committed to making meaningful progress in reducing our environmental footprint while continuing to deliver the quality and comfort you expect.
           </p>
 
           {/* Impact Numbers */}

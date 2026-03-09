@@ -8,7 +8,7 @@ export default function WomenPage() {
     <>
       <SEOHead
         title="Women's Collection"
-        description="Shop women's premium dresses, tops, skorts, jackets, and more at TravisMathew. Designed for style and performance."
+        description="Shop women's premium dresses, tops, skorts, jackets, and more at Ivy Crew. Designed for style and performance."
       />
 
       {/* Hero — Elegant editorial centered layout */}

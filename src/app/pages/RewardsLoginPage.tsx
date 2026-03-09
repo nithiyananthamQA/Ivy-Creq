@@ -9,7 +9,7 @@ export default function RewardsLoginPage() {
 
   return (
     <>
-      <SEOHead title="Sign In — TM Rewards" description="Sign in to your TravisMathew Rewards account to earn points, access exclusive offers, and track your orders." />
+      <SEOHead title="Sign In — Ivy Crew Rewards" description="Sign in to your Ivy Crew Rewards account to earn points, access exclusive offers, and track your orders." />
       <div className="max-w-[492px] mx-auto px-4 py-8 md:py-12">
         {/* Rewards Logo */}
         <div className="flex flex-col items-center mb-8">
@@ -63,7 +63,7 @@ export default function RewardsLoginPage() {
 
           <div className="text-sm">
             <p className="mb-2">
-              By signing in, you agree to TravisMathew's{' '}
+              By signing in, you agree to Ivy Crew's{' '}
               <Link to="/terms-of-service" className="underline">Terms of Use</Link> and{' '}
               <Link to="/terms-of-service" className="underline">TM Rewards Program Terms & Conditions</Link>. To learn more about how we use and protect your data, please see our{' '}
               <Link to="/privacy-policy" className="underline">Privacy Policy</Link>.

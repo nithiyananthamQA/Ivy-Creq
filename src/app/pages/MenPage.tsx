@@ -8,7 +8,7 @@ export default function MenPage() {
     <>
       <SEOHead
         title="Men's Collection"
-        description="Shop men's premium polos, pants, outerwear, tees, and footwear at TravisMathew. Built for comfort and style on and off the course."
+        description="Shop men's premium polos, pants, outerwear, tees, and footwear at Ivy Crew. Built for comfort and style on and off the course."
       />
 
       {/* Hero — Bold typographic split */}

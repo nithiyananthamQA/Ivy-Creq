@@ -13,7 +13,7 @@ export default function SalePage() {
     <>
       <SEOHead
         title="Sale"
-        description="Shop sale items at TravisMathew. Find great deals on premium men's and women's apparel, polos, pants, and more."
+        description="Shop sale items at Ivy Crew. Find great deals on premium men's and women's apparel, polos, pants, and more."
       />
 
       {/* Hero */}

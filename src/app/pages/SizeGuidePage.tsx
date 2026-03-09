@@ -30,7 +30,7 @@ export default function SizeGuidePage() {
     <>
       <SEOHead
         title="Size Guide"
-        description="Find your perfect fit with the TravisMathew size guide. Size charts for men's and women's tops, bottoms, and outerwear."
+        description="Find your perfect fit with the Ivy Crew size guide. Size charts for men's and women's tops, bottoms, and outerwear."
       />
 
       <section className="bg-[#1a2026] text-white py-8 md:py-10">

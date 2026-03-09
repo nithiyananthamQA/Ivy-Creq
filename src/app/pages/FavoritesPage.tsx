@@ -15,7 +15,7 @@ export default function FavoritesPage() {
     <>
       <SEOHead
         title="My Favorites"
-        description="View your saved favorites at TravisMathew. Keep track of items you love."
+        description="View your saved favorites at Ivy Crew. Keep track of items you love."
       />
 
       <section className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-[60px]">

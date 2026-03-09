@@ -8,7 +8,7 @@ export default function CartPage() {
 
   return (
     <>
-      <SEOHead title="Your Cart" description="Review items in your shopping cart and proceed to checkout at TravisMathew." />
+      <SEOHead title="Your Cart" description="Review items in your shopping cart and proceed to checkout at Ivy Crew." />
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[60px] py-8 md:py-12">
         <div className="flex flex-col lg:flex-row lg:justify-center gap-8 lg:gap-[81px]">
           {/* Left Section - Cart Items */}

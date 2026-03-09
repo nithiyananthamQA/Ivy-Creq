@@ -3,6 +3,7 @@ import { Outlet, useLocation, ScrollRestoration } from 'react-router';
 import Header from './Header';
 import Footer from './Footer';
 import CartDrawer from '../CartDrawer';
+import ChatWidget from '../ChatWidget';
 import { FavoritesProvider } from '../../context/FavoritesContext';
 import { CartProvider } from '../../context/CartContext';
 
@@ -32,6 +33,7 @@ export default function Layout() {
           </main>
           <Footer />
           <CartDrawer />
+          <ChatWidget />
           {mysteryModalOpen && (
             <Suspense>
               <MysteryDiscountModal isOpen={mysteryModalOpen} onClose={() => setMysteryModalOpen(false)} />

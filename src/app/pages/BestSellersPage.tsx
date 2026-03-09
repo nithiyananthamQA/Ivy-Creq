@@ -15,7 +15,7 @@ export default function BestSellersPage() {
     <>
       <SEOHead
         title="Best Sellers"
-        description="Shop TravisMathew's best selling men's and women's apparel. Our most popular polos, pants, outerwear, and more."
+        description="Shop Ivy Crew's best selling men's and women's apparel. Our most popular polos, pants, outerwear, and more."
       />
 
       {/* Hero */}

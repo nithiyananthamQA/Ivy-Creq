@@ -8,6 +8,7 @@ import img1Maa1904Mbu1EcommJpgJpg from "figma:asset/c5932e253ee1f1a181a3c548955b
 import imgA466090Blk1EcommJpgJpg from "figma:asset/427e55283c3583e0d253b727dcb89303b02e0b64.png";
 import imgNextSlide from "figma:asset/49f91a9e52bdda9531e0c5c7e2b5f2a64f6197dd.png";
 import imgDivDyRecommendationsSliderButton from "figma:asset/53dda8618e1949749d31f29031ce1606cb93671a.png";
+import BlackLogo from "../assets/Black.svg";
 import imgShopMensOuterwear from "figma:asset/e631f37e095731f772cc26f18e161eaaf5f90413.png";
 import imgShopMensPolos from "figma:asset/265cf083f7bff66143aab7729d2b05385cbc056e.png";
 import imgShopMensPants from "figma:asset/3656899e775dee3c0ddbdd26f5b56c5214ae34ea.png";
@@ -3120,32 +3121,7 @@ export default function Component1920WLight() {
                       <div className="relative shrink-0" data-name="a">
                         <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center relative">
                           <div className="content-stretch flex flex-col h-[34px] items-start overflow-clip relative shrink-0 w-[306px]" data-name="TravisMathew">
-                            <div className="content-stretch flex flex-col h-[34px] items-center justify-center overflow-clip px-[4.425px] relative shrink-0 w-[306px]" data-name="Combo-Logo-Block-Black-Large2-01_bde23c6d-e438-4445-8ddc-13785447b027.svg fill">
-                              <div className="h-[34px] overflow-clip relative shrink-0 w-[297.151px]" data-name="Combo-Logo-Block-Black-Large2-01_bde23c6d-e438-4445-8ddc-13785447b027.svg">
-                                <div className="absolute inset-[21.41%_0_0_0]" data-name="Group">
-                                  <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 297.151 26.7198">
-                                    <g id="Group">
-                                      <path clipRule="evenodd" d={svgPaths.p135dc780} fill="var(--fill-0, #231F20)" fillRule="evenodd" id="Vector" />
-                                      <path clipRule="evenodd" d={svgPaths.p1c99b80} fill="var(--fill-0, #231F20)" fillRule="evenodd" id="Vector_2" />
-                                      <path d={svgPaths.pe4f6270} fill="var(--fill-0, #231F20)" id="Vector_3" />
-                                      <path d={svgPaths.p5e93300} fill="var(--fill-0, #231F20)" id="Vector_4" />
-                                      <path d={svgPaths.p11757200} fill="var(--fill-0, #231F20)" id="Vector_5" />
-                                      <path d={svgPaths.p5e1e980} fill="var(--fill-0, #231F20)" id="Vector_6" />
-                                      <path d={svgPaths.p28c17780} fill="var(--fill-0, #231F20)" id="Vector_7" />
-                                      <path d={svgPaths.p8e24200} fill="var(--fill-0, #231F20)" id="Vector_8" />
-                                      <path d={svgPaths.p100dcd00} fill="var(--fill-0, #231F20)" id="Vector_9" />
-                                      <path d={svgPaths.pfd72b00} fill="var(--fill-0, #231F20)" id="Vector_10" />
-                                      <path d={svgPaths.p23937680} fill="var(--fill-0, #231F20)" id="Vector_11" />
-                                      <path d={svgPaths.p129d3100} fill="var(--fill-0, #231F20)" id="Vector_12" />
-                                      <path d={svgPaths.p726ab80} fill="var(--fill-0, #231F20)" id="Vector_13" />
-                                      <path d={svgPaths.p24b0d900} fill="var(--fill-0, #231F20)" id="Vector_14" />
-                                      <path d={svgPaths.p54a4fa0} fill="var(--fill-0, #231F20)" id="Vector_15" />
-                                      <path d={svgPaths.p9b93c00} fill="var(--fill-0, #231F20)" id="Vector_16" />
-                                    </g>
-                                  </svg>
-                                </div>
-                              </div>
-                            </div>
+                            <img src={BlackLogo} alt="TravisMathew Logo" className="h-full w-auto object-contain" />
                           </div>
                         </div>
                       </div>

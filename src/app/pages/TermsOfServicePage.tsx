@@ -4,7 +4,7 @@ import SEOHead from '../components/SEOHead';
 const sections = [
   {
     title: '1. Acceptance of Terms',
-    content: 'By accessing and using the TravisMathew website, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website.',
+    content: 'By accessing and using the Ivy Crew website, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website.',
   },
   {
     title: '2. Use of Website',
@@ -26,7 +26,7 @@ const sections = [
   },
   {
     title: '5. Intellectual Property',
-    content: 'All content on this website, including text, images, logos, and graphics, is the property of TravisMathew and is protected by copyright and trademark laws. You may not reproduce, distribute, or create derivative works without our express written consent.',
+    content: 'All content on this website, including text, images, logos, and graphics, is the property of Ivy Crew and is protected by copyright and trademark laws. You may not reproduce, distribute, or create derivative works without our express written consent.',
   },
   {
     title: '6. TM Rewards Program',
@@ -34,7 +34,7 @@ const sections = [
   },
   {
     title: '7. Limitation of Liability',
-    content: 'TravisMathew shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the website or purchase of products. Our total liability shall not exceed the amount you paid for the product giving rise to the claim.',
+    content: 'Ivy Crew shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the website or purchase of products. Our total liability shall not exceed the amount you paid for the product giving rise to the claim.',
   },
   {
     title: '8. Governing Law',
@@ -42,7 +42,7 @@ const sections = [
   },
   {
     title: '9. Contact',
-    content: 'For questions about these Terms of Service, please contact us at legal@travismathew.com or call 1-800-TRAVIS-M.',
+    content: 'For questions about these Terms of Service, please contact us at legal@ivycrew.com or call 1-800-IVY-CREW.',
   },
 ];
 
@@ -51,7 +51,7 @@ export default function TermsOfServicePage() {
     <>
       <SEOHead
         title="Terms of Service"
-        description="Read the TravisMathew Terms of Service governing your use of our website, purchases, and TM Rewards program."
+        description="Read the Ivy Crew Terms of Service governing your use of our website, purchases, and rewards program."
       />
 
       <section className="bg-[#1a2026] text-white py-8 md:py-10">

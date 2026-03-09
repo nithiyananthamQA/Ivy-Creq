@@ -6,7 +6,7 @@ export default function OurStoryPage() {
     <>
       <SEOHead
         title="Our Story"
-        description="Learn about TravisMathew — a lifestyle brand born in Southern California, designed for those who live life on the edge of comfort and style."
+        description="Learn about Ivy Crew — a lifestyle brand born in Southern California, designed for those who live life on the edge of comfort and style."
       />
 
       <section className="bg-[#1a2026] text-white py-8 md:py-10">
@@ -29,13 +29,13 @@ export default function OurStoryPage() {
           {/* Story Content */}
           <div className="space-y-6 text-sm text-[#333b42] leading-relaxed mb-10">
             <p>
-              TravisMathew was founded in 2007 with a simple idea: create apparel that moves with you, looks great, and feels even better. Born out of the Southern California lifestyle, our brand blends performance fabrics with everyday versatility.
+              Ivy Crew was founded in 2007 with a simple idea: create apparel that moves with you, looks great, and feels even better. Born out of the Southern California lifestyle, our brand blends performance fabrics with everyday versatility.
             </p>
             <p>
               From the golf course to the city streets, our designs are rooted in the belief that what you wear should never hold you back. Every piece is crafted with premium materials and a modern aesthetic that transitions seamlessly from work to weekend.
             </p>
             <p>
-              Today, TravisMathew continues to push boundaries in men's and women's apparel. We're proud to be part of your daily uniform — whether you're hitting the links, exploring a new city, or just making the most of a beautiful day.
+              Today, Ivy Crew continues to push boundaries in men's and women's apparel. We're proud to be part of your daily uniform — whether you're hitting the links, exploring a new city, or just making the most of a beautiful day.
             </p>
           </div>
 

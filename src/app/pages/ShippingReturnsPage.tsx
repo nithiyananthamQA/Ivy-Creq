@@ -5,7 +5,7 @@ export default function ShippingReturnsPage() {
     <>
       <SEOHead
         title="Shipping & Returns"
-        description="Learn about TravisMathew shipping options, delivery times, free shipping policy, and return instructions."
+        description="Learn about Ivy Crew shipping options, delivery times, free shipping policy, and return instructions."
       />
       <section className="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-[60px]">
         <div className="max-w-[800px] mx-auto">

@@ -36,7 +36,6 @@ import imgWanderlustShort9InImage2 from "figma:asset/c792cb6c5f84b8a34d1d77d67e9
 import imgCloudWaffleShirtJacketImage1 from "figma:asset/3fc2bd94d2c4c5dd47c705b670fbbaa4ad40789a.png";
 import imgCloudWaffleShirtJacketImage2 from "figma:asset/8cc678619a56669ac839b8781f3d2345737e3752.png";
 import imgBannerImage3 from "figma:asset/f61dedfe26be2f509ad0d3de39d775c80c7da4de.png";
-import imgTravisMathew from "figma:asset/f144d5585eb10670a3323e1d954d06b6137cfe98.png";
 import imgIcon from "figma:asset/bebc00b59b077c5e59b6bd8f62b979701b2aa4d0.png";
 import imgYourPrivacyChoicesIcon from "figma:asset/ed35f48a9fd142447684c5717a326546a5588b38.png";
 
@@ -235,7 +234,6 @@ export {
   imgBannerImage1,
   imgBannerImage2,
   imgBannerImage3,
-  imgTravisMathew,
   imgIcon,
   imgYourPrivacyChoicesIcon,
   imgPolosYoullActuallyWear,

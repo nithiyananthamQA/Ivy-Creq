@@ -9,7 +9,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <SEOHead title="Contact Us" description="Get in touch with TravisMathew customer service. We're here to help with orders, returns, sizing, and more." />
+      <SEOHead title="Contact Us" description="Get in touch with Ivy Crew customer service. We're here to help with orders, returns, sizing, and more." />
 
       <section className="bg-[#1a2026] text-white py-8 md:py-10">
         <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[60px] text-center">
@@ -22,7 +22,7 @@ export default function ContactPage() {
         <div className="max-w-[1000px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
             {[
-              { icon: Mail, label: 'Email', value: 'support@travismathew.com' },
+              { icon: Mail, label: 'Email', value: 'support@ivycrew.com' },
               { icon: Phone, label: 'Phone', value: '1-800-TRAVIS-M' },
               { icon: Clock, label: 'Hours', value: 'Mon–Fri 8am–5pm PST' },
               { icon: MapPin, label: 'Headquarters', value: 'Union City, CA 94587' },

@@ -12,7 +12,7 @@ export default function RewardsSignupPage() {
 
   return (
     <>
-      <SEOHead title="Join TM Rewards" description="Join TravisMathew Rewards for free. Earn points on every purchase, get exclusive offers, free gifts, and early access to new collections." />
+      <SEOHead title="Join Ivy Crew Rewards" description="Join Ivy Crew Rewards for free. Earn points on every purchase, get exclusive offers, free gifts, and early access to new collections." />
       <div className="max-w-[600px] mx-auto px-4 py-8 md:py-12">
         {/* Rewards Logo */}
         <div className="flex flex-col items-center mb-8">
@@ -121,7 +121,7 @@ export default function RewardsSignupPage() {
               className="mt-1"
             />
             <label className="text-xs text-[#333b42]">
-              By joining, you agree to receive emails from TravisMathew, and you acknowledge that you have read the{' '}
+              By joining, you agree to receive emails from Ivy Crew, and you acknowledge that you have read the{' '}
               <Link to="/privacy-policy" className="underline">Privacy Policy</Link>. You can unsubscribe at any time. View our{' '}
               <Link to="/terms-of-service" className="underline">Terms of Use</Link> and{' '}
               <Link to="/terms-of-service" className="underline">TM Reward Program Terms & Conditions</Link>.

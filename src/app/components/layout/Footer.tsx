@@ -89,7 +89,7 @@ export default function Footer() {
               <img src={imgIcon} alt="Payment methods" className="h-6" width={24} height={24} />
               <img src={imgYourPrivacyChoicesIcon} alt="Your Privacy Choices" className="h-6" width={24} height={24} />
             </div>
-            <p className="text-gray-400">&copy; 2026 TravisMathew. All rights reserved.</p>
+            <p className="text-gray-400">&copy; 2026 Ivy Crew. All rights reserved.</p>
             <div className="flex gap-4">
               <Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link>
               <Link to="/terms-of-service" className="hover:underline">Terms of Service</Link>

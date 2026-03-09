@@ -3,7 +3,7 @@ import { Menu, User, ShoppingCart, Heart, X } from 'lucide-react';
 import { Link } from 'react-router';
 import { useFavorites } from '../../context/FavoritesContext';
 import { useCart } from '../../context/CartContext';
-import { imgTravisMathew } from '../../data/products';
+import BlackLogo from '../../../assets/Black.svg';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,7 +31,7 @@ export default function Header() {
 
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <img src={imgTravisMathew} alt="TravisMathew" className="h-8 lg:h-10 w-auto invert" />
+            <img src={BlackLogo} alt="Ivy Crew" className="h-8 lg:h-10 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -73,7 +73,7 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 bg-white z-50">
           <div className="flex justify-between items-center p-4 border-b">
-            <img src={imgTravisMathew} alt="TravisMathew" className="h-8 w-auto invert" />
+            <img src={BlackLogo} alt="Ivy Crew" className="h-8 w-auto" />
             <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
               <X className="w-6 h-6" />
             </button>

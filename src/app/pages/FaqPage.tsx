@@ -38,7 +38,7 @@ const faqs = [
         answer: 'Check our Size Guide page for detailed measurements and fit recommendations for all of our men\'s and women\'s products. If you\'re between sizes, we generally recommend sizing up for a more relaxed fit.',
       },
       {
-        question: 'How do I care for my TravisMathew apparel?',
+        question: 'How do I care for my Ivy Crew apparel?',
         answer: 'We recommend machine washing in cold water with like colors and tumble drying on low heat. Avoid bleach and ironing directly on prints or logos. Check the care label on each garment for specific instructions.',
       },
     ],
@@ -52,7 +52,7 @@ const faqs = [
       },
       {
         question: 'Do you have physical store locations?',
-        answer: 'Yes, we have retail stores across the United States. Visit our Store Locator page to find the nearest TravisMathew store to you.',
+        answer: 'Yes, we have retail stores across the United States. Visit our Store Locator page to find the nearest Ivy Crew store to you.',
       },
     ],
   },
@@ -63,7 +63,7 @@ export default function FaqPage() {
     <>
       <SEOHead
         title="FAQ"
-        description="Find answers to frequently asked questions about TravisMathew orders, shipping, returns, sizing, TM Rewards, and more."
+        description="Find answers to frequently asked questions about Ivy Crew orders, shipping, returns, sizing, rewards, and more."
       />
 
       <section className="bg-[#1a2026] text-white py-8 md:py-10">
