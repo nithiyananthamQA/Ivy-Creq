@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "deploy": "vite build && wrangler pages deploy dist --project-name=ivy-crew"
   },
   "dependencies": {
     "@popperjs/core": "2.11.8",
