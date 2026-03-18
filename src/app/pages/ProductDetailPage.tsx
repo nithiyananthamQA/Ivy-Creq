@@ -30,7 +30,9 @@ export default function ProductDetailPage() {
     );
   }
 
-  const images = [product.image1 || product.image, product.image2].filter(Boolean) as string[];
+  const images = product.images && product.images.length > 0
+    ? product.images
+    : [product.image1 || product.image, product.image2].filter(Boolean) as string[];
   const favorited = isFavorite(product.id);
 
   const handleAddToCart = () => {
@@ -42,8 +44,8 @@ export default function ProductDetailPage() {
     addToCart(product, selectedSize ?? undefined);
   };
 
-  const prevImage = () => setActiveImage(i => (i === 0 ? images.length - 1 : i - 1));
-  const nextImage = () => setActiveImage(i => (i === images.length - 1 ? 0 : i + 1));
+  const prevImage = () => setActiveImage((i: number) => (i === 0 ? images.length - 1 : i - 1));
+  const nextImage = () => setActiveImage((i: number) => (i === images.length - 1 ? 0 : i + 1));
 
   return (
     <>

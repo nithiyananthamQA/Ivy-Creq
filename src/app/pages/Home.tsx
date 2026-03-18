@@ -1,5 +1,6 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
+import { Shield, Sparkles, Sun, Maximize2, Droplets, Wind, Waves, Scissors } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import SEOHead from '../components/SEOHead';
 import {
@@ -9,34 +10,81 @@ import {
 
 const Slider = lazy(() => import('react-slick'));
 
+/** Renders children only after the section scrolls near the viewport */
+function LazySection({ children, fallbackHeight = '200px' }: { children: React.ReactNode; fallbackHeight?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { rootMargin: '200px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref}>
+      {visible ? children : <div style={{ minHeight: fallbackHeight }} />}
+    </div>
+  );
+}
+
 function HeroBanner() {
   return (
     <section className="relative w-full">
       <div className="relative aspect-[390/500] md:aspect-[1024/600] lg:aspect-[1920/700]">
         <img
           src={imgBannerImage}
-          alt="Spring is in the Air — Shop new styles for the season ahead"
+          alt="Ivy Crew — Premium performance apparel for men and women"
           className="w-full h-full object-cover object-[30%_center] md:object-center"
-          fetchPriority="high"
           sizes="100vw"
           width={1920}
           height={700}
         />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white px-6 max-w-2xl">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Spring is in the Air
-            </h1>
-            <p className="text-base md:text-lg mb-6 lg:mb-8">
-              And even if it isn't, we can dream courtesy of new styles built for the season ahead.
-            </p>
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-              <Link to="/new-arrivals" className="bg-white text-black px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors min-w-[260px] md:min-w-[270px] text-center">
-                Shop Men's New Arrivals
-              </Link>
-              <Link to="/women" className="bg-white text-black px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors min-w-[260px] md:min-w-[270px] text-center">
-                Shop Women's New Arrivals
-              </Link>
+        {/* Mobile — pinned to bottom with gradient fade */}
+        <div className="absolute inset-x-0 bottom-0 md:hidden">
+          <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent pt-16 pb-5 px-4">
+            <div className="text-right text-white bg-black/40 backdrop-blur-[2px] border border-white/15 rounded-sm px-5 py-5">
+              <h1 className="text-2xl font-bold mb-2 drop-shadow-md">
+                Look Sharp. Feel&nbsp;Unstoppable.
+              </h1>
+              <p className="text-sm mb-4 text-white/90 drop-shadow-sm">
+                Premium apparel engineered with performance fabrics — so you look your best from the office to the weekend.
+              </p>
+              <div className="flex flex-col gap-3 items-stretch">
+                <Link to="/men" className="bg-white text-black px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center">
+                  Shop Men's Collection
+                </Link>
+                <Link to="/women" className="bg-white text-black px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center">
+                  Shop Women's Collection
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop — centered right */}
+        <div className="absolute inset-0 hidden md:flex items-center justify-end">
+          <div className="text-right text-white px-12 lg:px-20">
+            <div className="bg-black/30 backdrop-blur-[3px] border border-white/15 rounded-sm px-10 py-10 lg:px-12 lg:py-12 max-w-xl lg:max-w-2xl">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-md">
+                Look Sharp. Feel&nbsp;Unstoppable.
+              </h1>
+              <p className="text-lg mb-8 text-white/90 drop-shadow-sm">
+                Premium apparel engineered with performance fabrics — so you look your best from the office to the weekend.
+              </p>
+              <div className="flex flex-row gap-4 justify-end">
+                <Link to="/men" className="bg-white text-black px-6 lg:px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center whitespace-nowrap">
+                  Shop Men's Collection
+                </Link>
+                <Link to="/women" className="bg-white text-black px-6 lg:px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center whitespace-nowrap">
+                  Shop Women's Collection
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -132,21 +180,45 @@ function WomensCollectionSection() {
               width={1920}
               height={500}
             />
-            <div className="absolute inset-0 flex items-center justify-end">
-              <div className="text-white px-6 md:px-12 lg:px-20 max-w-md lg:max-w-lg text-right">
-                <p className="text-xs md:text-sm uppercase tracking-[0.2em] text-white/80 mb-2">Women's Collection</p>
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 leading-tight">
-                  Effortless Style
-                </h3>
-                <p className="text-sm md:text-base text-white/80 mb-6">
-                  From versatile layers to everyday essentials — discover pieces designed to move with you.
-                </p>
-                <Link
-                  to="/women"
-                  className="inline-block bg-white text-[#1a2026] px-8 py-3 font-bold text-sm hover:bg-gray-200 transition-colors"
-                >
-                  Shop Women's
-                </Link>
+            {/* Mobile — pinned to bottom, wider glass card */}
+            <div className="absolute inset-x-0 bottom-0 md:hidden">
+              <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent pt-14 pb-4 px-3">
+                <div className="text-white text-right bg-black/40 backdrop-blur-[2px] border border-white/15 rounded-sm px-5 py-5 w-[90%] ml-auto">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/80 mb-1.5">Women's Collection</p>
+                  <h3 className="text-xl font-bold mb-2 leading-tight drop-shadow-md">
+                    Effortless Style, All Day
+                  </h3>
+                  <p className="text-xs text-white/90 mb-4 drop-shadow-sm">
+                    Versatile layers and everyday essentials in performance fabrics that keep you cool, dry, and confident.
+                  </p>
+                  <Link
+                    to="/women"
+                    className="inline-block bg-white text-[#1a2026] px-8 py-3 font-bold text-sm hover:bg-gray-200 transition-colors"
+                  >
+                    Shop Women's
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop — centered right */}
+            <div className="absolute inset-0 hidden md:flex items-center justify-end">
+              <div className="text-white px-12 lg:px-20 max-w-md lg:max-w-lg text-right">
+                <div className="bg-black/30 backdrop-blur-[3px] border border-white/15 rounded-sm px-8 py-8">
+                  <p className="text-sm uppercase tracking-[0.2em] text-white/80 mb-2">Women's Collection</p>
+                  <h3 className="text-3xl lg:text-4xl font-bold mb-3 leading-tight drop-shadow-md">
+                    Effortless Style, All Day
+                  </h3>
+                  <p className="text-base text-white/90 mb-6 drop-shadow-sm">
+                    Versatile layers and everyday essentials in performance fabrics that keep you cool, dry, and confident.
+                  </p>
+                  <Link
+                    to="/women"
+                    className="inline-block bg-white text-[#1a2026] px-8 py-3 font-bold text-sm hover:bg-gray-200 transition-colors"
+                  >
+                    Shop Women's
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -178,10 +250,10 @@ function MensCollectionSection() {
             <div>
               <p className="text-sm uppercase tracking-[0.2em] text-white/60 mb-3">Men's Collection</p>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-                Built for<br />Every Day
+                Built to Perform,<br />Made to Impress
               </h2>
               <p className="text-white/70 text-sm md:text-base max-w-md mb-6">
-                From the course to the coast — premium fabrics and modern fits designed to move with you, wherever the day takes you.
+                Premium fabrics with UPF protection, 4-way stretch, and quick-dry technology — modern fits for every occasion.
               </p>
               <Link
                 to="/men"
@@ -228,6 +300,41 @@ function MensCollectionSection() {
   );
 }
 
+const fabricFeatures = [
+  { icon: Shield, label: 'Durable' },
+  { icon: Sparkles, label: 'Easy Care' },
+  { icon: Sun, label: 'UV Protection\nUPF 30+' },
+  { icon: Maximize2, label: 'Dynamic Stretch' },
+  { icon: Droplets, label: 'Quick Dry\nTechnology' },
+  { icon: Wind, label: 'Cool Comfort' },
+  { icon: Waves, label: 'Wrinkle Resistant' },
+  { icon: Scissors, label: 'Performance Finish' },
+];
+
+function FabricTechnologySection() {
+  return (
+    <section className="py-10 md:py-14 lg:py-16 border-y border-[#e5e5e5]">
+      <div className="max-w-[1920px] mx-auto px-4 md:px-8">
+        <p className="text-center text-xs uppercase tracking-[0.25em] text-[#6c7782] mb-8 md:mb-10">
+          Engineered for Performance
+        </p>
+        <div className="grid grid-cols-4 md:grid-cols-8 gap-y-8 gap-x-4 md:gap-x-6">
+          {fabricFeatures.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex flex-col items-center text-center gap-2.5">
+              <div className="w-11 h-11 rounded-full border border-[#1a2026] flex items-center justify-center">
+                <Icon className="w-[18px] h-[18px] text-[#1a2026]" strokeWidth={1.5} />
+              </div>
+              <span className="text-[10px] md:text-[11px] leading-tight text-[#1a2026] font-medium whitespace-pre-line">
+                {label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function BottomBanner() {
   return (
     <section className="relative w-full">
@@ -250,14 +357,23 @@ export default function Home() {
   return (
     <>
       <SEOHead
-        title="Home"
-        description="Shop men's and women's premium apparel, polos, pants, outerwear, and footwear at TravisMathew. Free shipping on orders $150+."
+        title="Ivy Crew — Premium Performance Apparel for Men & Women"
+        description="Shop men's and women's premium performance apparel at Ivy Crew. UV-protective, quick-dry, wrinkle-resistant clothing built for style and comfort. Free shipping on orders $150+."
       />
       <HeroBanner />
       <NewArrivalsSection />
-      <WomensCollectionSection />
-      <MensCollectionSection />
-      <BottomBanner />
+      <LazySection fallbackHeight="600px">
+        <WomensCollectionSection />
+      </LazySection>
+      <LazySection fallbackHeight="600px">
+        <MensCollectionSection />
+      </LazySection>
+      <LazySection fallbackHeight="100px">
+        <FabricTechnologySection />
+      </LazySection>
+      <LazySection fallbackHeight="400px">
+        <BottomBanner />
+      </LazySection>
     </>
   );
 }

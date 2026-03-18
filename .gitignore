@@ -2,3 +2,7 @@ node_modules
 dist
 .DS_Store
 *.local
+
+# Raw reference/sample images (not needed in repo)
+images/
+product-sample-website-*/

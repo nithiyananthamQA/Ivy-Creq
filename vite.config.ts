@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import path from 'path'
+import fs from 'fs'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
@@ -8,6 +9,12 @@ const figmaAssetResolver = {
   resolveId(source: string) {
     if (source.startsWith('figma:asset/')) {
       const filename = source.replace('figma:asset/', '');
+      // Prefer WebP over PNG for much smaller file sizes
+      const webpFile = filename.replace(/\.png$/, '.webp');
+      const webpPath = path.resolve(__dirname, `./src/assets/${webpFile}`);
+      if (fs.existsSync(webpPath)) {
+        return webpPath;
+      }
       return path.resolve(__dirname, `./src/assets/${filename}`);
     }
     return null;
@@ -38,6 +45,7 @@ export default defineConfig({
         manualChunks: {
           'vendor-router': ['react-router'],
           'vendor-slider': ['react-slick'],
+          'vendor-icons': ['lucide-react'],
         },
       },
     },

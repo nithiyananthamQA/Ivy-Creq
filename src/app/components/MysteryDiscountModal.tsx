@@ -16,18 +16,22 @@ export default function MysteryDiscountModal({ isOpen, onClose }: MysteryDiscoun
       />
 
       {/* Modal */}
-      <div className="relative bg-white max-w-[600px] md:max-w-[800px] w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors"
-          aria-label="Close"
-        >
-          <X className="w-5 h-5" />
-        </button>
+      <div className="relative max-w-[600px] md:max-w-[800px] w-full">
+        {/* Close button — sits outside on mobile so it doesn't cover text */}
+        <div className="flex justify-end mb-2 md:mb-0">
+          <button
+            onClick={onClose}
+            className="bg-white text-[#1a2026] rounded-full w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition-colors shadow-lg md:absolute md:top-3 md:right-3 md:z-10"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
 
+        <div className="bg-white max-h-[85vh] overflow-y-auto shadow-2xl">
         <div className="grid md:grid-cols-2">
           {/* Left Side - Form */}
-          <div className="p-6 md:p-8">
+          <div className="p-6 md:p-8 md:pr-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-2">
               A Special Deal Is Waiting for You
             </h2>
@@ -86,6 +90,7 @@ export default function MysteryDiscountModal({ isOpen, onClose }: MysteryDiscoun
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

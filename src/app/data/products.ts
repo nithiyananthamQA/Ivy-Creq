@@ -25,16 +25,26 @@ import imgBreezeBlendTravelDayJacketImage2 from "figma:asset/b5d8370bf42d3317086
 import imgBannerImage2 from "figma:asset/b25e4f0e6f24dc4b1f610a7e528d515814b68973.png";
 import imgPolosYoullActuallyWear from "figma:asset/11770ec716312f0159b6333e4b26312da21cd190.png";
 import imgTheNewOpenToClose20Jogger from "figma:asset/bb07c8767851221401bedf9129abcad27293bc4a.png";
-import imgTransatlanticQuarterZipImage1 from "figma:asset/0e40a0c28a524da44b6ad808f61c6647e6eb7739.png";
-import imgTransatlanticQuarterZipImage2 from "figma:asset/2f0327a5c471b668a8158a21b893897b90e25b56.png";
-import imgTheHeaterPoloImage1 from "figma:asset/00947901b6c5fc4b245840f30c5dbfdfb5602c34.png";
-import imgTheHeaterPoloImage2 from "figma:asset/8331ef4de3532ac14071e5e1160745e6cba9f4e6.png";
-import imgLegacyFeatherweightJeansImage1 from "figma:asset/4d1e9c1f73ece946338d815443a652ca0c918b81.png";
-import imgLegacyFeatherweightJeansImage2 from "figma:asset/1a5095baa558279452cbd886a7659ff4f1285ab9.png";
-import imgWanderlustShort9InImage1 from "figma:asset/479fc1dd28b59f7ec52e37da7f59718f5806081c.png";
-import imgWanderlustShort9InImage2 from "figma:asset/c792cb6c5f84b8a34d1d77d67e97fa4bf48f62e2.png";
-import imgCloudWaffleShirtJacketImage1 from "figma:asset/3fc2bd94d2c4c5dd47c705b670fbbaa4ad40789a.png";
-import imgCloudWaffleShirtJacketImage2 from "figma:asset/8cc678619a56669ac839b8781f3d2345737e3752.png";
+// Men's product images (real Ivy Crew product photos)
+import imgBlueBotanicalPolo1 from '../../assets/mens/blue-botanical-polo-1.webp';
+import imgBlueBotanicalPolo2 from '../../assets/mens/blue-botanical-polo-2.webp';
+import imgBlueBotanicalPolo3 from '../../assets/mens/blue-botanical-polo-3.webp';
+import imgBlueBotanicalPolo4 from '../../assets/mens/blue-botanical-polo-4.webp';
+import imgWhitePatternedPolo1 from '../../assets/mens/white-patterned-polo-1.webp';
+import imgWhitePatternedPolo2 from '../../assets/mens/white-patterned-polo-2.webp';
+import imgWhitePatternedPolo3 from '../../assets/mens/white-patterned-polo-3.webp';
+import imgWhitePatternedPolo4 from '../../assets/mens/white-patterned-polo-4.webp';
+import imgRosePatternedPolo1 from '../../assets/mens/rose-patterned-polo-1.webp';
+import imgRosePatternedPolo2 from '../../assets/mens/rose-patterned-polo-2.webp';
+import imgRosePatternedPolo3 from '../../assets/mens/rose-patterned-polo-3.webp';
+import imgRosePatternedPolo4 from '../../assets/mens/rose-patterned-polo-4.webp';
+import imgBlueLeafPolo1 from '../../assets/mens/blue-leaf-polo-1.webp';
+import imgBlueLeafPolo2 from '../../assets/mens/blue-leaf-polo-2.webp';
+import imgBlueLeafPolo3 from '../../assets/mens/blue-leaf-polo-3.webp';
+import imgBlueLeafPolo4 from '../../assets/mens/blue-leaf-polo-4.webp';
+import imgSageClassicPolo1 from '../../assets/mens/sage-classic-polo-1.webp';
+import imgSageClassicPolo2 from '../../assets/mens/sage-classic-polo-2.webp';
+import imgSageClassicPolo3 from '../../assets/mens/sage-classic-polo-3.webp';
 import imgBannerImage3 from "figma:asset/f61dedfe26be2f509ad0d3de39d775c80c7da4de.png";
 import imgIcon from "figma:asset/bebc00b59b077c5e59b6bd8f62b979701b2aa4d0.png";
 import imgYourPrivacyChoicesIcon from "figma:asset/ed35f48a9fd142447684c5717a326546a5588b38.png";
@@ -46,6 +56,7 @@ export interface Product {
   image?: string;
   image1?: string;
   image2?: string;
+  images?: string[];
   franchise?: string;
   badge?: string;
   colors: string[];
@@ -159,59 +170,65 @@ export const womenProducts: Product[] = [
 export const menProducts: Product[] = [
   {
     id: 301,
-    name: 'Transatlantic Quarter Zip',
-    price: '$109.95',
-    image1: imgTransatlanticQuarterZipImage1,
-    image2: imgTransatlanticQuarterZipImage2,
+    name: 'Botanical Print Polo',
+    price: '$89.95',
+    image1: imgBlueBotanicalPolo1,
+    image2: imgBlueBotanicalPolo2,
+    images: [imgBlueBotanicalPolo1, imgBlueBotanicalPolo2, imgBlueBotanicalPolo3, imgBlueBotanicalPolo4],
     franchise: "MEN'S",
-    colors: ['#2d313d', '#637a7b', '#447ca0'],
+    badge: 'NEW',
+    colors: ['#4a6e8a', '#1d3f43'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Premium midweight quarter zip with a clean, modern silhouette. Built with 4-way stretch for comfort that travels.',
+    description: 'A refined botanical print polo crafted from premium cotton blend. Subtle floral detail with the Ivy Crew signature for effortless everyday style.',
   },
   {
     id: 302,
-    name: 'The Heater Polo',
+    name: 'Marble Texture Polo',
     price: '$84.95',
-    image1: imgTheHeaterPoloImage1,
-    image2: imgTheHeaterPoloImage2,
+    image1: imgWhitePatternedPolo1,
+    image2: imgWhitePatternedPolo2,
+    images: [imgWhitePatternedPolo1, imgWhitePatternedPolo2, imgWhitePatternedPolo3, imgWhitePatternedPolo4],
     franchise: "MEN'S",
     badge: 'BEST SELLER',
-    colors: ['#000000', '#ffffff'],
+    colors: ['#f0ede8', '#cdcbcc'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Our best-selling polo for a reason. Moisture-wicking Heater fabric and a tailored fit you can wear anywhere.',
+    description: 'Lightweight marble-textured polo with a clean silhouette. Soft-touch fabric and a tailored fit you can wear anywhere.',
   },
   {
     id: 303,
-    name: 'Legacy Featherweight Jeans',
-    price: '$129.95',
-    image1: imgLegacyFeatherweightJeansImage1,
-    image2: imgLegacyFeatherweightJeansImage2,
+    name: 'Rose Garden Polo',
+    price: '$89.95',
+    image1: imgRosePatternedPolo1,
+    image2: imgRosePatternedPolo2,
+    images: [imgRosePatternedPolo1, imgRosePatternedPolo2, imgRosePatternedPolo3, imgRosePatternedPolo4],
     franchise: "MEN'S",
-    colors: ['#2e3652'],
-    sizes: ['30', '32', '34', '36', '38'],
-    description: 'Jeans that feel like sweats. Featherweight denim with incredible stretch and a modern slim fit.',
+    colors: ['#c27a8a', '#8b4d5e'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Make a statement in this rose-toned textured polo. All-over botanical pattern with moisture-wicking performance fabric.',
   },
   {
     id: 304,
-    name: 'Wanderlust Short 9in',
-    price: '$74.95',
-    image1: imgWanderlustShort9InImage1,
-    image2: imgWanderlustShort9InImage2,
+    name: 'Tropical Leaf Polo',
+    price: '$94.95',
+    image1: imgBlueLeafPolo1,
+    image2: imgBlueLeafPolo2,
+    images: [imgBlueLeafPolo1, imgBlueLeafPolo2, imgBlueLeafPolo3, imgBlueLeafPolo4],
     franchise: "MEN'S",
-    colors: ['#3a3c3f', '#dcdbd9'],
-    sizes: ['30', '32', '34', '36', '38'],
-    description: 'A 9-inch inseam short built for adventure. Quick-dry fabric with hidden zip pockets keeps essentials secure.',
+    colors: ['#4a6e8a', '#2d4a6b', '#3a5c7a'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Bold tropical leaf print with contrast navy collar and cuffs. Premium stretch fabric for comfort on and off the course.',
   },
   {
     id: 305,
-    name: 'Cloud Waffle Shirt Jacket',
-    price: '$119.95',
-    image1: imgCloudWaffleShirtJacketImage1,
-    image2: imgCloudWaffleShirtJacketImage2,
+    name: 'Classic Sage Polo',
+    price: '$79.95',
+    image1: imgSageClassicPolo1,
+    image2: imgSageClassicPolo2,
+    images: [imgSageClassicPolo1, imgSageClassicPolo2, imgSageClassicPolo3],
     franchise: "MEN'S",
-    colors: ['#333b42', '#cdcbcc'],
+    colors: ['#8fa68a', '#6b8a66'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'A textured waffle-knit shirt jacket that layers effortlessly. Soft cloud fabric for all-day wearability.',
+    description: 'Timeless solid sage polo with the Ivy Crew emblem. Clean, minimal design in ultra-soft piqué cotton for all-day comfort.',
   },
 ];
 
