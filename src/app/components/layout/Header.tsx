@@ -45,7 +45,7 @@ export default function Header() {
           </nav>
 
           {/* Right icons */}
-          <div className="flex items-center gap-3 lg:gap-4">
+          <div className="flex items-center gap-1 lg:gap-4">
             <Link to="/favorites" className="p-2 relative" aria-label="Favorites">
               <Heart className="w-5 h-5 text-[#333b42]" />
               {favoritesCount > 0 && (

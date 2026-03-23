@@ -17,16 +17,14 @@ export default function MysteryDiscountModal({ isOpen, onClose }: MysteryDiscoun
 
       {/* Modal */}
       <div className="relative max-w-[600px] md:max-w-[800px] w-full">
-        {/* Close button — sits outside on mobile so it doesn't cover text */}
-        <div className="flex justify-end mb-2 md:mb-0">
-          <button
-            onClick={onClose}
-            className="bg-white text-[#1a2026] rounded-full w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition-colors shadow-lg md:absolute md:top-3 md:right-3 md:z-10"
-            aria-label="Close"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
+        {/* Close button — positioned absolutely so it doesn't shift modal centering */}
+        <button
+          onClick={onClose}
+          className="absolute -top-11 right-0 md:top-3 md:right-3 md:z-10 bg-white text-[#1a2026] rounded-full w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition-colors shadow-lg"
+          aria-label="Close"
+        >
+          <X className="w-5 h-5" />
+        </button>
 
         <div className="bg-white max-h-[85vh] overflow-y-auto shadow-2xl">
         <div className="grid md:grid-cols-2">
