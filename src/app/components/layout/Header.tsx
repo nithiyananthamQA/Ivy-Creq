@@ -14,7 +14,7 @@ export default function Header() {
     <header className="bg-white border-b border-gray-200">
       {/* Top announcement bar */}
       <div className="bg-black text-white text-center py-2 text-sm">
-        <p>Free Shipping on Orders $150+ | <Link to="/new-arrivals" className="underline">Shop Now</Link></p>
+        <p>Free Shipping on Orders ₹2,000+ | <Link to="/new-arrivals" className="underline">Shop Now</Link></p>
       </div>
 
       {/* Main header */}

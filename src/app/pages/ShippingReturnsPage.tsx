@@ -17,7 +17,7 @@ export default function ShippingReturnsPage() {
             <div className="space-y-4 text-sm text-[#333b42]">
               <div className="bg-[#f5f7f8] p-6">
                 <p className="font-bold text-[#1a2026] mb-2">Free Standard Shipping</p>
-                <p>On all orders $150 and above. TM Rewards members enjoy free shipping on every order.</p>
+                <p>On all orders ₹2,000 and above. TM Rewards members enjoy free shipping on every order.</p>
               </div>
               <div className="border border-[#e5e5e5] p-6 space-y-3">
                 <div className="flex justify-between">

@@ -13,7 +13,7 @@ const faqs = [
       },
       {
         question: 'Do you offer free shipping?',
-        answer: 'Yes! We offer free standard shipping on all orders $150 and above. TM Rewards members enjoy free shipping on every order, regardless of order total.',
+        answer: 'Yes! We offer free standard shipping on all orders ₹2,000 and above. TM Rewards members enjoy free shipping on every order, regardless of order total.',
       },
       {
         question: 'Can I cancel or modify my order?',

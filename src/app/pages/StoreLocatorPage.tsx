@@ -56,7 +56,7 @@ export default function StoreLocatorPage() {
 
           <div className="mt-8 bg-[#f5f7f8] border border-[#e5e5e5] p-6 text-center">
             <h3 className="font-bold text-[#1a2026] mb-2">Can't find a store near you?</h3>
-            <p className="text-sm text-[#333b42]">Shop the full collection online with free shipping on orders $150+.</p>
+            <p className="text-sm text-[#333b42]">Shop the full collection online with free shipping on orders ₹2,000+.</p>
           </div>
 
         </div>

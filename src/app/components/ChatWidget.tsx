@@ -21,7 +21,7 @@ const getMockResponse = (userMessage: string): string => {
   }
   
   if (message.includes('shipping') || message.includes('delivery')) {
-    return "We offer FREE shipping on orders over $150! Standard shipping takes 3-5 business days. Need it faster? We also offer expedited options.";
+    return "We offer FREE shipping on orders over ₹2,000! Standard shipping takes 3-5 business days. Need it faster? We also offer expedited options.";
   }
   
   if (message.includes('return') || message.includes('refund')) {

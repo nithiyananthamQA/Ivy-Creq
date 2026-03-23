@@ -25,26 +25,87 @@ import imgBreezeBlendTravelDayJacketImage2 from "figma:asset/b5d8370bf42d3317086
 import imgBannerImage2 from "figma:asset/b25e4f0e6f24dc4b1f610a7e528d515814b68973.png";
 import imgPolosYoullActuallyWear from "figma:asset/11770ec716312f0159b6333e4b26312da21cd190.png";
 import imgTheNewOpenToClose20Jogger from "figma:asset/bb07c8767851221401bedf9129abcad27293bc4a.png";
-// Men's product images (real Ivy Crew product photos)
+// Men's product images (Ivy Crew AI model photoshoot)
 import imgBlueBotanicalPolo1 from '../../assets/mens/blue-botanical-polo-1.webp';
 import imgBlueBotanicalPolo2 from '../../assets/mens/blue-botanical-polo-2.webp';
 import imgBlueBotanicalPolo3 from '../../assets/mens/blue-botanical-polo-3.webp';
 import imgBlueBotanicalPolo4 from '../../assets/mens/blue-botanical-polo-4.webp';
-import imgWhitePatternedPolo1 from '../../assets/mens/white-patterned-polo-1.webp';
-import imgWhitePatternedPolo2 from '../../assets/mens/white-patterned-polo-2.webp';
-import imgWhitePatternedPolo3 from '../../assets/mens/white-patterned-polo-3.webp';
-import imgWhitePatternedPolo4 from '../../assets/mens/white-patterned-polo-4.webp';
-import imgRosePatternedPolo1 from '../../assets/mens/rose-patterned-polo-1.webp';
-import imgRosePatternedPolo2 from '../../assets/mens/rose-patterned-polo-2.webp';
-import imgRosePatternedPolo3 from '../../assets/mens/rose-patterned-polo-3.webp';
-import imgRosePatternedPolo4 from '../../assets/mens/rose-patterned-polo-4.webp';
-import imgBlueLeafPolo1 from '../../assets/mens/blue-leaf-polo-1.webp';
-import imgBlueLeafPolo2 from '../../assets/mens/blue-leaf-polo-2.webp';
-import imgBlueLeafPolo3 from '../../assets/mens/blue-leaf-polo-3.webp';
-import imgBlueLeafPolo4 from '../../assets/mens/blue-leaf-polo-4.webp';
+import imgBlueBotanicalPolo5 from '../../assets/mens/blue-botanical-polo-5.webp';
+import imgSageHeatherPolo1 from '../../assets/mens/sage-heather-polo-1.webp';
+import imgSageHeatherPolo2 from '../../assets/mens/sage-heather-polo-2.webp';
+import imgSageHeatherPolo3 from '../../assets/mens/sage-heather-polo-3.webp';
+import imgSageHeatherPolo4 from '../../assets/mens/sage-heather-polo-4.webp';
+import imgSageHeatherPolo5 from '../../assets/mens/sage-heather-polo-5.webp';
+import imgRosePalmPolo1 from '../../assets/mens/rose-palm-polo-1.webp';
+import imgRosePalmPolo2 from '../../assets/mens/rose-palm-polo-2.webp';
+import imgRosePalmPolo3 from '../../assets/mens/rose-palm-polo-3.webp';
+import imgRosePalmPolo4 from '../../assets/mens/rose-palm-polo-4.webp';
+import imgRosePalmPolo5 from '../../assets/mens/rose-palm-polo-5.webp';
+import imgWhiteAbstractPolo1 from '../../assets/mens/white-abstract-polo-1.webp';
+import imgWhiteAbstractPolo2 from '../../assets/mens/white-abstract-polo-2.webp';
+import imgWhiteAbstractPolo3 from '../../assets/mens/white-abstract-polo-3.webp';
+import imgWhiteAbstractPolo4 from '../../assets/mens/white-abstract-polo-4.webp';
+import imgWhiteAbstractPolo5 from '../../assets/mens/white-abstract-polo-5.webp';
+import imgRoseTexturedPolo1 from '../../assets/mens/rose-textured-polo-1.webp';
+import imgRoseTexturedPolo2 from '../../assets/mens/rose-textured-polo-2.webp';
+import imgRoseTexturedPolo3 from '../../assets/mens/rose-textured-polo-3.webp';
+import imgRoseTexturedPolo4 from '../../assets/mens/rose-textured-polo-4.webp';
+import imgRoseTexturedPolo5 from '../../assets/mens/rose-textured-polo-5.webp';
+import imgBlueFloralPolo1 from '../../assets/mens/blue-floral-polo-1.webp';
+import imgBlueFloralPolo2 from '../../assets/mens/blue-floral-polo-2.webp';
+import imgBlueFloralPolo3 from '../../assets/mens/blue-floral-polo-3.webp';
+import imgBlueFloralPolo4 from '../../assets/mens/blue-floral-polo-4.webp';
+import imgBlueFloralPolo5 from '../../assets/mens/blue-floral-polo-5.webp';
+import imgBlueFloralPolo6 from '../../assets/mens/blue-floral-polo-6.webp';
+import imgSagePalmPolo1 from '../../assets/mens/sage-palm-polo-1.webp';
+import imgSagePalmPolo2 from '../../assets/mens/sage-palm-polo-2.webp';
+import imgSagePalmPolo3 from '../../assets/mens/sage-palm-polo-3.webp';
+import imgSagePalmPolo4 from '../../assets/mens/sage-palm-polo-4.webp';
+import imgSagePalmPolo5 from '../../assets/mens/sage-palm-polo-5.webp';
+import imgSkyLandscapePolo1 from '../../assets/mens/sky-landscape-polo-1.webp';
+import imgSkyLandscapePolo2 from '../../assets/mens/sky-landscape-polo-2.webp';
+import imgSkyLandscapePolo3 from '../../assets/mens/sky-landscape-polo-3.webp';
+import imgSkyLandscapePolo4 from '../../assets/mens/sky-landscape-polo-4.webp';
+import imgSkyLandscapePolo5 from '../../assets/mens/sky-landscape-polo-5.webp';
+import imgSkyLandscapePolo6 from '../../assets/mens/sky-landscape-polo-6.webp';
+import imgGreenStripePolo1 from '../../assets/mens/green-stripe-polo-1.webp';
+import imgGreenStripePolo2 from '../../assets/mens/green-stripe-polo-2.webp';
+import imgGreenStripePolo3 from '../../assets/mens/green-stripe-polo-3.webp';
+import imgGreenStripePolo4 from '../../assets/mens/green-stripe-polo-4.webp';
+import imgGreenStripePolo5 from '../../assets/mens/green-stripe-polo-5.webp';
+import imgBlackGeometricPolo1 from '../../assets/mens/black-geometric-polo-1.webp';
+import imgBlackGeometricPolo2 from '../../assets/mens/black-geometric-polo-2.webp';
+import imgBlackGeometricPolo3 from '../../assets/mens/black-geometric-polo-3.webp';
+import imgBlackGeometricPolo4 from '../../assets/mens/black-geometric-polo-4.webp';
+import imgBlackGeometricPolo5 from '../../assets/mens/black-geometric-polo-5.webp';
+import imgBlackNeonPolo1 from '../../assets/mens/black-neon-polo-1.webp';
+import imgBlackNeonPolo2 from '../../assets/mens/black-neon-polo-2.webp';
+import imgBlackNeonPolo3 from '../../assets/mens/black-neon-polo-3.webp';
+import imgBlackNeonPolo4 from '../../assets/mens/black-neon-polo-4.webp';
+import imgBlackNeonPolo5 from '../../assets/mens/black-neon-polo-5.webp';
+import imgMochaClassicPolo1 from '../../assets/mens/mocha-classic-polo-1.webp';
+import imgMochaClassicPolo2 from '../../assets/mens/mocha-classic-polo-2.webp';
+import imgMochaClassicPolo3 from '../../assets/mens/mocha-classic-polo-3.webp';
+import imgMochaClassicPolo4 from '../../assets/mens/mocha-classic-polo-4.webp';
+import imgTealTexturedPolo1 from '../../assets/mens/teal-textured-polo-1.webp';
+import imgTealTexturedPolo2 from '../../assets/mens/teal-textured-polo-2.webp';
+import imgTealTexturedPolo3 from '../../assets/mens/teal-textured-polo-3.webp';
+import imgTealTexturedPolo4 from '../../assets/mens/teal-textured-polo-4.webp';
+import imgTealTexturedPolo5 from '../../assets/mens/teal-textured-polo-5.webp';
+import imgNavyTippedPolo1 from '../../assets/mens/navy-tipped-polo-1.webp';
+import imgNavyTippedPolo2 from '../../assets/mens/navy-tipped-polo-2.webp';
+import imgNavyTippedPolo3 from '../../assets/mens/navy-tipped-polo-3.webp';
+import imgNavyTippedPolo4 from '../../assets/mens/navy-tipped-polo-4.webp';
+import imgNavyTippedPolo5 from '../../assets/mens/navy-tipped-polo-5.webp';
+import imgOliveStripePolo1 from '../../assets/mens/olive-stripe-polo-1.webp';
+import imgOliveStripePolo2 from '../../assets/mens/olive-stripe-polo-2.webp';
+import imgOliveStripePolo3 from '../../assets/mens/olive-stripe-polo-3.webp';
+import imgOliveStripePolo4 from '../../assets/mens/olive-stripe-polo-4.webp';
+import imgOliveStripePolo5 from '../../assets/mens/olive-stripe-polo-5.webp';
 import imgSageClassicPolo1 from '../../assets/mens/sage-classic-polo-1.webp';
 import imgSageClassicPolo2 from '../../assets/mens/sage-classic-polo-2.webp';
 import imgSageClassicPolo3 from '../../assets/mens/sage-classic-polo-3.webp';
+import imgSageClassicPolo4 from '../../assets/mens/sage-classic-polo-4.webp';
 import imgBannerImage3 from "figma:asset/f61dedfe26be2f509ad0d3de39d775c80c7da4de.png";
 import imgIcon from "figma:asset/bebc00b59b077c5e59b6bd8f62b979701b2aa4d0.png";
 import imgYourPrivacyChoicesIcon from "figma:asset/ed35f48a9fd142447684c5717a326546a5588b38.png";
@@ -73,7 +134,7 @@ export const newArrivals: Product[] = [
   {
     id: 101,
     name: 'Heater Pro Color Block Polo',
-    price: '$109.95',
+    price: '₹1,899',
     image: img1Mab0621Wht1EcommJpgJpg,
     colors: ['#d8ccbb', '#6478c6', '#1d3f43'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -82,7 +143,7 @@ export const newArrivals: Product[] = [
   {
     id: 102,
     name: 'Clubside Varsity Bomber',
-    price: '$249.95',
+    price: '₹3,999',
     image: imgA45732Q11341EcommJpg,
     colors: ['#333b42'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -91,7 +152,7 @@ export const newArrivals: Product[] = [
   {
     id: 103,
     name: 'Cloud Crew Long Sleeve T-Shirt',
-    price: '$69.95',
+    price: '₹1,199',
     image: imgA466090Blk1EcommJpgJpg,
     colors: ['#333b42', '#dcdbd9', '#1d3f43'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -100,7 +161,7 @@ export const newArrivals: Product[] = [
   {
     id: 104,
     name: 'Performance Quarter Zip',
-    price: '$89.95',
+    price: '₹1,499',
     image: imgA45855C06601EcommJpgJpg,
     colors: ['#525449', '#bccbcf'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -112,7 +173,7 @@ export const womenProducts: Product[] = [
   {
     id: 201,
     name: 'MoveKnit Sleeveless Printed Dress',
-    price: '$98.95',
+    price: '₹1,699',
     image1: imgMoveKnitSleevelessPrintedDressImage1,
     image2: imgMoveKnitSleevelessPrintedDressImage2,
     franchise: "WOMEN'S",
@@ -123,7 +184,7 @@ export const womenProducts: Product[] = [
   {
     id: 202,
     name: 'Moveknit Rib Limitless Top',
-    price: '$69.95',
+    price: '₹1,199',
     image1: imgMoveknitRibLimitlessTopImage1,
     image2: imgMoveknitRibLimitlessTopImage2,
     franchise: "WOMEN'S",
@@ -134,7 +195,7 @@ export const womenProducts: Product[] = [
   {
     id: 203,
     name: 'Moveknit Rib Limitless Skort',
-    price: '$79.95',
+    price: '₹1,299',
     image1: imgMoveknitRibLimitlessSkortImage1,
     image2: imgMoveknitRibLimitlessSkortImage2,
     franchise: "WOMEN'S",
@@ -145,7 +206,7 @@ export const womenProducts: Product[] = [
   {
     id: 204,
     name: 'Moveknit Game Set Match Skort 2.0',
-    price: '$79.95',
+    price: '₹1,299',
     image1: imgMoveknitGameSetMatchSkort20Image1,
     image2: imgMoveknitGameSetMatchSkort20Image2,
     franchise: "WOMEN'S",
@@ -157,7 +218,7 @@ export const womenProducts: Product[] = [
   {
     id: 205,
     name: 'BreezeBlend Travel Day Jacket',
-    price: '$149.95',
+    price: '₹2,499',
     image1: imgBreezeBlendTravelDayJacketImage1,
     image2: imgBreezeBlendTravelDayJacketImage2,
     franchise: "WOMEN'S",
@@ -171,10 +232,10 @@ export const menProducts: Product[] = [
   {
     id: 301,
     name: 'Botanical Print Polo',
-    price: '$89.95',
+    price: '₹1,499',
     image1: imgBlueBotanicalPolo1,
     image2: imgBlueBotanicalPolo2,
-    images: [imgBlueBotanicalPolo1, imgBlueBotanicalPolo2, imgBlueBotanicalPolo3, imgBlueBotanicalPolo4],
+    images: [imgBlueBotanicalPolo1, imgBlueBotanicalPolo2, imgBlueBotanicalPolo3, imgBlueBotanicalPolo4, imgBlueBotanicalPolo5],
     franchise: "MEN'S",
     badge: 'NEW',
     colors: ['#4a6e8a', '#1d3f43'],
@@ -183,50 +244,185 @@ export const menProducts: Product[] = [
   },
   {
     id: 302,
-    name: 'Marble Texture Polo',
-    price: '$84.95',
-    image1: imgWhitePatternedPolo1,
-    image2: imgWhitePatternedPolo2,
-    images: [imgWhitePatternedPolo1, imgWhitePatternedPolo2, imgWhitePatternedPolo3, imgWhitePatternedPolo4],
+    name: 'Sage Heather Polo',
+    price: '₹1,299',
+    image1: imgSageHeatherPolo1,
+    image2: imgSageHeatherPolo2,
+    images: [imgSageHeatherPolo1, imgSageHeatherPolo2, imgSageHeatherPolo3, imgSageHeatherPolo4, imgSageHeatherPolo5],
+    franchise: "MEN'S",
+    colors: ['#8fa68a', '#6b8a66'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'A relaxed heathered sage polo in ultra-soft piqué cotton. Clean, minimal design for effortless all-day comfort.',
+  },
+  {
+    id: 303,
+    name: 'Rose Palm Polo',
+    price: '₹1,499',
+    image1: imgRosePalmPolo1,
+    image2: imgRosePalmPolo2,
+    images: [imgRosePalmPolo1, imgRosePalmPolo2, imgRosePalmPolo3, imgRosePalmPolo4, imgRosePalmPolo5],
+    franchise: "MEN'S",
+    badge: 'NEW',
+    colors: ['#d4a0a0', '#c27a8a'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Soft rose-toned polo with an all-over palm print. Moisture-wicking performance fabric keeps you cool under pressure.',
+  },
+  {
+    id: 304,
+    name: 'White Abstract Polo',
+    price: '₹1,399',
+    image1: imgWhiteAbstractPolo1,
+    image2: imgWhiteAbstractPolo2,
+    images: [imgWhiteAbstractPolo1, imgWhiteAbstractPolo2, imgWhiteAbstractPolo3, imgWhiteAbstractPolo4, imgWhiteAbstractPolo5],
     franchise: "MEN'S",
     badge: 'BEST SELLER',
     colors: ['#f0ede8', '#cdcbcc'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Lightweight marble-textured polo with a clean silhouette. Soft-touch fabric and a tailored fit you can wear anywhere.',
-  },
-  {
-    id: 303,
-    name: 'Rose Garden Polo',
-    price: '$89.95',
-    image1: imgRosePatternedPolo1,
-    image2: imgRosePatternedPolo2,
-    images: [imgRosePatternedPolo1, imgRosePatternedPolo2, imgRosePatternedPolo3, imgRosePatternedPolo4],
-    franchise: "MEN'S",
-    colors: ['#c27a8a', '#8b4d5e'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Make a statement in this rose-toned textured polo. All-over botanical pattern with moisture-wicking performance fabric.',
-  },
-  {
-    id: 304,
-    name: 'Tropical Leaf Polo',
-    price: '$94.95',
-    image1: imgBlueLeafPolo1,
-    image2: imgBlueLeafPolo2,
-    images: [imgBlueLeafPolo1, imgBlueLeafPolo2, imgBlueLeafPolo3, imgBlueLeafPolo4],
-    franchise: "MEN'S",
-    colors: ['#4a6e8a', '#2d4a6b', '#3a5c7a'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Bold tropical leaf print with contrast navy collar and cuffs. Premium stretch fabric for comfort on and off the course.',
+    description: 'Lightweight white polo with a subtle abstract print. Soft-touch fabric and a tailored fit you can wear anywhere.',
   },
   {
     id: 305,
+    name: 'Rose Textured Polo',
+    price: '₹1,399',
+    image1: imgRoseTexturedPolo1,
+    image2: imgRoseTexturedPolo2,
+    images: [imgRoseTexturedPolo1, imgRoseTexturedPolo2, imgRoseTexturedPolo3, imgRoseTexturedPolo4, imgRoseTexturedPolo5],
+    franchise: "MEN'S",
+    colors: ['#c27a8a', '#8b4d5e'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Make a statement in this rose-toned textured polo. All-over tonal pattern with moisture-wicking performance fabric.',
+  },
+  {
+    id: 306,
+    name: 'Blue Floral Polo',
+    price: '₹1,599',
+    image1: imgBlueFloralPolo1,
+    image2: imgBlueFloralPolo2,
+    images: [imgBlueFloralPolo1, imgBlueFloralPolo2, imgBlueFloralPolo3, imgBlueFloralPolo4, imgBlueFloralPolo5, imgBlueFloralPolo6],
+    franchise: "MEN'S",
+    badge: 'NEW',
+    colors: ['#3a5c8a', '#1d2f43'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Bold blue floral print with contrast navy collar and cuffs. Premium stretch fabric for comfort on and off the course.',
+  },
+  {
+    id: 307,
+    name: 'Sage Palm Polo',
+    price: '₹1,499',
+    image1: imgSagePalmPolo1,
+    image2: imgSagePalmPolo2,
+    images: [imgSagePalmPolo1, imgSagePalmPolo2, imgSagePalmPolo3, imgSagePalmPolo4, imgSagePalmPolo5],
+    franchise: "MEN'S",
+    colors: ['#b5c9b0', '#8fa68a'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Refined sage palm leaf print in a relaxed silhouette. Quick-dry fabric with UPF 30+ sun protection for outdoor comfort.',
+  },
+  {
+    id: 308,
+    name: 'Sky Landscape Polo',
+    price: '₹1,599',
+    image1: imgSkyLandscapePolo1,
+    image2: imgSkyLandscapePolo2,
+    images: [imgSkyLandscapePolo1, imgSkyLandscapePolo2, imgSkyLandscapePolo3, imgSkyLandscapePolo4, imgSkyLandscapePolo5, imgSkyLandscapePolo6],
+    franchise: "MEN'S",
+    colors: ['#a8c8e0', '#6a8fb5'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'A unique landscape graphic across the chest in sky blue tones. Piqué cotton with dynamic stretch for effortless movement.',
+  },
+  {
+    id: 309,
+    name: 'Green Stripe Polo',
+    price: '₹1,499',
+    image1: imgGreenStripePolo1,
+    image2: imgGreenStripePolo2,
+    images: [imgGreenStripePolo1, imgGreenStripePolo2, imgGreenStripePolo3, imgGreenStripePolo4, imgGreenStripePolo5],
+    franchise: "MEN'S",
+    colors: ['#2d5a3d', '#1a2026'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Bold green and black color block polo with contrast stripe detail. Performance knit that moves with you all day.',
+  },
+  {
+    id: 310,
+    name: 'Black Geometric Polo',
+    price: '₹1,599',
+    image1: imgBlackGeometricPolo1,
+    image2: imgBlackGeometricPolo2,
+    images: [imgBlackGeometricPolo1, imgBlackGeometricPolo2, imgBlackGeometricPolo3, imgBlackGeometricPolo4, imgBlackGeometricPolo5],
+    franchise: "MEN'S",
+    colors: ['#1a2026', '#2d2d2d'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Black polo with a vibrant geometric chest band. Eye-catching detail meets premium wrinkle-resistant fabric.',
+  },
+  {
+    id: 311,
+    name: 'Black Neon Accent Polo',
+    price: '₹1,399',
+    image1: imgBlackNeonPolo1,
+    image2: imgBlackNeonPolo2,
+    images: [imgBlackNeonPolo1, imgBlackNeonPolo2, imgBlackNeonPolo3, imgBlackNeonPolo4, imgBlackNeonPolo5],
+    franchise: "MEN'S",
+    colors: ['#1a2026', '#c8e636'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Sleek black polo with neon lime accents on collar and placket. Sporty crest detail and 4-way stretch performance fabric.',
+  },
+  {
+    id: 312,
+    name: 'Mocha Classic Polo',
+    price: '₹1,299',
+    image1: imgMochaClassicPolo1,
+    image2: imgMochaClassicPolo2,
+    images: [imgMochaClassicPolo1, imgMochaClassicPolo2, imgMochaClassicPolo3, imgMochaClassicPolo4],
+    franchise: "MEN'S",
+    colors: ['#8b7355', '#6b5a42'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Timeless mocha polo in ultra-soft piqué cotton. Clean, minimal design with the Ivy Crew emblem for everyday versatility.',
+  },
+  {
+    id: 313,
+    name: 'Teal Textured Polo',
+    price: '₹1,499',
+    image1: imgTealTexturedPolo1,
+    image2: imgTealTexturedPolo2,
+    images: [imgTealTexturedPolo1, imgTealTexturedPolo2, imgTealTexturedPolo3, imgTealTexturedPolo4, imgTealTexturedPolo5],
+    franchise: "MEN'S",
+    colors: ['#7aacaa', '#5a8c8a'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Textured teal polo with a modern relaxed fit. Quick-dry technology and cool comfort fabric for warm-weather style.',
+  },
+  {
+    id: 314,
+    name: 'Navy Tipped Polo',
+    price: '₹1,499',
+    image1: imgNavyTippedPolo1,
+    image2: imgNavyTippedPolo2,
+    images: [imgNavyTippedPolo1, imgNavyTippedPolo2, imgNavyTippedPolo3, imgNavyTippedPolo4, imgNavyTippedPolo5],
+    franchise: "MEN'S",
+    badge: 'BEST SELLER',
+    colors: ['#1a2040', '#e05a30'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Classic navy polo with signature orange tipping on collar and cuffs. Branded placket detail adds a premium touch.',
+  },
+  {
+    id: 315,
+    name: 'Olive Stripe Polo',
+    price: '₹1,399',
+    image1: imgOliveStripePolo1,
+    image2: imgOliveStripePolo2,
+    images: [imgOliveStripePolo1, imgOliveStripePolo2, imgOliveStripePolo3, imgOliveStripePolo4, imgOliveStripePolo5],
+    franchise: "MEN'S",
+    colors: ['#8a8a6e', '#6b6b52'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Subtle stripe texture in olive tones. Lightweight breathable fabric with easy care finish — perfect for travel or everyday wear.',
+  },
+  {
+    id: 316,
     name: 'Classic Sage Polo',
-    price: '$79.95',
+    price: '₹1,299',
     image1: imgSageClassicPolo1,
     image2: imgSageClassicPolo2,
-    images: [imgSageClassicPolo1, imgSageClassicPolo2, imgSageClassicPolo3],
+    images: [imgSageClassicPolo1, imgSageClassicPolo2, imgSageClassicPolo3, imgSageClassicPolo4],
     franchise: "MEN'S",
-    colors: ['#8fa68a', '#6b8a66'],
+    colors: ['#b5c2a8', '#8fa68a'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     description: 'Timeless solid sage polo with the Ivy Crew emblem. Clean, minimal design in ultra-soft piqué cotton for all-day comfort.',
   },
@@ -238,6 +434,15 @@ export const categories: Category[] = [
   { name: "Shop Men's Pants", image: imgShopMensPants },
   { name: "Shop Men's Footwear", image: imgShopMensFootwear },
   { name: "Shop Men's Tees", image: imgShopMensTees },
+];
+
+// Featured men's products for homepage (curated selection)
+export const menFeatured: Product[] = [
+  menProducts[0],  // Botanical Print Polo (NEW)
+  menProducts[3],  // White Abstract Polo (BEST SELLER)
+  menProducts[5],  // Blue Floral Polo (NEW)
+  menProducts[13], // Navy Tipped Polo (BEST SELLER)
+  menProducts[8],  // Green Stripe Polo
 ];
 
 export const allProducts: Product[] = [...newArrivals, ...womenProducts, ...menProducts];
