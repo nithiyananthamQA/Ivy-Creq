@@ -309,7 +309,8 @@ export default function ProductDetailPage() {
 
   // Mobile inline scroll-snap gallery
   const inlineScrollRef = useRef<HTMLDivElement>(null);
-  const scrollSyncRef = useRef(true);
+  const scrollSourceRef = useRef<'user' | 'programmatic'>('user');
+  const scrollTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const images = product
     ? (product.images && product.images.length > 0
@@ -317,17 +318,16 @@ export default function ProductDetailPage() {
         : [product.image1 || product.image, product.image2].filter(Boolean) as string[])
     : [];
 
-  // Sync inline scroll position when activeImage changes from outside
+  // Sync inline scroll position when activeImage changes from thumbnail/external click
   useEffect(() => {
     const el = inlineScrollRef.current;
-    if (!el || !images.length) return;
+    if (!el || !images.length || scrollSourceRef.current === 'user') return;
     const target = activeImage * el.clientWidth;
     if (Math.abs(el.scrollLeft - target) > 5) {
-      scrollSyncRef.current = false;
       el.scrollTo({ left: target, behavior: 'smooth' });
-      const t = setTimeout(() => { scrollSyncRef.current = true; }, 500);
-      return () => clearTimeout(t);
     }
+    const t = setTimeout(() => { scrollSourceRef.current = 'user'; }, 400);
+    return () => clearTimeout(t);
   }, [activeImage, images.length]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
@@ -369,10 +369,17 @@ export default function ProductDetailPage() {
   const nextImage = () => setActiveImage((i: number) => (i === images.length - 1 ? 0 : i + 1));
 
   const handleInlineScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    if (!scrollSyncRef.current) return;
+    if (scrollSourceRef.current === 'programmatic') return;
+    clearTimeout(scrollTimerRef.current);
     const el = e.currentTarget;
-    const idx = Math.round(el.scrollLeft / el.clientWidth);
-    if (idx >= 0 && idx < images.length && idx !== activeImage) setActiveImage(idx);
+    scrollTimerRef.current = setTimeout(() => {
+      const idx = Math.round(el.scrollLeft / el.clientWidth);
+      if (idx >= 0 && idx < images.length && idx !== activeImage) {
+        scrollSourceRef.current = 'programmatic';
+        setActiveImage(idx);
+        setTimeout(() => { scrollSourceRef.current = 'user'; }, 100);
+      }
+    }, 80);
   };
 
   const openViewer  = (i: number) => { setActiveImage(i); setViewerOpen(true); };
@@ -469,12 +476,12 @@ export default function ProductDetailPage() {
             <div className="relative md:hidden mb-3">
               <div
                 ref={inlineScrollRef}
-                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth"
                 onScroll={handleInlineScroll}
-                style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+                style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' } as React.CSSProperties}
               >
                 {images.map((img, i) => (
-                  <div key={i} className="w-full shrink-0 snap-start">
+                  <div key={i} className="w-full shrink-0 snap-center">
                     <div className="aspect-[3/4] bg-[#f5f7f8]">
                       <img
                         src={img}
