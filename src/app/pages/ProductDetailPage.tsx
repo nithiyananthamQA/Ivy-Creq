@@ -313,9 +313,11 @@ export default function ProductDetailPage() {
   const scrollTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const images = product
-    ? (product.images && product.images.length > 0
-        ? product.images
-        : [product.image1 || product.image, product.image2].filter(Boolean) as string[])
+    ? (product.hdImages && product.hdImages.length > 0
+        ? product.hdImages
+        : product.images && product.images.length > 0
+          ? product.images
+          : [product.image1 || product.image, product.image2].filter(Boolean) as string[])
     : [];
 
   // Sync inline scroll position when activeImage changes from thumbnail/external click

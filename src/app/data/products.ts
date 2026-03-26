@@ -108,6 +108,87 @@ import imgSageClassicPolo1 from '../../assets/mens/sage-classic-polo-1.webp';
 import imgSageClassicPolo2 from '../../assets/mens/sage-classic-polo-2.webp';
 import imgSageClassicPolo3 from '../../assets/mens/sage-classic-polo-3.webp';
 import imgSageClassicPolo4 from '../../assets/mens/sage-classic-polo-4.webp';
+// Men's HD product images (full resolution for product detail page zoom)
+import hdBlueBotanicalPolo1 from '../../assets/mens-hd/blue-botanical-polo-1.webp';
+import hdBlueBotanicalPolo2 from '../../assets/mens-hd/blue-botanical-polo-2.webp';
+import hdBlueBotanicalPolo3 from '../../assets/mens-hd/blue-botanical-polo-3.webp';
+import hdBlueBotanicalPolo4 from '../../assets/mens-hd/blue-botanical-polo-4.webp';
+import hdBlueBotanicalPolo5 from '../../assets/mens-hd/blue-botanical-polo-5.webp';
+import hdSageHeatherPolo1 from '../../assets/mens-hd/sage-heather-polo-1.webp';
+import hdSageHeatherPolo2 from '../../assets/mens-hd/sage-heather-polo-2.webp';
+import hdSageHeatherPolo3 from '../../assets/mens-hd/sage-heather-polo-3.webp';
+import hdSageHeatherPolo4 from '../../assets/mens-hd/sage-heather-polo-4.webp';
+import hdSageHeatherPolo5 from '../../assets/mens-hd/sage-heather-polo-5.webp';
+import hdRosePalmPolo1 from '../../assets/mens-hd/rose-palm-polo-1.webp';
+import hdRosePalmPolo2 from '../../assets/mens-hd/rose-palm-polo-2.webp';
+import hdRosePalmPolo3 from '../../assets/mens-hd/rose-palm-polo-3.webp';
+import hdRosePalmPolo4 from '../../assets/mens-hd/rose-palm-polo-4.webp';
+import hdRosePalmPolo5 from '../../assets/mens-hd/rose-palm-polo-5.webp';
+import hdWhiteAbstractPolo1 from '../../assets/mens-hd/white-abstract-polo-1.webp';
+import hdWhiteAbstractPolo2 from '../../assets/mens-hd/white-abstract-polo-2.webp';
+import hdWhiteAbstractPolo3 from '../../assets/mens-hd/white-abstract-polo-3.webp';
+import hdWhiteAbstractPolo4 from '../../assets/mens-hd/white-abstract-polo-4.webp';
+import hdWhiteAbstractPolo5 from '../../assets/mens-hd/white-abstract-polo-5.webp';
+import hdRoseTexturedPolo1 from '../../assets/mens-hd/rose-textured-polo-1.webp';
+import hdRoseTexturedPolo2 from '../../assets/mens-hd/rose-textured-polo-2.webp';
+import hdRoseTexturedPolo3 from '../../assets/mens-hd/rose-textured-polo-3.webp';
+import hdRoseTexturedPolo4 from '../../assets/mens-hd/rose-textured-polo-4.webp';
+import hdRoseTexturedPolo5 from '../../assets/mens-hd/rose-textured-polo-5.webp';
+import hdBlueFloralPolo1 from '../../assets/mens-hd/blue-floral-polo-1.webp';
+import hdBlueFloralPolo2 from '../../assets/mens-hd/blue-floral-polo-2.webp';
+import hdBlueFloralPolo3 from '../../assets/mens-hd/blue-floral-polo-3.webp';
+import hdBlueFloralPolo4 from '../../assets/mens-hd/blue-floral-polo-4.webp';
+import hdBlueFloralPolo5 from '../../assets/mens-hd/blue-floral-polo-5.webp';
+import hdBlueFloralPolo6 from '../../assets/mens-hd/blue-floral-polo-6.webp';
+import hdSagePalmPolo1 from '../../assets/mens-hd/sage-palm-polo-1.webp';
+import hdSagePalmPolo2 from '../../assets/mens-hd/sage-palm-polo-2.webp';
+import hdSagePalmPolo3 from '../../assets/mens-hd/sage-palm-polo-3.webp';
+import hdSagePalmPolo4 from '../../assets/mens-hd/sage-palm-polo-4.webp';
+import hdSagePalmPolo5 from '../../assets/mens-hd/sage-palm-polo-5.webp';
+import hdSkyLandscapePolo1 from '../../assets/mens-hd/sky-landscape-polo-1.webp';
+import hdSkyLandscapePolo2 from '../../assets/mens-hd/sky-landscape-polo-2.webp';
+import hdSkyLandscapePolo3 from '../../assets/mens-hd/sky-landscape-polo-3.webp';
+import hdSkyLandscapePolo4 from '../../assets/mens-hd/sky-landscape-polo-4.webp';
+import hdSkyLandscapePolo5 from '../../assets/mens-hd/sky-landscape-polo-5.webp';
+import hdSkyLandscapePolo6 from '../../assets/mens-hd/sky-landscape-polo-6.webp';
+import hdGreenStripePolo1 from '../../assets/mens-hd/green-stripe-polo-1.webp';
+import hdGreenStripePolo2 from '../../assets/mens-hd/green-stripe-polo-2.webp';
+import hdGreenStripePolo3 from '../../assets/mens-hd/green-stripe-polo-3.webp';
+import hdGreenStripePolo4 from '../../assets/mens-hd/green-stripe-polo-4.webp';
+import hdGreenStripePolo5 from '../../assets/mens-hd/green-stripe-polo-5.webp';
+import hdBlackGeometricPolo1 from '../../assets/mens-hd/black-geometric-polo-1.webp';
+import hdBlackGeometricPolo2 from '../../assets/mens-hd/black-geometric-polo-2.webp';
+import hdBlackGeometricPolo3 from '../../assets/mens-hd/black-geometric-polo-3.webp';
+import hdBlackGeometricPolo4 from '../../assets/mens-hd/black-geometric-polo-4.webp';
+import hdBlackGeometricPolo5 from '../../assets/mens-hd/black-geometric-polo-5.webp';
+import hdBlackNeonPolo1 from '../../assets/mens-hd/black-neon-polo-1.webp';
+import hdBlackNeonPolo2 from '../../assets/mens-hd/black-neon-polo-2.webp';
+import hdBlackNeonPolo3 from '../../assets/mens-hd/black-neon-polo-3.webp';
+import hdBlackNeonPolo4 from '../../assets/mens-hd/black-neon-polo-4.webp';
+import hdBlackNeonPolo5 from '../../assets/mens-hd/black-neon-polo-5.webp';
+import hdMochaClassicPolo1 from '../../assets/mens-hd/mocha-classic-polo-1.webp';
+import hdMochaClassicPolo2 from '../../assets/mens-hd/mocha-classic-polo-2.webp';
+import hdMochaClassicPolo3 from '../../assets/mens-hd/mocha-classic-polo-3.webp';
+import hdMochaClassicPolo4 from '../../assets/mens-hd/mocha-classic-polo-4.webp';
+import hdTealTexturedPolo1 from '../../assets/mens-hd/teal-textured-polo-1.webp';
+import hdTealTexturedPolo2 from '../../assets/mens-hd/teal-textured-polo-2.webp';
+import hdTealTexturedPolo3 from '../../assets/mens-hd/teal-textured-polo-3.webp';
+import hdTealTexturedPolo4 from '../../assets/mens-hd/teal-textured-polo-4.webp';
+import hdTealTexturedPolo5 from '../../assets/mens-hd/teal-textured-polo-5.webp';
+import hdNavyTippedPolo1 from '../../assets/mens-hd/navy-tipped-polo-1.webp';
+import hdNavyTippedPolo2 from '../../assets/mens-hd/navy-tipped-polo-2.webp';
+import hdNavyTippedPolo3 from '../../assets/mens-hd/navy-tipped-polo-3.webp';
+import hdNavyTippedPolo4 from '../../assets/mens-hd/navy-tipped-polo-4.webp';
+import hdNavyTippedPolo5 from '../../assets/mens-hd/navy-tipped-polo-5.webp';
+import hdOliveStripePolo1 from '../../assets/mens-hd/olive-stripe-polo-1.webp';
+import hdOliveStripePolo2 from '../../assets/mens-hd/olive-stripe-polo-2.webp';
+import hdOliveStripePolo3 from '../../assets/mens-hd/olive-stripe-polo-3.webp';
+import hdOliveStripePolo4 from '../../assets/mens-hd/olive-stripe-polo-4.webp';
+import hdOliveStripePolo5 from '../../assets/mens-hd/olive-stripe-polo-5.webp';
+import hdSageClassicPolo1 from '../../assets/mens-hd/sage-classic-polo-1.webp';
+import hdSageClassicPolo2 from '../../assets/mens-hd/sage-classic-polo-2.webp';
+import hdSageClassicPolo3 from '../../assets/mens-hd/sage-classic-polo-3.webp';
+import hdSageClassicPolo4 from '../../assets/mens-hd/sage-classic-polo-4.webp';
 
 export interface Product {
   id: number;
@@ -117,6 +198,7 @@ export interface Product {
   image1?: string;
   image2?: string;
   images?: string[];
+  hdImages?: string[];
   franchise?: string;
   badge?: string;
   colors: string[];
@@ -235,6 +317,7 @@ export const menProducts: Product[] = [
     image1: imgBlueBotanicalPolo1,
     image2: imgBlueBotanicalPolo2,
     images: [imgBlueBotanicalPolo1, imgBlueBotanicalPolo2, imgBlueBotanicalPolo3, imgBlueBotanicalPolo4, imgBlueBotanicalPolo5],
+    hdImages: [hdBlueBotanicalPolo1, hdBlueBotanicalPolo2, hdBlueBotanicalPolo3, hdBlueBotanicalPolo4, hdBlueBotanicalPolo5],
     franchise: "MEN'S",
     badge: 'NEW',
     colors: ['#4a6e8a', '#1d3f43'],
@@ -248,6 +331,7 @@ export const menProducts: Product[] = [
     image1: imgSageHeatherPolo1,
     image2: imgSageHeatherPolo2,
     images: [imgSageHeatherPolo1, imgSageHeatherPolo2, imgSageHeatherPolo3, imgSageHeatherPolo4, imgSageHeatherPolo5],
+    hdImages: [hdSageHeatherPolo1, hdSageHeatherPolo2, hdSageHeatherPolo3, hdSageHeatherPolo4, hdSageHeatherPolo5],
     franchise: "MEN'S",
     colors: ['#8fa68a', '#6b8a66'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -260,6 +344,7 @@ export const menProducts: Product[] = [
     image1: imgRosePalmPolo1,
     image2: imgRosePalmPolo2,
     images: [imgRosePalmPolo1, imgRosePalmPolo2, imgRosePalmPolo3, imgRosePalmPolo4, imgRosePalmPolo5],
+    hdImages: [hdRosePalmPolo1, hdRosePalmPolo2, hdRosePalmPolo3, hdRosePalmPolo4, hdRosePalmPolo5],
     franchise: "MEN'S",
     badge: 'NEW',
     colors: ['#d4a0a0', '#c27a8a'],
@@ -273,6 +358,7 @@ export const menProducts: Product[] = [
     image1: imgWhiteAbstractPolo1,
     image2: imgWhiteAbstractPolo2,
     images: [imgWhiteAbstractPolo1, imgWhiteAbstractPolo2, imgWhiteAbstractPolo3, imgWhiteAbstractPolo4, imgWhiteAbstractPolo5],
+    hdImages: [hdWhiteAbstractPolo1, hdWhiteAbstractPolo2, hdWhiteAbstractPolo3, hdWhiteAbstractPolo4, hdWhiteAbstractPolo5],
     franchise: "MEN'S",
     badge: 'BEST SELLER',
     colors: ['#f0ede8', '#cdcbcc'],
@@ -286,6 +372,7 @@ export const menProducts: Product[] = [
     image1: imgRoseTexturedPolo1,
     image2: imgRoseTexturedPolo2,
     images: [imgRoseTexturedPolo1, imgRoseTexturedPolo2, imgRoseTexturedPolo3, imgRoseTexturedPolo4, imgRoseTexturedPolo5],
+    hdImages: [hdRoseTexturedPolo1, hdRoseTexturedPolo2, hdRoseTexturedPolo3, hdRoseTexturedPolo4, hdRoseTexturedPolo5],
     franchise: "MEN'S",
     colors: ['#c27a8a', '#8b4d5e'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -298,6 +385,7 @@ export const menProducts: Product[] = [
     image1: imgBlueFloralPolo1,
     image2: imgBlueFloralPolo2,
     images: [imgBlueFloralPolo1, imgBlueFloralPolo2, imgBlueFloralPolo3, imgBlueFloralPolo4, imgBlueFloralPolo5, imgBlueFloralPolo6],
+    hdImages: [hdBlueFloralPolo1, hdBlueFloralPolo2, hdBlueFloralPolo3, hdBlueFloralPolo4, hdBlueFloralPolo5, hdBlueFloralPolo6],
     franchise: "MEN'S",
     badge: 'NEW',
     colors: ['#3a5c8a', '#1d2f43'],
@@ -311,6 +399,7 @@ export const menProducts: Product[] = [
     image1: imgSagePalmPolo1,
     image2: imgSagePalmPolo2,
     images: [imgSagePalmPolo1, imgSagePalmPolo2, imgSagePalmPolo3, imgSagePalmPolo4, imgSagePalmPolo5],
+    hdImages: [hdSagePalmPolo1, hdSagePalmPolo2, hdSagePalmPolo3, hdSagePalmPolo4, hdSagePalmPolo5],
     franchise: "MEN'S",
     colors: ['#b5c9b0', '#8fa68a'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -323,6 +412,7 @@ export const menProducts: Product[] = [
     image1: imgSkyLandscapePolo1,
     image2: imgSkyLandscapePolo2,
     images: [imgSkyLandscapePolo1, imgSkyLandscapePolo2, imgSkyLandscapePolo3, imgSkyLandscapePolo4, imgSkyLandscapePolo5, imgSkyLandscapePolo6],
+    hdImages: [hdSkyLandscapePolo1, hdSkyLandscapePolo2, hdSkyLandscapePolo3, hdSkyLandscapePolo4, hdSkyLandscapePolo5, hdSkyLandscapePolo6],
     franchise: "MEN'S",
     colors: ['#a8c8e0', '#6a8fb5'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -335,6 +425,7 @@ export const menProducts: Product[] = [
     image1: imgGreenStripePolo1,
     image2: imgGreenStripePolo2,
     images: [imgGreenStripePolo1, imgGreenStripePolo2, imgGreenStripePolo3, imgGreenStripePolo4, imgGreenStripePolo5],
+    hdImages: [hdGreenStripePolo1, hdGreenStripePolo2, hdGreenStripePolo3, hdGreenStripePolo4, hdGreenStripePolo5],
     franchise: "MEN'S",
     colors: ['#2d5a3d', '#1a2026'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -347,6 +438,7 @@ export const menProducts: Product[] = [
     image1: imgBlackGeometricPolo1,
     image2: imgBlackGeometricPolo2,
     images: [imgBlackGeometricPolo1, imgBlackGeometricPolo2, imgBlackGeometricPolo3, imgBlackGeometricPolo4, imgBlackGeometricPolo5],
+    hdImages: [hdBlackGeometricPolo1, hdBlackGeometricPolo2, hdBlackGeometricPolo3, hdBlackGeometricPolo4, hdBlackGeometricPolo5],
     franchise: "MEN'S",
     colors: ['#1a2026', '#2d2d2d'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -359,6 +451,7 @@ export const menProducts: Product[] = [
     image1: imgBlackNeonPolo1,
     image2: imgBlackNeonPolo2,
     images: [imgBlackNeonPolo1, imgBlackNeonPolo2, imgBlackNeonPolo3, imgBlackNeonPolo4, imgBlackNeonPolo5],
+    hdImages: [hdBlackNeonPolo1, hdBlackNeonPolo2, hdBlackNeonPolo3, hdBlackNeonPolo4, hdBlackNeonPolo5],
     franchise: "MEN'S",
     colors: ['#1a2026', '#c8e636'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -371,6 +464,7 @@ export const menProducts: Product[] = [
     image1: imgMochaClassicPolo1,
     image2: imgMochaClassicPolo2,
     images: [imgMochaClassicPolo1, imgMochaClassicPolo2, imgMochaClassicPolo3, imgMochaClassicPolo4],
+    hdImages: [hdMochaClassicPolo1, hdMochaClassicPolo2, hdMochaClassicPolo3, hdMochaClassicPolo4],
     franchise: "MEN'S",
     colors: ['#8b7355', '#6b5a42'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -383,6 +477,7 @@ export const menProducts: Product[] = [
     image1: imgTealTexturedPolo1,
     image2: imgTealTexturedPolo2,
     images: [imgTealTexturedPolo1, imgTealTexturedPolo2, imgTealTexturedPolo3, imgTealTexturedPolo4, imgTealTexturedPolo5],
+    hdImages: [hdTealTexturedPolo1, hdTealTexturedPolo2, hdTealTexturedPolo3, hdTealTexturedPolo4, hdTealTexturedPolo5],
     franchise: "MEN'S",
     colors: ['#7aacaa', '#5a8c8a'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -395,6 +490,7 @@ export const menProducts: Product[] = [
     image1: imgNavyTippedPolo1,
     image2: imgNavyTippedPolo2,
     images: [imgNavyTippedPolo1, imgNavyTippedPolo2, imgNavyTippedPolo3, imgNavyTippedPolo4, imgNavyTippedPolo5],
+    hdImages: [hdNavyTippedPolo1, hdNavyTippedPolo2, hdNavyTippedPolo3, hdNavyTippedPolo4, hdNavyTippedPolo5],
     franchise: "MEN'S",
     badge: 'BEST SELLER',
     colors: ['#1a2040', '#e05a30'],
@@ -408,6 +504,7 @@ export const menProducts: Product[] = [
     image1: imgOliveStripePolo1,
     image2: imgOliveStripePolo2,
     images: [imgOliveStripePolo1, imgOliveStripePolo2, imgOliveStripePolo3, imgOliveStripePolo4, imgOliveStripePolo5],
+    hdImages: [hdOliveStripePolo1, hdOliveStripePolo2, hdOliveStripePolo3, hdOliveStripePolo4, hdOliveStripePolo5],
     franchise: "MEN'S",
     colors: ['#8a8a6e', '#6b6b52'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -420,6 +517,7 @@ export const menProducts: Product[] = [
     image1: imgSageClassicPolo1,
     image2: imgSageClassicPolo2,
     images: [imgSageClassicPolo1, imgSageClassicPolo2, imgSageClassicPolo3, imgSageClassicPolo4],
+    hdImages: [hdSageClassicPolo1, hdSageClassicPolo2, hdSageClassicPolo3, hdSageClassicPolo4],
     franchise: "MEN'S",
     colors: ['#b5c2a8', '#8fa68a'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
