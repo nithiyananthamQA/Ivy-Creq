@@ -485,7 +485,7 @@ export default function ProductDetailPage() {
                 style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
               >
                 {images.map((img, i) => (
-                  <div key={i} className="w-full shrink-0 snap-start">
+                  <div key={i} className="w-full shrink-0 snap-start snap-always">
                     <div className="aspect-[3/4] bg-[#f5f7f8]">
                       <img
                         src={img}
