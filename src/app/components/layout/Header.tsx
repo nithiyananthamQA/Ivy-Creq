@@ -3,7 +3,7 @@ import { Menu, User, ShoppingCart, Heart, X } from 'lucide-react';
 import { Link } from 'react-router';
 import { useFavorites } from '../../context/FavoritesContext';
 import { useCart } from '../../context/CartContext';
-import BlackLogo from '../../../assets/Black.svg';
+import BlackLogo from '../../../assets/logo-black.svg';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

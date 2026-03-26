@@ -1,109 +1,292 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
 import { Heart, ChevronLeft, ChevronRight, Truck, RotateCcw, Shield, X, ZoomIn } from 'lucide-react';
-
-/** Mobile pinch-zoom + pan + double-tap hook */
-function useMobileZoom(containerRef: React.RefObject<HTMLDivElement | null>) {
-  const [scale, setScale] = useState(1);
-  const [translate, setTranslate] = useState({ x: 0, y: 0 });
-  const stateRef = useRef({ scale: 1, tx: 0, ty: 0 });
-  const pinchRef = useRef({ startDist: 0, startScale: 1 });
-  const panRef = useRef({ startX: 0, startY: 0, startTx: 0, startTy: 0 });
-  const lastTapRef = useRef(0);
-
-  const clampTranslate = useCallback((tx: number, ty: number, s: number) => {
-    const el = containerRef.current;
-    if (!el) return { x: 0, y: 0 };
-    const rect = el.getBoundingClientRect();
-    const maxTx = Math.max(0, (rect.width * s - rect.width) / 2);
-    const maxTy = Math.max(0, (rect.height * s - rect.height) / 2);
-    return { x: Math.max(-maxTx, Math.min(maxTx, tx)), y: Math.max(-maxTy, Math.min(maxTy, ty)) };
-  }, [containerRef]);
-
-  const reset = useCallback(() => {
-    setScale(1);
-    setTranslate({ x: 0, y: 0 });
-    stateRef.current = { scale: 1, tx: 0, ty: 0 };
-  }, []);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const getTouchDist = (t: TouchList) => {
-      const dx = t[0].clientX - t[1].clientX;
-      const dy = t[0].clientY - t[1].clientY;
-      return Math.hypot(dx, dy);
-    };
-
-    const onTouchStart = (e: TouchEvent) => {
-      if (e.touches.length === 2) {
-        e.preventDefault();
-        pinchRef.current = { startDist: getTouchDist(e.touches), startScale: stateRef.current.scale };
-      } else if (e.touches.length === 1) {
-        // Double tap detection
-        const now = Date.now();
-        if (now - lastTapRef.current < 300) {
-          e.preventDefault();
-          const newScale = stateRef.current.scale > 1.3 ? 1 : 1.8;
-          const clamped = newScale === 1 ? { x: 0, y: 0 } : clampTranslate(0, 0, newScale);
-          setScale(newScale);
-          setTranslate(clamped);
-          stateRef.current = { scale: newScale, tx: clamped.x, ty: clamped.y };
-        }
-        lastTapRef.current = now;
-        // Pan start
-        panRef.current = {
-          startX: e.touches[0].clientX, startY: e.touches[0].clientY,
-          startTx: stateRef.current.tx, startTy: stateRef.current.ty,
-        };
-      }
-    };
-
-    const onTouchMove = (e: TouchEvent) => {
-      if (e.touches.length === 2) {
-        e.preventDefault();
-        const dist = getTouchDist(e.touches);
-        const newScale = Math.max(1, Math.min(2.5, pinchRef.current.startScale * (dist / pinchRef.current.startDist)));
-        const clamped = clampTranslate(stateRef.current.tx, stateRef.current.ty, newScale);
-        setScale(newScale);
-        setTranslate(clamped);
-        stateRef.current = { scale: newScale, tx: clamped.x, ty: clamped.y };
-      } else if (e.touches.length === 1 && stateRef.current.scale > 1) {
-        e.preventDefault();
-        const dx = e.touches[0].clientX - panRef.current.startX;
-        const dy = e.touches[0].clientY - panRef.current.startY;
-        const clamped = clampTranslate(panRef.current.startTx + dx, panRef.current.startTy + dy, stateRef.current.scale);
-        setTranslate(clamped);
-        stateRef.current.tx = clamped.x;
-        stateRef.current.ty = clamped.y;
-      }
-    };
-
-    const onTouchEnd = (e: TouchEvent) => {
-      if (e.touches.length === 0 && stateRef.current.scale <= 1.05) {
-        reset();
-      }
-    };
-
-    el.addEventListener('touchstart', onTouchStart, { passive: false });
-    el.addEventListener('touchmove', onTouchMove, { passive: false });
-    el.addEventListener('touchend', onTouchEnd);
-    return () => {
-      el.removeEventListener('touchstart', onTouchStart);
-      el.removeEventListener('touchmove', onTouchMove);
-      el.removeEventListener('touchend', onTouchEnd);
-    };
-  }, [containerRef, clampTranslate, reset]);
-
-  return { scale, translate, reset };
-}
 import SEOHead from '../components/SEOHead';
 import SizeGuideModal from '../components/SizeGuideModal';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
 import { getProductById } from '../data/products';
 
+const LENS_SIZE = 140;
+const ZOOM = 2;
+
+/* ─── Fullscreen mobile viewer ────────────────────────────────────────────────
+   Swipeable gallery (slide animation) + per-image pinch-zoom / double-tap /
+   pan.  Matches the UX of Myntra, Amazon, ASOS, and similar apps.
+   ────────────────────────────────────────────────────────────────────────── */
+function MobileImageViewer({
+  images,
+  initialIndex,
+  productName,
+  onClose,
+}: {
+  images: string[];
+  initialIndex: number;
+  productName: string;
+  onClose: (currentIndex: number) => void;
+}) {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [scale, setScale] = useState(1);
+  const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isSnapping, setIsSnapping] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  /* lock body scroll while viewer is open */
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  /* mutable state kept in a ref so touch-event closures always see
+     the latest values without re-attaching listeners */
+  const s = useRef({
+    scale: 1, tx: 0, ty: 0,
+    drag: 0, idx: initialIndex,
+    dragging: false, pinching: false,
+  });
+  const pinch  = useRef({ dist: 0, baseScale: 1 });
+  const pan    = useRef({ x0: 0, y0: 0, tx0: 0, ty0: 0 });
+  const swipe  = useRef({ x0: 0, y0: 0, t0: 0, moved: false });
+  const tap    = useRef(0);
+
+  const clamp = useCallback((tx: number, ty: number, sc: number) => {
+    if (sc <= 1) return { x: 0, y: 0 };
+    const el = containerRef.current;
+    if (!el) return { x: 0, y: 0 };
+    const r = el.getBoundingClientRect();
+    const mxT = Math.max(0, (r.width  * sc - r.width)  / 2);
+    const mxY = Math.max(0, (r.height * sc - r.height) / 2);
+    return { x: Math.max(-mxT, Math.min(mxT, tx)), y: Math.max(-mxY, Math.min(mxY, ty)) };
+  }, []);
+
+  const resetZoom = useCallback(() => {
+    setScale(1);
+    setTranslate({ x: 0, y: 0 });
+    Object.assign(s.current, { scale: 1, tx: 0, ty: 0 });
+  }, []);
+
+  const goTo = useCallback((i: number) => {
+    const idx = Math.max(0, Math.min(images.length - 1, i));
+    setIsSnapping(true);
+    setDragOffset(0);
+    setCurrentIndex(idx);
+    s.current.drag = 0;
+    s.current.idx  = idx;
+    resetZoom();
+    setTimeout(() => setIsSnapping(false), 320);
+  }, [images.length, resetZoom]);
+
+  /* ── touch handling ─────────────────────────────────────────────────── */
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const dist = (t: TouchList) =>
+      Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+
+    const onStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        s.current.pinching = true;
+        pinch.current = { dist: dist(e.touches), baseScale: s.current.scale };
+        return;
+      }
+      if (e.touches.length !== 1) return;
+
+      const now = Date.now();
+      /* double-tap → zoom centred on tap point */
+      if (now - tap.current < 300) {
+        e.preventDefault();
+        if (s.current.scale > 1.3) {
+          resetZoom();
+        } else {
+          const r  = el.getBoundingClientRect();
+          const tx = (r.width  / 2 - (e.touches[0].clientX - r.left)) * 1.5;
+          const ty = (r.height / 2 - (e.touches[0].clientY - r.top )) * 1.5;
+          const c  = clamp(tx, ty, 2.5);
+          setScale(2.5);
+          setTranslate(c);
+          Object.assign(s.current, { scale: 2.5, tx: c.x, ty: c.y });
+        }
+        tap.current = 0;
+        return;
+      }
+      tap.current = now;
+
+      s.current.dragging = true;
+      s.current.pinching = false;
+      swipe.current = { x0: e.touches[0].clientX, y0: e.touches[0].clientY, t0: now, moved: false };
+      pan.current   = { x0: e.touches[0].clientX, y0: e.touches[0].clientY, tx0: s.current.tx, ty0: s.current.ty };
+    };
+
+    const onMove = (e: TouchEvent) => {
+      /* pinch zoom */
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const ns = Math.max(1, Math.min(3, pinch.current.baseScale * (dist(e.touches) / pinch.current.dist)));
+        const c = clamp(s.current.tx, s.current.ty, ns);
+        setScale(ns);
+        setTranslate(c);
+        Object.assign(s.current, { scale: ns, tx: c.x, ty: c.y });
+        return;
+      }
+      if (e.touches.length !== 1 || !s.current.dragging) return;
+
+      const dx = e.touches[0].clientX - swipe.current.x0;
+      const dy = e.touches[0].clientY - swipe.current.y0;
+
+      if (s.current.scale > 1.05) {
+        /* panning when zoomed */
+        e.preventDefault();
+        const c = clamp(pan.current.tx0 + dx, pan.current.ty0 + dy, s.current.scale);
+        setTranslate(c);
+        s.current.tx = c.x;
+        s.current.ty = c.y;
+      } else if (Math.abs(dx) > 5) {
+        /* horizontal swipe — slide gallery */
+        e.preventDefault();
+        swipe.current.moved = true;
+        let off = dx;
+        const idx = s.current.idx;
+        if ((idx === 0 && dx > 0) || (idx === images.length - 1 && dx < 0)) off = dx * 0.2;
+        setDragOffset(off);
+        s.current.drag = off;
+      }
+    };
+
+    const onEnd = (e: TouchEvent) => {
+      /* one finger lifted during pinch → transition to pan */
+      if (e.touches.length === 1 && s.current.pinching) {
+        pan.current = {
+          x0: e.touches[0].clientX, y0: e.touches[0].clientY,
+          tx0: s.current.tx, ty0: s.current.ty,
+        };
+        s.current.dragging = true;
+        s.current.pinching = false;
+        swipe.current.moved = false;
+        return;
+      }
+      if (e.touches.length > 0) return;
+      s.current.dragging = false;
+
+      /* after pinch ended */
+      if (s.current.pinching) {
+        s.current.pinching = false;
+        if (s.current.scale <= 1.05) resetZoom();
+        return;
+      }
+
+      /* gallery swipe at 1× */
+      if (s.current.scale <= 1.05 && swipe.current.moved) {
+        const dx  = s.current.drag;
+        const vel = Math.abs(dx) / Math.max(1, Date.now() - swipe.current.t0);
+        const thr = vel > 0.3 ? 30 : window.innerWidth * 0.2;
+        const idx = s.current.idx;
+
+        if (Math.abs(dx) > thr) {
+          if (dx < 0 && idx < images.length - 1) { goTo(idx + 1); return; }
+          if (dx > 0 && idx > 0)                  { goTo(idx - 1); return; }
+        }
+        /* snap back */
+        setIsSnapping(true);
+        setDragOffset(0);
+        s.current.drag = 0;
+        setTimeout(() => setIsSnapping(false), 320);
+        return;
+      }
+
+      if (s.current.scale <= 1.05) resetZoom();
+    };
+
+    el.addEventListener('touchstart', onStart, { passive: false });
+    el.addEventListener('touchmove',  onMove,  { passive: false });
+    el.addEventListener('touchend',   onEnd);
+    return () => {
+      el.removeEventListener('touchstart', onStart);
+      el.removeEventListener('touchmove',  onMove);
+      el.removeEventListener('touchend',   onEnd);
+    };
+  }, [clamp, resetZoom, goTo, images.length]);
+
+  /* gallery position */
+  const slidePct = 100 / images.length;
+  const pxToPct  = (dragOffset / (typeof window !== 'undefined' ? window.innerWidth : 390)) * slidePct;
+  const galleryX = -currentIndex * slidePct + pxToPct;
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black flex flex-col md:hidden" style={{ touchAction: 'none' }}>
+      {/* header */}
+      <div className="flex items-center justify-between px-4 h-12 shrink-0 z-20">
+        <span className="text-sm text-white/70 font-medium tabular-nums">
+          {currentIndex + 1} / {images.length}
+        </span>
+        <button
+          onClick={() => onClose(currentIndex)}
+          className="w-9 h-9 flex items-center justify-center bg-white/10 rounded-full active:bg-white/20"
+          aria-label="Close"
+        >
+          <X className="w-5 h-5 text-white" />
+        </button>
+      </div>
+
+      {/* swipeable gallery */}
+      <div ref={containerRef} className="flex-1 overflow-hidden" style={{ touchAction: 'none' }}>
+        <div
+          className="flex h-full will-change-transform"
+          style={{
+            width: `${images.length * 100}%`,
+            transform: `translateX(${galleryX}%)`,
+            transition: isSnapping ? 'transform 0.3s cubic-bezier(.25,1,.5,1)' : 'none',
+          }}
+        >
+          {images.map((img, i) => (
+            <div key={i} className="h-full flex items-center justify-center" style={{ width: `${slidePct}%` }}>
+              <img
+                src={img}
+                alt={`${productName} ${i + 1}`}
+                className="max-w-full max-h-full object-contain select-none"
+                draggable={false}
+                style={
+                  i === currentIndex
+                    ? {
+                        transform: `translate(${translate.x}px,${translate.y}px) scale(${scale})`,
+                        transition: scale === 1 && !s.current.dragging ? 'transform 0.2s ease-out' : 'none',
+                      }
+                    : undefined
+                }
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* zoom hint */}
+      <p className="text-center text-[11px] text-white/30 py-1 shrink-0">
+        {scale > 1.05
+          ? 'Drag to pan · Double-tap to reset'
+          : 'Pinch or double-tap to zoom · Swipe to browse'}
+      </p>
+
+      {/* pill dots */}
+      {images.length > 1 && (
+        <div className="flex justify-center items-center gap-1.5 h-8 shrink-0">
+          {images.map((_, i) => (
+            <div
+              key={i}
+              className={`rounded-full transition-all duration-300 ${
+                currentIndex === i ? 'w-5 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/30'
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── Product detail page ────────────────────────────────────────────────── */
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
   const product = getProductById(Number(id));
@@ -115,17 +298,52 @@ export default function ProductDetailPage() {
   const [activeImage, setActiveImage] = useState(0);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
 
-  // Desktop zoom state
+  // Desktop zoom
   const [showZoom, setShowZoom] = useState(false);
   const [lensPx, setLensPx] = useState({ x: 0, y: 0 });
   const [containerSize, setContainerSize] = useState({ w: 0, h: 0 });
   const imgRef = useRef<HTMLDivElement>(null);
 
-  // Mobile zoom state
-  const [mobileZoomOpen, setMobileZoomOpen] = useState(false);
-  const mobileZoomRef = useRef<HTMLDivElement>(null);
-  const mobileZoom = useMobileZoom(mobileZoomRef);
+  // Mobile viewer
+  const [viewerOpen, setViewerOpen] = useState(false);
 
+  // Mobile inline scroll-snap gallery
+  const inlineScrollRef = useRef<HTMLDivElement>(null);
+  const scrollSyncRef = useRef(true);
+
+  const images = product
+    ? (product.images && product.images.length > 0
+        ? product.images
+        : [product.image1 || product.image, product.image2].filter(Boolean) as string[])
+    : [];
+
+  // Sync inline scroll position when activeImage changes from outside
+  useEffect(() => {
+    const el = inlineScrollRef.current;
+    if (!el || !images.length) return;
+    const target = activeImage * el.clientWidth;
+    if (Math.abs(el.scrollLeft - target) > 5) {
+      scrollSyncRef.current = false;
+      el.scrollTo({ left: target, behavior: 'smooth' });
+      const t = setTimeout(() => { scrollSyncRef.current = true; }, 500);
+      return () => clearTimeout(t);
+    }
+  }, [activeImage, images.length]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!imgRef.current) return;
+    const rect = imgRef.current.getBoundingClientRect();
+    setContainerSize({ w: rect.width, h: rect.height });
+    const px = e.clientX - rect.left;
+    const py = e.clientY - rect.top;
+    const half = LENS_SIZE / 2;
+    setLensPx({
+      x: Math.max(half, Math.min(rect.width  - half, px)),
+      y: Math.max(half, Math.min(rect.height - half, py)),
+    });
+  }, []);
+
+  /* ── early return ──────────────────────────────────────────────────── */
   if (!product) {
     return (
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[60px] py-16 text-center">
@@ -138,16 +356,11 @@ export default function ProductDetailPage() {
     );
   }
 
-  const images = product.images && product.images.length > 0
-    ? product.images
-    : [product.image1 || product.image, product.image2].filter(Boolean) as string[];
   const favorited = isFavorite(product.id);
+  const styleCode = `IVC-${10400 + product.id}`;
 
   const handleAddToCart = () => {
-    if (product.sizes && product.sizes.length > 0 && !selectedSize) {
-      setSizeError(true);
-      return;
-    }
+    if (product.sizes && product.sizes.length > 0 && !selectedSize) { setSizeError(true); return; }
     setSizeError(false);
     addToCart(product, selectedSize ?? undefined);
   };
@@ -155,28 +368,18 @@ export default function ProductDetailPage() {
   const prevImage = () => setActiveImage((i: number) => (i === 0 ? images.length - 1 : i - 1));
   const nextImage = () => setActiveImage((i: number) => (i === images.length - 1 ? 0 : i + 1));
 
-  const LENS_SIZE = 140; // px — lens box size
-  const ZOOM = 2; // zoom factor for desktop preview
+  const handleInlineScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (!scrollSyncRef.current) return;
+    const el = e.currentTarget;
+    const idx = Math.round(el.scrollLeft / el.clientWidth);
+    if (idx >= 0 && idx < images.length && idx !== activeImage) setActiveImage(idx);
+  };
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!imgRef.current) return;
-    const rect = imgRef.current.getBoundingClientRect();
-    setContainerSize({ w: rect.width, h: rect.height });
-    const px = e.clientX - rect.left;
-    const py = e.clientY - rect.top;
-    const half = LENS_SIZE / 2;
-    setLensPx({
-      x: Math.max(half, Math.min(rect.width - half, px)),
-      y: Math.max(half, Math.min(rect.height - half, py)),
-    });
-  }, []);
+  const openViewer  = (i: number) => { setActiveImage(i); setViewerOpen(true); };
+  const closeViewer = (i: number) => { setActiveImage(i); setViewerOpen(false); };
 
-  // Lens top-left corner (for transform calculation)
   const lensLeft = lensPx.x - LENS_SIZE / 2;
-  const lensTop = lensPx.y - LENS_SIZE / 2;
-
-  // Generate style code from product id
-  const styleCode = `IVC-${10400 + product.id}`;
+  const lensTop  = lensPx.y - LENS_SIZE / 2;
 
   return (
     <>
@@ -207,9 +410,10 @@ export default function ProductDetailPage() {
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[60px] pb-12 md:pb-16">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
 
-          {/* Image Gallery */}
+          {/* ── Image gallery ──────────────────────────────────────────── */}
           <div className="flex-1 max-w-[800px]">
-            {/* Desktop main image with hover zoom */}
+
+            {/* Desktop: hover-zoom image */}
             <div
               ref={imgRef}
               className="relative aspect-[3/4] bg-[#f5f7f8] overflow-hidden mb-3 cursor-crosshair hidden md:block"
@@ -228,20 +432,15 @@ export default function ProductDetailPage() {
                 className="w-full h-full object-cover pointer-events-none"
                 width={800}
                 height={1067}
+                loading={activeImage === 0 ? 'eager' : 'lazy'}
+                fetchPriority={activeImage === 0 ? 'high' : undefined}
               />
-              {/* Zoom lens indicator — exactly matches what the preview shows */}
               {showZoom && (
                 <div
                   className="absolute border-2 border-[#1a2026]/40 bg-white/15 pointer-events-none z-10"
-                  style={{
-                    width: LENS_SIZE,
-                    height: LENS_SIZE,
-                    left: lensLeft,
-                    top: lensTop,
-                  }}
+                  style={{ width: LENS_SIZE, height: LENS_SIZE, left: lensLeft, top: lensTop }}
                 />
               )}
-              {/* Desktop navigation arrows — hide zoom on hover/click */}
               {images.length > 1 && (
                 <>
                   <button
@@ -266,82 +465,77 @@ export default function ProductDetailPage() {
               )}
             </div>
 
-            {/* Mobile: tap to open fullscreen zoom */}
-            <div
-              className="relative aspect-[3/4] bg-[#f5f7f8] overflow-hidden mb-3 md:hidden"
-              onClick={() => setMobileZoomOpen(true)}
-            >
+            {/* Mobile: scroll-snap swipeable gallery */}
+            <div className="relative md:hidden mb-3">
+              <div
+                ref={inlineScrollRef}
+                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+                onScroll={handleInlineScroll}
+                style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+              >
+                {images.map((img, i) => (
+                  <div key={i} className="w-full shrink-0 snap-start">
+                    <div className="aspect-[3/4] bg-[#f5f7f8]">
+                      <img
+                        src={img}
+                        alt={`${product.name} – ${i + 1}`}
+                        className="w-full h-full object-cover cursor-zoom-in"
+                        onClick={() => openViewer(i)}
+                        width={800}
+                        height={1067}
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                        fetchPriority={i === 0 ? 'high' : undefined}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
               {product.badge && (
-                <div className="absolute top-3 left-3 bg-black text-white text-[10px] font-medium px-2.5 py-1 tracking-[0.2px] z-10">
+                <div className="absolute top-3 left-3 bg-black text-white text-[10px] font-medium px-2.5 py-1 tracking-[0.2px] z-10 pointer-events-none">
                   {product.badge}
                 </div>
               )}
-              <img
-                src={images[activeImage]}
-                alt={product.name}
-                className="w-full h-full object-cover"
-                width={800}
-                height={1067}
-              />
-              <div className="absolute bottom-3 right-3 bg-white/90 p-2 rounded-full shadow-sm">
+              <div className="absolute bottom-3 right-3 bg-white/90 p-2 rounded-full shadow-sm pointer-events-none">
                 <ZoomIn className="w-4 h-4 text-[#1a2026]" />
               </div>
-              {images.length > 1 && (
-                <>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 flex items-center justify-center"
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft className="w-5 h-5 text-[#1a2026]" />
-                  </button>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 flex items-center justify-center"
-                    aria-label="Next image"
-                  >
-                    <ChevronRight className="w-5 h-5 text-[#1a2026]" />
-                  </button>
-                </>
-              )}
             </div>
 
-            {/* Thumbnail strip */}
+            {/* Mobile: pill dots */}
             {images.length > 1 && (
-              <div className="flex gap-2">
-                {images.map((img, i) => (
-                  <button
+              <div className="flex justify-center gap-1.5 mb-3 md:hidden">
+                {images.map((_, i) => (
+                  <div
                     key={i}
-                    onClick={() => setActiveImage(i)}
-                    className={`w-14 h-[70px] md:w-16 md:h-20 overflow-hidden border-2 transition-colors ${
-                      activeImage === i ? 'border-[#1a2026]' : 'border-transparent hover:border-[#e5e5e5]'
+                    className={`rounded-full transition-all duration-300 ${
+                      activeImage === i ? 'w-5 h-1.5 bg-[#1a2026]' : 'w-1.5 h-1.5 bg-[#cdcbcc]'
                     }`}
-                    aria-label={`View image ${i + 1}`}
-                  >
-                    <img src={img} alt="" className="w-full h-full object-cover" width={64} height={80} />
-                  </button>
+                  />
                 ))}
               </div>
             )}
 
-            {/* Mobile swipe dots */}
+            {/* Desktop: thumbnail strip */}
             {images.length > 1 && (
-              <div className="flex justify-center gap-2 mt-3 lg:hidden">
-                {images.map((_, i) => (
+              <div className="hidden md:flex gap-2">
+                {images.map((img, i) => (
                   <button
                     key={i}
                     onClick={() => setActiveImage(i)}
-                    className={`w-2 h-2 rounded-full transition-colors ${activeImage === i ? 'bg-[#1a2026]' : 'bg-[#cdcbcc]'}`}
-                    aria-label={`Go to image ${i + 1}`}
-                  />
+                    className={`w-16 h-20 overflow-hidden border-2 transition-colors ${
+                      activeImage === i ? 'border-[#1a2026]' : 'border-transparent hover:border-[#e5e5e5]'
+                    }`}
+                    aria-label={`View image ${i + 1}`}
+                  >
+                    <img src={img} alt="" className="w-full h-full object-cover" width={64} height={80} loading="lazy" />
+                  </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Product Info — with zoom overlay on top */}
+          {/* ── Product info ───────────────────────────────────────────── */}
           <div className="relative w-full lg:w-[420px] xl:w-[480px] lg:sticky lg:top-8 lg:self-start">
-            {/* Desktop: Zoomed preview overlay — shows exactly what the lens covers */}
+            {/* Desktop: zoomed preview overlay */}
             {showZoom && (
               <div className="hidden lg:block absolute inset-0 z-30 bg-white border border-[#e5e5e5] shadow-xl overflow-hidden">
                 <img
@@ -357,6 +551,7 @@ export default function ProductDetailPage() {
                 />
               </div>
             )}
+
             {product.franchise && (
               <p className="text-sm text-[#6c7782] uppercase tracking-wider mb-1">{product.franchise}</p>
             )}
@@ -369,7 +564,7 @@ export default function ProductDetailPage() {
               <p className="text-sm text-[#47515c] leading-relaxed mb-6">{product.description}</p>
             )}
 
-            {/* Color swatch — single color badge for this product */}
+            {/* Color swatch */}
             {product.colors.length > 0 && (
               <div className="mb-6">
                 <p className="text-sm font-bold text-[#1a2026] mb-2">Color</p>
@@ -411,9 +606,7 @@ export default function ProductDetailPage() {
                     </button>
                   ))}
                 </div>
-                {sizeError && (
-                  <p className="text-xs text-red-600 mt-2">Please select a size</p>
-                )}
+                {sizeError && <p className="text-xs text-red-600 mt-2">Please select a size</p>}
               </div>
             )}
 
@@ -438,7 +631,7 @@ export default function ProductDetailPage() {
               </button>
             </div>
 
-            {/* Product Details */}
+            {/* Product details */}
             <div className="border-t border-[#e5e5e5] pt-5 mb-5">
               <p className="text-sm font-bold text-[#1a2026] mb-3">Product Details</p>
               <div className="grid grid-cols-2 gap-y-2 text-xs">
@@ -478,57 +671,14 @@ export default function ProductDetailPage() {
         </div>
       </div>
 
-      {/* Mobile fullscreen zoom modal — pinch, pan, double-tap */}
-      {mobileZoomOpen && (
-        <div className="fixed inset-0 z-50 bg-white flex flex-col md:hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-[#e5e5e5]">
-            <div>
-              <p className="text-sm font-bold text-[#1a2026]">{product.name}</p>
-              <p className="text-[10px] text-[#6c7782]">
-                {mobileZoom.scale > 1.05 ? `${Math.round(mobileZoom.scale * 100)}% — drag to pan` : 'Pinch or double-tap to zoom'}
-              </p>
-            </div>
-            <button
-              onClick={() => { setMobileZoomOpen(false); mobileZoom.reset(); }}
-              className="w-9 h-9 flex items-center justify-center bg-[#f5f7f8] rounded-full"
-              aria-label="Close zoom"
-            >
-              <X className="w-5 h-5 text-[#1a2026]" />
-            </button>
-          </div>
-          <div
-            ref={mobileZoomRef}
-            className="flex-1 overflow-hidden flex items-center justify-center bg-[#f5f7f8]"
-            style={{ touchAction: 'none' }}
-          >
-            <img
-              src={images[activeImage]}
-              alt={product.name}
-              className="w-full h-full object-contain pointer-events-none select-none"
-              draggable={false}
-              style={{
-                transform: `translate(${mobileZoom.translate.x}px, ${mobileZoom.translate.y}px) scale(${mobileZoom.scale})`,
-                transition: mobileZoom.scale === 1 ? 'transform 0.2s ease-out' : 'none',
-              }}
-            />
-          </div>
-          {/* Thumbnail strip */}
-          {images.length > 1 && (
-            <div className="flex gap-2 px-4 py-3 border-t border-[#e5e5e5] overflow-x-auto">
-              {images.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => { setActiveImage(i); mobileZoom.reset(); }}
-                  className={`w-12 h-[60px] shrink-0 overflow-hidden border-2 transition-colors ${
-                    activeImage === i ? 'border-[#1a2026]' : 'border-transparent'
-                  }`}
-                >
-                  <img src={img} alt="" className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+      {/* ── Mobile fullscreen viewer ─────────────────────────────────── */}
+      {viewerOpen && (
+        <MobileImageViewer
+          images={images}
+          initialIndex={activeImage}
+          productName={product.name}
+          onClose={closeViewer}
+        />
       )}
 
       <SizeGuideModal open={sizeGuideOpen} onClose={() => setSizeGuideOpen(false)} />

@@ -11,11 +11,6 @@ declare module '*.svg?react' {
   export default ReactComponent;
 }
 
-declare module 'figma:asset/*' {
-  const content: string;
-  export default content;
-}
-
 declare module '*.webp' {
   const content: string;
   export default content;

@@ -44,6 +44,7 @@ function HeroBanner() {
           sizes="100vw"
           width={1920}
           height={700}
+          fetchPriority="high"
         />
         {/* Mobile — pinned to bottom with gradient fade */}
         <div className="absolute inset-x-0 bottom-0 md:hidden">
@@ -137,7 +138,7 @@ function NewArrivalsSection() {
         <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pl-4 pr-4 pb-4 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
           {newArrivals.map((product) => (
             <div key={product.id} className="w-[80vw] shrink-0 snap-start">
-              <ProductCard product={product} />
+              <ProductCard product={product} loading="eager" />
             </div>
           ))}
           <Link to="/new-arrivals" className="w-[50vw] shrink-0 snap-start flex flex-col items-center justify-center bg-[#f5f7f8] border border-[#e5e5e5] active:border-black transition-colors rounded">
@@ -153,7 +154,7 @@ function NewArrivalsSection() {
           <Slider {...sliderSettings} className="new-arrivals-slider">
             {newArrivals.map((product) => (
               <div key={product.id} className="px-2">
-                <ProductCard product={product} />
+                <ProductCard product={product} loading="eager" />
               </div>
             ))}
           </Slider>
@@ -290,8 +291,8 @@ function MensCollectionSection() {
 
         <div className="px-4 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4 lg:gap-6">
-            {menFeatured.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {menFeatured.map((product, index) => (
+              <ProductCard key={product.id} product={product} loading={index < 2 ? 'eager' : 'lazy'} />
             ))}
           </div>
         </div>
@@ -392,9 +393,7 @@ export default function Home() {
       <LazySection fallbackHeight="600px">
         <WomensCollectionSection />
       </LazySection>
-      <LazySection fallbackHeight="600px">
-        <MensCollectionSection />
-      </LazySection>
+      <MensCollectionSection />
       <LazySection fallbackHeight="100px">
         <FabricTechnologySection />
       </LazySection>
