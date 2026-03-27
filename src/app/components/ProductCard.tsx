@@ -14,7 +14,6 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, hoverable = true, loading = 'lazy' }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [hasHovered, setHasHovered] = useState(false);
   const { toggleFavorite, isFavorite } = useFavorites();
   const { addToCart } = useCart();
   const favorited = isFavorite(product.id);
@@ -23,7 +22,7 @@ export default function ProductCard({ product, hoverable = true, loading = 'lazy
     <Link
       to={`/product/${product.id}`}
       className="group relative bg-white cursor-pointer block"
-      onMouseEnter={() => { if (hoverable) { setIsHovered(true); setHasHovered(true); } }}
+      onMouseEnter={() => { if (hoverable) { setIsHovered(true); } }}
       onMouseLeave={() => hoverable && setIsHovered(false)}
     >
       <div className="relative aspect-[335/421.59] overflow-hidden">
@@ -33,7 +32,7 @@ export default function ProductCard({ product, hoverable = true, loading = 'lazy
           </div>
         )}
         <img
-          src={product.image1 || product.image}
+          src={product.thumb || product.image1 || product.image}
           alt={product.name}
           className="w-full h-full object-cover"
           loading={loading}
@@ -42,11 +41,12 @@ export default function ProductCard({ product, hoverable = true, loading = 'lazy
           width={335}
           height={422}
         />
-        {product.image2 && hasHovered && (
+        {product.image2 && (
           <img
             src={product.image2}
             alt={product.name}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 hidden md:block ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+            loading="lazy"
             decoding="async"
             width={335}
             height={422}

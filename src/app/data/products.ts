@@ -27,7 +27,24 @@ import imgBreezeblendJacket2 from '../../assets/womens/breezeblend-jacket-2.webp
 // Footer icons
 import imgIcon from '../../assets/icons/payment-methods.webp';
 import imgYourPrivacyChoicesIcon from '../../assets/icons/privacy-choices.webp';
-// Men's product images (Ivy Crew AI model photoshoot)
+// Men's product images - thumbnails for homepage (compressed, 400px wide)
+import thumbBlueBotanicalPolo from '../../assets/mens-thumb/blue-botanical-polo-1.webp';
+import thumbSageHeatherPolo from '../../assets/mens-thumb/sage-heather-polo-1.webp';
+import thumbRosePalmPolo from '../../assets/mens-thumb/rose-palm-polo-1.webp';
+import thumbWhiteAbstractPolo from '../../assets/mens-thumb/white-abstract-polo-1.webp';
+import thumbRoseTexturedPolo from '../../assets/mens-thumb/rose-textured-polo-1.webp';
+import thumbBlueFloralPolo from '../../assets/mens-thumb/blue-floral-polo-1.webp';
+import thumbSagePalmPolo from '../../assets/mens-thumb/sage-palm-polo-1.webp';
+import thumbSkyLandscapePolo from '../../assets/mens-thumb/sky-landscape-polo-1.webp';
+import thumbGreenStripePolo from '../../assets/mens-thumb/green-stripe-polo-1.webp';
+import thumbBlackGeometricPolo from '../../assets/mens-thumb/black-geometric-polo-1.webp';
+import thumbBlackNeonPolo from '../../assets/mens-thumb/black-neon-polo-1.webp';
+import thumbMochaClassicPolo from '../../assets/mens-thumb/mocha-classic-polo-1.webp';
+import thumbTealTexturedPolo from '../../assets/mens-thumb/teal-textured-polo-1.webp';
+import thumbNavyTippedPolo from '../../assets/mens-thumb/navy-tipped-polo-1.webp';
+import thumbOliveStripePolo from '../../assets/mens-thumb/olive-stripe-polo-1.webp';
+import thumbSageClassicPolo from '../../assets/mens-thumb/sage-classic-polo-1.webp';
+// Men's product images - standard quality for product gallery
 import imgBlueBotanicalPolo1 from '../../assets/mens/blue-botanical-polo-1.webp';
 import imgBlueBotanicalPolo2 from '../../assets/mens/blue-botanical-polo-2.webp';
 import imgBlueBotanicalPolo3 from '../../assets/mens/blue-botanical-polo-3.webp';
@@ -197,8 +214,11 @@ export interface Product {
   image?: string;
   image1?: string;
   image2?: string;
+  thumb?: string;
   images?: string[];
   hdImages?: string[];
+  mobileImages?: string[];
+  mobileHdImages?: string[];
   franchise?: string;
   badge?: string;
   colors: string[];
@@ -311,52 +331,12 @@ export const womenProducts: Product[] = [
 
 export const menProducts: Product[] = [
   {
-    id: 301,
-    name: 'Botanical Print Polo',
-    price: '₹1,499',
-    image1: imgBlueBotanicalPolo1,
-    image2: imgBlueBotanicalPolo2,
-    images: [imgBlueBotanicalPolo1, imgBlueBotanicalPolo2, imgBlueBotanicalPolo3, imgBlueBotanicalPolo4, imgBlueBotanicalPolo5],
-    hdImages: [hdBlueBotanicalPolo1, hdBlueBotanicalPolo2, hdBlueBotanicalPolo3, hdBlueBotanicalPolo4, hdBlueBotanicalPolo5],
-    franchise: "MEN'S",
-    badge: 'NEW',
-    colors: ['#4a6e8a', '#1d3f43'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'A refined botanical print polo crafted from premium cotton blend. Subtle floral detail with the Ivy Crew signature for effortless everyday style.',
-  },
-  {
-    id: 302,
-    name: 'Sage Heather Polo',
-    price: '₹1,299',
-    image1: imgSageHeatherPolo1,
-    image2: imgSageHeatherPolo2,
-    images: [imgSageHeatherPolo1, imgSageHeatherPolo2, imgSageHeatherPolo3, imgSageHeatherPolo4, imgSageHeatherPolo5],
-    hdImages: [hdSageHeatherPolo1, hdSageHeatherPolo2, hdSageHeatherPolo3, hdSageHeatherPolo4, hdSageHeatherPolo5],
-    franchise: "MEN'S",
-    colors: ['#8fa68a', '#6b8a66'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'A relaxed heathered sage polo in ultra-soft piqué cotton. Clean, minimal design for effortless all-day comfort.',
-  },
-  {
-    id: 303,
-    name: 'Rose Palm Polo',
-    price: '₹1,499',
-    image1: imgRosePalmPolo1,
-    image2: imgRosePalmPolo2,
-    images: [imgRosePalmPolo1, imgRosePalmPolo2, imgRosePalmPolo3, imgRosePalmPolo4, imgRosePalmPolo5],
-    hdImages: [hdRosePalmPolo1, hdRosePalmPolo2, hdRosePalmPolo3, hdRosePalmPolo4, hdRosePalmPolo5],
-    franchise: "MEN'S",
-    badge: 'NEW',
-    colors: ['#d4a0a0', '#c27a8a'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Soft rose-toned polo with an all-over palm print. Moisture-wicking performance fabric keeps you cool under pressure.',
-  },
-  {
     id: 304,
     name: 'White Abstract Polo',
     price: '₹1,399',
     image1: imgWhiteAbstractPolo1,
     image2: imgWhiteAbstractPolo2,
+    thumb: thumbWhiteAbstractPolo,
     images: [imgWhiteAbstractPolo1, imgWhiteAbstractPolo2, imgWhiteAbstractPolo3, imgWhiteAbstractPolo4, imgWhiteAbstractPolo5],
     hdImages: [hdWhiteAbstractPolo1, hdWhiteAbstractPolo2, hdWhiteAbstractPolo3, hdWhiteAbstractPolo4, hdWhiteAbstractPolo5],
     franchise: "MEN'S",
@@ -371,6 +351,7 @@ export const menProducts: Product[] = [
     price: '₹1,399',
     image1: imgRoseTexturedPolo1,
     image2: imgRoseTexturedPolo2,
+    thumb: thumbRoseTexturedPolo,
     images: [imgRoseTexturedPolo1, imgRoseTexturedPolo2, imgRoseTexturedPolo3, imgRoseTexturedPolo4, imgRoseTexturedPolo5],
     hdImages: [hdRoseTexturedPolo1, hdRoseTexturedPolo2, hdRoseTexturedPolo3, hdRoseTexturedPolo4, hdRoseTexturedPolo5],
     franchise: "MEN'S",
@@ -384,6 +365,7 @@ export const menProducts: Product[] = [
     price: '₹1,599',
     image1: imgBlueFloralPolo1,
     image2: imgBlueFloralPolo2,
+    thumb: thumbBlueFloralPolo,
     images: [imgBlueFloralPolo1, imgBlueFloralPolo2, imgBlueFloralPolo3, imgBlueFloralPolo4, imgBlueFloralPolo5, imgBlueFloralPolo6],
     hdImages: [hdBlueFloralPolo1, hdBlueFloralPolo2, hdBlueFloralPolo3, hdBlueFloralPolo4, hdBlueFloralPolo5, hdBlueFloralPolo6],
     franchise: "MEN'S",
@@ -398,6 +380,7 @@ export const menProducts: Product[] = [
     price: '₹1,499',
     image1: imgSagePalmPolo1,
     image2: imgSagePalmPolo2,
+    thumb: thumbSagePalmPolo,
     images: [imgSagePalmPolo1, imgSagePalmPolo2, imgSagePalmPolo3, imgSagePalmPolo4, imgSagePalmPolo5],
     hdImages: [hdSagePalmPolo1, hdSagePalmPolo2, hdSagePalmPolo3, hdSagePalmPolo4, hdSagePalmPolo5],
     franchise: "MEN'S",
@@ -411,6 +394,7 @@ export const menProducts: Product[] = [
     price: '₹1,599',
     image1: imgSkyLandscapePolo1,
     image2: imgSkyLandscapePolo2,
+    thumb: thumbSkyLandscapePolo,
     images: [imgSkyLandscapePolo1, imgSkyLandscapePolo2, imgSkyLandscapePolo3, imgSkyLandscapePolo4, imgSkyLandscapePolo5, imgSkyLandscapePolo6],
     hdImages: [hdSkyLandscapePolo1, hdSkyLandscapePolo2, hdSkyLandscapePolo3, hdSkyLandscapePolo4, hdSkyLandscapePolo5, hdSkyLandscapePolo6],
     franchise: "MEN'S",
@@ -424,6 +408,7 @@ export const menProducts: Product[] = [
     price: '₹1,499',
     image1: imgGreenStripePolo1,
     image2: imgGreenStripePolo2,
+    thumb: thumbGreenStripePolo,
     images: [imgGreenStripePolo1, imgGreenStripePolo2, imgGreenStripePolo3, imgGreenStripePolo4, imgGreenStripePolo5],
     hdImages: [hdGreenStripePolo1, hdGreenStripePolo2, hdGreenStripePolo3, hdGreenStripePolo4, hdGreenStripePolo5],
     franchise: "MEN'S",
@@ -437,6 +422,7 @@ export const menProducts: Product[] = [
     price: '₹1,599',
     image1: imgBlackGeometricPolo1,
     image2: imgBlackGeometricPolo2,
+    thumb: thumbBlackGeometricPolo,
     images: [imgBlackGeometricPolo1, imgBlackGeometricPolo2, imgBlackGeometricPolo3, imgBlackGeometricPolo4, imgBlackGeometricPolo5],
     hdImages: [hdBlackGeometricPolo1, hdBlackGeometricPolo2, hdBlackGeometricPolo3, hdBlackGeometricPolo4, hdBlackGeometricPolo5],
     franchise: "MEN'S",
@@ -450,6 +436,7 @@ export const menProducts: Product[] = [
     price: '₹1,399',
     image1: imgBlackNeonPolo1,
     image2: imgBlackNeonPolo2,
+    thumb: thumbBlackNeonPolo,
     images: [imgBlackNeonPolo1, imgBlackNeonPolo2, imgBlackNeonPolo3, imgBlackNeonPolo4, imgBlackNeonPolo5],
     hdImages: [hdBlackNeonPolo1, hdBlackNeonPolo2, hdBlackNeonPolo3, hdBlackNeonPolo4, hdBlackNeonPolo5],
     franchise: "MEN'S",
@@ -458,37 +445,12 @@ export const menProducts: Product[] = [
     description: 'Sleek black polo with neon lime accents on collar and placket. Sporty crest detail and 4-way stretch performance fabric.',
   },
   {
-    id: 312,
-    name: 'Mocha Classic Polo',
-    price: '₹1,299',
-    image1: imgMochaClassicPolo1,
-    image2: imgMochaClassicPolo2,
-    images: [imgMochaClassicPolo1, imgMochaClassicPolo2, imgMochaClassicPolo3, imgMochaClassicPolo4],
-    hdImages: [hdMochaClassicPolo1, hdMochaClassicPolo2, hdMochaClassicPolo3, hdMochaClassicPolo4],
-    franchise: "MEN'S",
-    colors: ['#8b7355', '#6b5a42'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Timeless mocha polo in ultra-soft piqué cotton. Clean, minimal design with the Ivy Crew emblem for everyday versatility.',
-  },
-  {
-    id: 313,
-    name: 'Teal Textured Polo',
-    price: '₹1,499',
-    image1: imgTealTexturedPolo1,
-    image2: imgTealTexturedPolo2,
-    images: [imgTealTexturedPolo1, imgTealTexturedPolo2, imgTealTexturedPolo3, imgTealTexturedPolo4, imgTealTexturedPolo5],
-    hdImages: [hdTealTexturedPolo1, hdTealTexturedPolo2, hdTealTexturedPolo3, hdTealTexturedPolo4, hdTealTexturedPolo5],
-    franchise: "MEN'S",
-    colors: ['#7aacaa', '#5a8c8a'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Textured teal polo with a modern relaxed fit. Quick-dry technology and cool comfort fabric for warm-weather style.',
-  },
-  {
     id: 314,
     name: 'Navy Tipped Polo',
     price: '₹1,499',
     image1: imgNavyTippedPolo1,
     image2: imgNavyTippedPolo2,
+    thumb: thumbNavyTippedPolo,
     images: [imgNavyTippedPolo1, imgNavyTippedPolo2, imgNavyTippedPolo3, imgNavyTippedPolo4, imgNavyTippedPolo5],
     hdImages: [hdNavyTippedPolo1, hdNavyTippedPolo2, hdNavyTippedPolo3, hdNavyTippedPolo4, hdNavyTippedPolo5],
     franchise: "MEN'S",
@@ -503,6 +465,7 @@ export const menProducts: Product[] = [
     price: '₹1,399',
     image1: imgOliveStripePolo1,
     image2: imgOliveStripePolo2,
+    thumb: thumbOliveStripePolo,
     images: [imgOliveStripePolo1, imgOliveStripePolo2, imgOliveStripePolo3, imgOliveStripePolo4, imgOliveStripePolo5],
     hdImages: [hdOliveStripePolo1, hdOliveStripePolo2, hdOliveStripePolo3, hdOliveStripePolo4, hdOliveStripePolo5],
     franchise: "MEN'S",
@@ -516,12 +479,85 @@ export const menProducts: Product[] = [
     price: '₹1,299',
     image1: imgSageClassicPolo1,
     image2: imgSageClassicPolo2,
+    thumb: thumbSageClassicPolo,
     images: [imgSageClassicPolo1, imgSageClassicPolo2, imgSageClassicPolo3, imgSageClassicPolo4],
     hdImages: [hdSageClassicPolo1, hdSageClassicPolo2, hdSageClassicPolo3, hdSageClassicPolo4],
     franchise: "MEN'S",
     colors: ['#b5c2a8', '#8fa68a'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     description: 'Timeless solid sage polo with the Ivy Crew emblem. Clean, minimal design in ultra-soft piqué cotton for all-day comfort.',
+  },
+  {
+    id: 301,
+    name: 'Botanical Print Polo',
+    price: '₹1,499',
+    image1: imgBlueBotanicalPolo1,
+    image2: imgBlueBotanicalPolo2,
+    thumb: thumbBlueBotanicalPolo,
+    images: [imgBlueBotanicalPolo1, imgBlueBotanicalPolo2, imgBlueBotanicalPolo3, imgBlueBotanicalPolo4, imgBlueBotanicalPolo5],
+    hdImages: [hdBlueBotanicalPolo1, hdBlueBotanicalPolo2, hdBlueBotanicalPolo3, hdBlueBotanicalPolo4, hdBlueBotanicalPolo5],
+    franchise: "MEN'S",
+    badge: 'NEW',
+    colors: ['#4a6e8a', '#1d3f43'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'A refined botanical print polo crafted from premium cotton blend. Subtle floral detail with the Ivy Crew signature for effortless everyday style.',
+  },
+  {
+    id: 302,
+    name: 'Sage Heather Polo',
+    price: '₹1,299',
+    image1: imgSageHeatherPolo1,
+    image2: imgSageHeatherPolo2,
+    thumb: thumbSageHeatherPolo,
+    images: [imgSageHeatherPolo1, imgSageHeatherPolo2, imgSageHeatherPolo3, imgSageHeatherPolo4, imgSageHeatherPolo5],
+    hdImages: [hdSageHeatherPolo1, hdSageHeatherPolo2, hdSageHeatherPolo3, hdSageHeatherPolo4, hdSageHeatherPolo5],
+    franchise: "MEN'S",
+    colors: ['#8fa68a', '#6b8a66'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'A relaxed heathered sage polo in ultra-soft piqué cotton. Clean, minimal design for effortless all-day comfort.',
+  },
+  {
+    id: 312,
+    name: 'Mocha Classic Polo',
+    price: '₹1,299',
+    image1: imgMochaClassicPolo1,
+    image2: imgMochaClassicPolo2,
+    thumb: thumbMochaClassicPolo,
+    images: [imgMochaClassicPolo1, imgMochaClassicPolo2, imgMochaClassicPolo3, imgMochaClassicPolo4],
+    hdImages: [hdMochaClassicPolo1, hdMochaClassicPolo2, hdMochaClassicPolo3, hdMochaClassicPolo4],
+    franchise: "MEN'S",
+    colors: ['#8b7355', '#6b5a42'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Timeless mocha polo in ultra-soft piqué cotton. Clean, minimal design with the Ivy Crew emblem for everyday versatility.',
+  },
+  {
+    id: 313,
+    name: 'Teal Textured Polo',
+    price: '₹1,499',
+    image1: imgTealTexturedPolo1,
+    image2: imgTealTexturedPolo2,
+    thumb: thumbTealTexturedPolo,
+    images: [imgTealTexturedPolo1, imgTealTexturedPolo2, imgTealTexturedPolo3, imgTealTexturedPolo4, imgTealTexturedPolo5],
+    hdImages: [hdTealTexturedPolo1, hdTealTexturedPolo2, hdTealTexturedPolo3, hdTealTexturedPolo4, hdTealTexturedPolo5],
+    franchise: "MEN'S",
+    colors: ['#7aacaa', '#5a8c8a'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Textured teal polo with a modern relaxed fit. Quick-dry technology and cool comfort fabric for warm-weather style.',
+  },
+  {
+    id: 303,
+    name: 'Rose Palm Polo',
+    price: '₹1,499',
+    image1: imgRosePalmPolo1,
+    image2: imgRosePalmPolo2,
+    thumb: thumbRosePalmPolo,
+    images: [imgRosePalmPolo1, imgRosePalmPolo2, imgRosePalmPolo3, imgRosePalmPolo4, imgRosePalmPolo5],
+    hdImages: [hdRosePalmPolo1, hdRosePalmPolo2, hdRosePalmPolo3, hdRosePalmPolo4, hdRosePalmPolo5],
+    franchise: "MEN'S",
+    badge: 'NEW',
+    colors: ['#d4a0a0', '#c27a8a'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: 'Soft rose-toned polo with an all-over palm print. Moisture-wicking performance fabric keeps you cool under pressure.',
   },
 ];
 
@@ -533,19 +569,41 @@ export const categories: Category[] = [
   { name: "Shop Men's Tees", image: imgShopMensTees },
 ];
 
-// Featured men's products for homepage (curated selection)
+// Featured men's products for homepage (curated selection — all white background)
 export const menFeatured: Product[] = [
-  menProducts[0],  // Botanical Print Polo (NEW)
-  menProducts[3],  // White Abstract Polo (BEST SELLER)
-  menProducts[5],  // Blue Floral Polo (NEW)
-  menProducts[13], // Navy Tipped Polo (BEST SELLER)
-  menProducts[8],  // Green Stripe Polo
+  menProducts[0],  // White Abstract Polo (BEST SELLER)
+  menProducts[2],  // Blue Floral Polo (NEW)
+  menProducts[5],  // Green Stripe Polo
+  menProducts[8],  // Navy Tipped Polo (BEST SELLER)
+  menProducts[4],  // Sky Landscape Polo
 ];
 
 export const allProducts: Product[] = [...newArrivals, ...womenProducts, ...menProducts];
 
 export function getProductById(id: number): Product | undefined {
   return allProducts.find(p => p.id === id);
+}
+
+// Mobile-optimized images (loaded via glob for zero-config mapping)
+const mobileGallery = import.meta.glob<{ default: string }>('../../assets/mens-mobile/*.webp', { eager: true });
+const mobileHd = import.meta.glob<{ default: string }>('../../assets/mens-mobile-hd/*.webp', { eager: true });
+
+function getMobilePath(desktopPath: string, globMap: Record<string, { default: string }>): string {
+  const filename = desktopPath.split('/').pop()?.split('?')[0] || '';
+  for (const [key, mod] of Object.entries(globMap)) {
+    if (key.endsWith('/' + filename)) return mod.default;
+  }
+  return desktopPath; // fallback to desktop
+}
+
+export function getMobileImages(product: Product): string[] {
+  const imgs = product.images || [];
+  return imgs.map(src => getMobilePath(src, mobileGallery));
+}
+
+export function getMobileHdImages(product: Product): string[] {
+  const hdImgs = product.hdImages || product.images || [];
+  return hdImgs.map(src => getMobilePath(src, mobileHd));
 }
 
 export {

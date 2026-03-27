@@ -5,7 +5,7 @@ import SEOHead from '../components/SEOHead';
 import SizeGuideModal from '../components/SizeGuideModal';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
-import { getProductById } from '../data/products';
+import { getProductById, getMobileImages, getMobileHdImages } from '../data/products';
 
 const LENS_SIZE = 140;
 const ZOOM = 2;
@@ -247,6 +247,9 @@ function MobileImageViewer({
                 src={img}
                 alt={`${productName} ${i + 1}`}
                 className="max-w-full max-h-full object-contain select-none"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchPriority={i === 0 ? 'high' : undefined}
+                decoding={i === 0 ? 'sync' : 'async'}
                 draggable={false}
                 style={
                   i === currentIndex
@@ -311,13 +314,25 @@ export default function ProductDetailPage() {
   const inlineScrollRef = useRef<HTMLDivElement>(null);
   const programmaticScroll = useRef(false);
 
-  const images = product
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+  const desktopImages = product
     ? (product.hdImages && product.hdImages.length > 0
         ? product.hdImages
         : product.images && product.images.length > 0
           ? product.images
           : [product.image1 || product.image, product.image2].filter(Boolean) as string[])
     : [];
+
+  const mobileImages = product
+    ? (product.hdImages && product.hdImages.length > 0
+        ? getMobileHdImages(product)
+        : product.images && product.images.length > 0
+          ? getMobileImages(product)
+          : desktopImages)
+    : [];
+
+  const images = isMobile ? mobileImages : desktopImages;
 
   // Sync inline scroll position when activeImage changes from thumbnail click
   useEffect(() => {
@@ -492,10 +507,11 @@ export default function ProductDetailPage() {
                         alt={`${product.name} – ${i + 1}`}
                         className="w-full h-full object-cover cursor-zoom-in"
                         onClick={() => openViewer(i)}
-                        width={800}
-                        height={1067}
+                        width={600}
+                        height={800}
                         loading={i === 0 ? 'eager' : 'lazy'}
                         fetchPriority={i === 0 ? 'high' : undefined}
+                        decoding={i === 0 ? 'sync' : 'async'}
                       />
                     </div>
                   </div>
