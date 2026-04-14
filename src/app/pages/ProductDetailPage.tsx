@@ -438,58 +438,81 @@ export default function ProductDetailPage() {
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
 
           {/* ── Image gallery ──────────────────────────────────────────── */}
-          <div className="flex-1 max-w-[800px]">
+          <div className="flex-1 max-w-[800px] lg:overflow-y-auto lg:h-full scrollbar-hide"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}
+          >
 
-            {/* Desktop: hover-zoom image */}
-            <div
-              ref={imgRef}
-              className="relative aspect-[3/4] bg-[#f5f7f8] overflow-hidden mb-3 cursor-crosshair hidden md:block"
-              onMouseEnter={() => setShowZoom(true)}
-              onMouseLeave={() => setShowZoom(false)}
-              onMouseMove={handleMouseMove}
-            >
-              {product.badge && (
-                <div className="absolute top-3 left-3 bg-black text-white text-[10px] font-medium px-2.5 py-1 tracking-[0.2px] z-10">
-                  {product.badge}
+            {/* Desktop: thumbnails + main image */}
+            <div className="hidden md:flex gap-3">
+              {/* Thumbnail strip - vertical */}
+              {images.length > 1 && (
+                <div className="flex flex-col gap-2 shrink-0">
+                  {images.map((img, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveImage(i)}
+                      className={`w-16 h-20 overflow-hidden border-2 transition-colors ${
+                        activeImage === i ? 'border-[#1a2026]' : 'border-transparent hover:border-[#e5e5e5]'
+                      }`}
+                      aria-label={`View image ${i + 1}`}
+                    >
+                      <img src={img} alt="" className="w-full h-full object-contain" width={64} height={80} loading="lazy" />
+                    </button>
+                  ))}
                 </div>
               )}
-              <img
-                src={images[activeImage]}
-                alt={product.name}
-                className="w-full h-full object-cover pointer-events-none"
-                width={800}
-                height={1067}
-                loading={activeImage === 0 ? 'eager' : 'lazy'}
-                fetchPriority={activeImage === 0 ? 'high' : undefined}
-              />
-              {showZoom && (
-                <div
-                  className="absolute border-2 border-[#1a2026]/40 bg-white/15 pointer-events-none z-10"
-                  style={{ width: LENS_SIZE, height: LENS_SIZE, left: lensLeft, top: lensTop }}
+
+              {/* Main image */}
+              <div
+                ref={imgRef}
+                className="relative aspect-[3/4] bg-[#f5f7f8] overflow-hidden flex-1 cursor-crosshair"
+                onMouseEnter={() => setShowZoom(true)}
+                onMouseLeave={() => setShowZoom(false)}
+                onMouseMove={handleMouseMove}
+              >
+                {product.badge && (
+                  <div className="absolute top-3 left-3 bg-black text-white text-[10px] font-medium px-2.5 py-1 tracking-[0.2px] z-10">
+                    {product.badge}
+                  </div>
+                )}
+                <img
+                  src={images[activeImage]}
+                  alt={product.name}
+                  className="w-full h-full object-contain pointer-events-none"
+                  width={800}
+                  height={1067}
+                  loading={activeImage === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={activeImage === 0 ? 'high' : undefined}
                 />
-              )}
-              {images.length > 1 && (
-                <>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); setShowZoom(false); prevImage(); }}
-                    onMouseEnter={() => setShowZoom(false)}
-                    onMouseLeave={() => setShowZoom(true)}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 flex items-center justify-center hover:bg-white transition-colors z-20 cursor-pointer"
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft className="w-5 h-5 text-[#1a2026]" />
-                  </button>
-                  <button
-                    onClick={(e) => { e.stopPropagation(); setShowZoom(false); nextImage(); }}
-                    onMouseEnter={() => setShowZoom(false)}
-                    onMouseLeave={() => setShowZoom(true)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 flex items-center justify-center hover:bg-white transition-colors z-20 cursor-pointer"
-                    aria-label="Next image"
-                  >
-                    <ChevronRight className="w-5 h-5 text-[#1a2026]" />
-                  </button>
-                </>
-              )}
+                {showZoom && (
+                  <div
+                    className="absolute border-2 border-[#1a2026]/40 bg-white/15 pointer-events-none z-10"
+                    style={{ width: LENS_SIZE, height: LENS_SIZE, left: lensLeft, top: lensTop }}
+                  />
+                )}
+                {images.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setShowZoom(false); prevImage(); }}
+                      onMouseEnter={() => setShowZoom(false)}
+                      onMouseLeave={() => setShowZoom(true)}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 flex items-center justify-center hover:bg-white transition-colors z-20 cursor-pointer"
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft className="w-5 h-5 text-[#1a2026]" />
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setShowZoom(false); nextImage(); }}
+                      onMouseEnter={() => setShowZoom(false)}
+                      onMouseLeave={() => setShowZoom(true)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 flex items-center justify-center hover:bg-white transition-colors z-20 cursor-pointer"
+                      aria-label="Next image"
+                    >
+                      <ChevronRight className="w-5 h-5 text-[#1a2026]" />
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
 
             {/* Mobile: scroll-snap swipeable gallery */}
@@ -505,7 +528,7 @@ export default function ProductDetailPage() {
                       <img
                         src={img}
                         alt={`${product.name} – ${i + 1}`}
-                        className="w-full h-full object-cover cursor-zoom-in"
+                        className="w-full h-full object-contain cursor-zoom-in"
                         onClick={() => openViewer(i)}
                         width={600}
                         height={800}
@@ -537,24 +560,6 @@ export default function ProductDetailPage() {
                       activeImage === i ? 'w-5 h-1.5 bg-[#1a2026]' : 'w-1.5 h-1.5 bg-[#cdcbcc]'
                     }`}
                   />
-                ))}
-              </div>
-            )}
-
-            {/* Desktop: thumbnail strip */}
-            {images.length > 1 && (
-              <div className="hidden md:flex gap-2">
-                {images.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveImage(i)}
-                    className={`w-16 h-20 overflow-hidden border-2 transition-colors ${
-                      activeImage === i ? 'border-[#1a2026]' : 'border-transparent hover:border-[#e5e5e5]'
-                    }`}
-                    aria-label={`View image ${i + 1}`}
-                  >
-                    <img src={img} alt="" className="w-full h-full object-cover" width={64} height={80} loading="lazy" />
-                  </button>
                 ))}
               </div>
             )}
