@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router';
 import { Heart, ChevronLeft, ChevronRight, Truck, RotateCcw, Shield, X, ZoomIn } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import SizeGuideModal from '../components/SizeGuideModal';
+import FabricFeatures from '../components/FabricFeatures';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
 import { getProductById, getMobileImages, getMobileHdImages } from '../data/products';
@@ -702,6 +703,8 @@ export default function ProductDetailPage() {
                 <p className="text-xs text-[#47515c]">Secure checkout</p>
               </div>
             </div>
+
+            <FabricFeatures variant="product" />
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
-import { Shield, Sparkles, Sun, Maximize2, Droplets, Wind, Waves, Scissors } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import SEOHead from '../components/SEOHead';
+import { fabricFeatures } from '../components/FabricFeatures';
 import {
   newArrivals, womenProducts, menFeatured,
   imgBannerImage, imgBannerImage1, imgBannerImage3,
@@ -235,6 +235,15 @@ function WomensCollectionSection() {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
+
+          <div className="text-center mt-8 md:mt-12">
+            <Link
+              to="/women"
+              className="inline-block border-2 border-[#1a2026] text-[#1a2026] px-10 py-3 font-bold text-sm hover:bg-[#1a2026] hover:text-white transition-colors"
+            >
+              View All Women's
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -310,17 +319,6 @@ function MensCollectionSection() {
   );
 }
 
-const fabricFeatures = [
-  { icon: Shield, label: 'Durable', desc: 'Built to last through every wear and wash' },
-  { icon: Sparkles, label: 'Easy Care', desc: 'Machine washable, minimal ironing needed' },
-  { icon: Sun, label: 'UV Protection', desc: 'UPF 30+ rated sun shielding fabric' },
-  { icon: Maximize2, label: 'Dynamic Stretch', desc: '4-way stretch moves with your body' },
-  { icon: Droplets, label: 'Quick Dry', desc: 'Moisture-wicking, fast-drying technology' },
-  { icon: Wind, label: 'Cool Comfort', desc: 'Breathable fabric keeps you cool all day' },
-  { icon: Waves, label: 'Wrinkle Resistant', desc: 'Stays crisp from morning to night' },
-  { icon: Scissors, label: 'Performance Finish', desc: 'Premium detailing on every stitch' },
-];
-
 function FabricTechnologySection() {
   return (
     <section className="bg-[#1a2026] text-white py-12 md:py-16 lg:py-20">
@@ -339,10 +337,10 @@ function FabricTechnologySection() {
 
         {/* Mobile: 2-column grid with cards */}
         <div className="grid grid-cols-2 gap-3 md:hidden">
-          {fabricFeatures.map(({ icon: Icon, label, desc }) => (
+          {fabricFeatures.map(({ Icon, label, desc }) => (
             <div key={label} className="bg-white/[0.06] border border-white/10 rounded-sm p-4 flex flex-col items-center text-center">
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-2.5">
-                <Icon className="w-[18px] h-[18px] text-white" strokeWidth={1.5} />
+              <div className="w-12 h-12 mb-2.5 text-white">
+                <Icon className="w-12 h-12" />
               </div>
               <p className="text-xs font-semibold text-white mb-1">{label}</p>
               <p className="text-[10px] leading-snug text-white/50">{desc}</p>
@@ -352,15 +350,15 @@ function FabricTechnologySection() {
 
         {/* Desktop: horizontal strip with dividers */}
         <div className="hidden md:grid md:grid-cols-4 lg:grid-cols-8 gap-0">
-          {fabricFeatures.map(({ icon: Icon, label, desc }, i) => (
+          {fabricFeatures.map(({ Icon, label, desc }, i) => (
             <div
               key={label}
               className={`flex flex-col items-center text-center px-4 lg:px-5 py-6 ${
                 i > 0 ? 'border-l border-white/10' : ''
               }`}
             >
-              <div className="w-12 h-12 rounded-full bg-white/10 border border-white/15 flex items-center justify-center mb-3">
-                <Icon className="w-5 h-5 text-white" strokeWidth={1.5} />
+              <div className="w-14 h-14 mb-3 text-white">
+                <Icon className="w-14 h-14" />
               </div>
               <p className="text-xs font-semibold text-white mb-1.5">{label}</p>
               <p className="text-[10px] leading-snug text-white/45">{desc}</p>
