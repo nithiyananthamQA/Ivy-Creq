@@ -5,9 +5,9 @@ import type { Product } from '../data/products';
 
 const bestSellers: Product[] = [
   ...menProducts.filter(p => p.badge === 'BEST SELLER'),
-  ...menProducts.filter(p => !p.badge).slice(0, 2).map(p => ({ ...p, id: p.id + 300, badge: 'BEST SELLER' })),
-  ...womenProducts.slice(0, 3).map(p => ({ ...p, id: p.id + 400, badge: 'BEST SELLER' })),
-  ...newArrivals.slice(0, 2).map(p => ({ ...p, id: p.id + 500, badge: 'BEST SELLER' })),
+  ...menProducts.filter(p => !p.badge).slice(0, 2).map(p => ({ ...p, badge: 'BEST SELLER' })),
+  ...womenProducts.slice(0, 3).map(p => ({ ...p, badge: 'BEST SELLER' })),
+  ...newArrivals.slice(0, 2).map(p => ({ ...p, badge: 'BEST SELLER' })),
 ];
 
 export default function BestSellersPage() {

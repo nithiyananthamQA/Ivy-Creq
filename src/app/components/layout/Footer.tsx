@@ -3,6 +3,55 @@ import { Link } from 'react-router';
 import { ChevronDown } from 'lucide-react';
 import { imgIcon, imgYourPrivacyChoicesIcon } from '../../data/products';
 
+function NewsletterForm() {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Please enter a valid email.');
+      return;
+    }
+    setSubmitted(true);
+    setEmail('');
+  };
+
+  if (submitted) {
+    return (
+      <p className="text-sm text-white/80" role="status">
+        Thanks — you're subscribed.
+      </p>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} noValidate>
+      <div className="flex gap-2">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          className="flex-1 px-4 py-2 bg-white text-black rounded"
+          aria-label="Email for newsletter"
+        />
+        <button
+          type="submit"
+          className="bg-white text-black px-6 py-2 font-bold rounded hover:bg-gray-200"
+        >
+          Join
+        </button>
+      </div>
+      {error && (
+        <p className="text-xs text-red-400 mt-2" role="alert">{error}</p>
+      )}
+    </form>
+  );
+}
+
 function FooterAccordion({ title, children }: { title: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
 
@@ -68,17 +117,7 @@ export default function Footer() {
           <div className="pt-6 md:pt-0">
             <h3 className="font-bold mb-4 text-sm md:text-base">Stay Connected</h3>
             <p className="text-sm mb-4 text-gray-400">Sign up for exclusive offers and updates</p>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-2 bg-white text-black rounded"
-                aria-label="Email for newsletter"
-              />
-              <button className="bg-white text-black px-6 py-2 font-bold rounded hover:bg-gray-200">
-                Join
-              </button>
-            </div>
+            <NewsletterForm />
           </div>
         </div>
 

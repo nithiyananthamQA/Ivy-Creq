@@ -17,7 +17,7 @@ const getMockResponse = (userMessage: string): string => {
   }
   
   if (message.includes('price') || message.includes('cost') || message.includes('how much')) {
-    return "Our products range from $50 to $200. Check out our Sale section for great deals! Would you like me to show you specific items?";
+    return "Our products range from ₹799 to ₹3,999. Check out our Sale section for great deals! Would you like me to show you specific items?";
   }
   
   if (message.includes('shipping') || message.includes('delivery')) {
@@ -33,7 +33,7 @@ const getMockResponse = (userMessage: string): string => {
   }
   
   if (message.includes('rewards') || message.includes('points')) {
-    return "Join TM Rewards for FREE! Earn points on every purchase, get exclusive offers, and enjoy member-only perks. Sign up takes just a minute!";
+    return "Join Ivy Crew Rewards for FREE! Earn points on every purchase, get exclusive offers, and enjoy member-only perks. Sign up takes just a minute!";
   }
   
   if (message.includes('track') || message.includes('order') || message.includes('status')) {

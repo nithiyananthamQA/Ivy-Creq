@@ -5,7 +5,7 @@ interface SEOHeadProps {
   description?: string;
 }
 
-const SITE_NAME = 'TravisMathew';
+const SITE_NAME = 'Ivy Crew';
 
 export default function SEOHead({ title, description }: SEOHeadProps) {
   useEffect(() => {

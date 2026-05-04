@@ -5,8 +5,8 @@ import type { Product } from '../data/products';
 
 const allNewArrivals: Product[] = [
   ...newArrivals.map(p => ({ ...p, franchise: "MEN'S" as const })),
+  ...menProducts.filter(p => p.badge === 'NEW'),
   ...womenProducts.filter(p => p.badge === 'NEW'),
-  ...menProducts.slice(0, 2).map(p => ({ ...p, id: p.id + 200 })),
 ];
 
 export default function NewArrivalsPage() {
@@ -14,7 +14,7 @@ export default function NewArrivalsPage() {
     <>
       <SEOHead
         title="New Arrivals"
-        description="Discover the latest arrivals at TravisMathew. Shop new men's and women's polos, pants, outerwear, dresses, and accessories."
+        description="Discover the latest arrivals at Ivy Crew. Shop new men's and women's polos, pants, outerwear, dresses, and accessories."
       />
 
       {/* Hero */}

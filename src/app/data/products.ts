@@ -207,6 +207,8 @@ import hdSageClassicPolo2 from '../../assets/mens-hd/sage-classic-polo-2.webp';
 import hdSageClassicPolo3 from '../../assets/mens-hd/sage-classic-polo-3.webp';
 import hdSageClassicPolo4 from '../../assets/mens-hd/sage-classic-polo-4.webp';
 
+export type MenCategory = 'polos' | 'tees' | 'pants' | 'outerwear' | 'footwear';
+
 export interface Product {
   id: number;
   name: string;
@@ -224,6 +226,13 @@ export interface Product {
   colors: string[];
   sizes?: string[];
   description?: string;
+  category?: MenCategory;
+  productType?: string;
+  sleeve?: string;
+  fabric?: string;
+  fit?: string;
+  care?: string;
+  origin?: string;
 }
 
 export interface Category {
@@ -240,6 +249,12 @@ export const newArrivals: Product[] = [
     colors: ['#d8ccbb', '#6478c6', '#1d3f43'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     description: 'Engineered with 4-way stretch and moisture-wicking fabric, the Heater Pro Color Block Polo keeps you cool and comfortable from the first tee to the 19th hole.',
+    productType: 'Polo',
+    sleeve: 'Half Sleeve',
+    fabric: '4-Way Stretch Performance Knit',
+    fit: 'Tailored Fit',
+    care: 'Machine Wash Cold',
+    origin: 'Made in India',
   },
   {
     id: 102,
@@ -249,6 +264,12 @@ export const newArrivals: Product[] = [
     colors: ['#333b42'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     description: 'A modern take on the classic varsity bomber. Premium materials and a tailored fit make this jacket the perfect layer for any occasion.',
+    productType: 'Bomber Jacket',
+    sleeve: 'Long Sleeve',
+    fabric: 'Wool Blend with Satin Lining',
+    fit: 'Tailored Fit',
+    care: 'Dry Clean Only',
+    origin: 'Made in India',
   },
   {
     id: 103,
@@ -258,6 +279,12 @@ export const newArrivals: Product[] = [
     colors: ['#333b42', '#dcdbd9', '#1d3f43'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     description: 'Ultra-soft cloud fabric meets a relaxed crew neck silhouette. The perfect everyday layer that moves with you.',
+    productType: 'T-Shirt',
+    sleeve: 'Long Sleeve',
+    fabric: 'Cloud Soft Cotton',
+    fit: 'Relaxed Fit',
+    care: 'Machine Wash Cold',
+    origin: 'Made in India',
   },
   {
     id: 104,
@@ -267,8 +294,20 @@ export const newArrivals: Product[] = [
     colors: ['#525449', '#bccbcf'],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     description: 'Lightweight performance fabric with UPF 50 sun protection. A versatile quarter zip built for layering on and off the course.',
+    productType: 'Quarter Zip',
+    sleeve: 'Long Sleeve',
+    fabric: 'Lightweight Performance Knit, UPF 50',
+    fit: 'Regular Fit',
+    care: 'Machine Wash Cold',
+    origin: 'Made in India',
   },
 ];
+
+const WOMENS_DEFAULTS = {
+  fit: 'Regular Fit',
+  care: 'Machine Wash Cold',
+  origin: 'Made in India',
+};
 
 export const womenProducts: Product[] = [
   {
@@ -281,6 +320,10 @@ export const womenProducts: Product[] = [
     colors: ['#2e3652', '#cddeed'],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     description: 'A sleeveless printed dress featuring MoveKnit fabric for all-day comfort and effortless style on or off the court.',
+    productType: 'Dress',
+    sleeve: 'Sleeveless',
+    fabric: 'MoveKnit',
+    ...WOMENS_DEFAULTS,
   },
   {
     id: 202,
@@ -292,6 +335,11 @@ export const womenProducts: Product[] = [
     colors: ['#3a3c3f', '#dcdbd9'],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     description: 'Ribbed MoveKnit fabric creates a flattering, body-skimming fit that stretches and recovers with every movement.',
+    productType: 'Top',
+    sleeve: 'Sleeveless',
+    fabric: 'Ribbed MoveKnit',
+    ...WOMENS_DEFAULTS,
+    fit: 'Body-Skimming',
   },
   {
     id: 203,
@@ -303,6 +351,9 @@ export const womenProducts: Product[] = [
     colors: ['#1d3f43', '#447ca0'],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     description: 'The Limitless Skort pairs the look of a skirt with built-in shorts for confident coverage during any activity.',
+    productType: 'Skort',
+    fabric: 'Ribbed MoveKnit',
+    ...WOMENS_DEFAULTS,
   },
   {
     id: 204,
@@ -315,6 +366,9 @@ export const womenProducts: Product[] = [
     colors: ['#000000', '#ffffff'],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     description: 'Upgraded with softer MoveKnit fabric and a refined waistband, the Game Set Match Skort 2.0 is ready for match day.',
+    productType: 'Skort',
+    fabric: 'MoveKnit',
+    ...WOMENS_DEFAULTS,
   },
   {
     id: 205,
@@ -326,10 +380,14 @@ export const womenProducts: Product[] = [
     colors: ['#cdcbcc', '#66676d', '#bfada8', '#525449'],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     description: 'Lightweight BreezeBlend fabric makes this the ideal travel companion — packable, breathable, and endlessly versatile.',
+    productType: 'Jacket',
+    sleeve: 'Long Sleeve',
+    fabric: 'BreezeBlend',
+    ...WOMENS_DEFAULTS,
   },
 ];
 
-export const menProducts: Product[] = [
+const menPolosBase: Product[] = [
   {
     id: 304,
     name: 'White Abstract Polo',
@@ -560,6 +618,114 @@ export const menProducts: Product[] = [
     description: 'Soft rose-toned polo with an all-over palm print. Moisture-wicking performance fabric keeps you cool under pressure.',
   },
 ];
+
+const menPolos: Product[] = menPolosBase.map(p => ({
+  ...p,
+  category: 'polos',
+  productType: 'Polo',
+  sleeve: 'Half Sleeve',
+  fabric: 'Premium Piqué Cotton',
+  fit: 'Regular Fit',
+  care: 'Machine Wash Cold',
+  origin: 'Made in India',
+}));
+
+// T-shirt tiers — loaded via glob (filenames: tshirt-<n>-<idx>.webp). Same 5-tier
+// pipeline as the polos (mens-thumb / mens / mens-hd / mens-mobile / mens-mobile-hd).
+const tshirtThumbGlob = import.meta.glob<{ default: string }>('../../assets/mens-thumb/tshirt-*.webp', { eager: true });
+const tshirtStdGlob = import.meta.glob<{ default: string }>('../../assets/mens/tshirt-*.webp', { eager: true });
+const tshirtHdGlob = import.meta.glob<{ default: string }>('../../assets/mens-hd/tshirt-*.webp', { eager: true });
+
+function tshirtLookup(globMap: Record<string, { default: string }>, filename: string): string | undefined {
+  for (const [key, mod] of Object.entries(globMap)) {
+    if (key.endsWith('/' + filename)) return mod.default;
+  }
+  return undefined;
+}
+
+function tshirtSeries(globMap: Record<string, { default: string }>, productNum: number): string[] {
+  const out: string[] = [];
+  for (let i = 1; i <= 12; i++) {
+    const url = tshirtLookup(globMap, `tshirt-${productNum}-${i}.webp`);
+    if (!url) break;
+    out.push(url);
+  }
+  return out;
+}
+
+// Mock metadata for the 77 t-shirts (placeholder pools — replace with real product data later)
+const TSHIRT_NAME_POOL = [
+  'Classic Crew Tee',
+  'Heritage Pocket Tee',
+  'Essential Cotton Tee',
+  'Vintage Wash Tee',
+  'Tailored Fit Tee',
+  'Soft Touch Tee',
+  'Athletic Stripe Tee',
+  'Performance Active Tee',
+  'Statement Graphic Tee',
+  'Modern Relaxed Tee',
+  'Premium Pima Tee',
+  'Refined Crew Tee',
+];
+const TSHIRT_PRICE_POOL = ['₹799', '₹899', '₹999', '₹1,099', '₹1,199', '₹1,299', '₹1,399'];
+const TSHIRT_COLOR_POOL: string[][] = [
+  ['#1a2026', '#3a3c3f'],
+  ['#f0ede8', '#cdcbcc'],
+  ['#8fa68a', '#6b8a66'],
+  ['#4a6e8a', '#1d3f43'],
+  ['#8b7355', '#6b5a42'],
+  ['#c27a8a', '#8b4d5e'],
+  ['#7aacaa', '#5a8c8a'],
+  ['#1a2040', '#e05a30'],
+  ['#8a8a6e', '#6b6b52'],
+  ['#525449', '#bccbcf'],
+  ['#2d5a3d', '#1a2026'],
+  ['#d4a0a0', '#c27a8a'],
+];
+const TSHIRT_DESCRIPTIONS = [
+  'Premium cotton tee with a tailored fit. Soft, breathable fabric for everyday comfort.',
+  'Effortless everyday tee crafted from ultra-soft cotton blend. A true wardrobe essential.',
+  'Lightweight and breathable, this tee pairs clean lines with a modern relaxed fit.',
+  'Built for comfort with moisture-wicking performance fabric and a clean silhouette.',
+  'Soft-touch fabric and a refined cut make this an instant rotation favorite.',
+];
+const tshirtBadge = (i: number): string | undefined => {
+  if (i % 13 === 0) return 'NEW';
+  if (i % 19 === 0) return 'BEST SELLER';
+  return undefined;
+};
+
+const menTshirts: Product[] = Array.from({ length: 77 }, (_, i) => {
+  const n = i + 1;
+  const std = tshirtSeries(tshirtStdGlob, n);
+  const hd = tshirtSeries(tshirtHdGlob, n);
+  const thumb = tshirtLookup(tshirtThumbGlob, `tshirt-${n}-1.webp`);
+  return {
+    id: 400 + n,
+    name: `${TSHIRT_NAME_POOL[i % TSHIRT_NAME_POOL.length]} ${String(n).padStart(2, '0')}`,
+    price: TSHIRT_PRICE_POOL[i % TSHIRT_PRICE_POOL.length],
+    image1: std[0],
+    image2: std[1] ?? std[0],
+    thumb,
+    images: std,
+    hdImages: hd,
+    franchise: "MEN'S",
+    badge: tshirtBadge(i),
+    colors: TSHIRT_COLOR_POOL[i % TSHIRT_COLOR_POOL.length],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    description: TSHIRT_DESCRIPTIONS[i % TSHIRT_DESCRIPTIONS.length],
+    category: 'tees',
+    productType: 'T-Shirt',
+    sleeve: 'Half Sleeve',
+    fabric: 'Premium Cotton Blend',
+    fit: 'Regular Fit',
+    care: 'Machine Wash Cold',
+    origin: 'Made in India',
+  };
+});
+
+export const menProducts: Product[] = [...menPolos, ...menTshirts];
 
 export const categories: Category[] = [
   { name: "Shop Men's Outerwear", image: imgShopMensOuterwear },

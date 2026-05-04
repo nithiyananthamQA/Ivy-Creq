@@ -6,6 +6,21 @@ export default function ContactPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setError('Please fill in all required fields.');
+      return;
+    }
+    setSubmitted(true);
+    setName('');
+    setEmail('');
+    setMessage('');
+  };
 
   return (
     <>
@@ -23,7 +38,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
             {[
               { icon: Mail, label: 'Email', value: 'support@ivycrew.com' },
-              { icon: Phone, label: 'Phone', value: '1-800-TRAVIS-M' },
+              { icon: Phone, label: 'Phone', value: '1-800-IVY-CREW' },
               { icon: Clock, label: 'Hours', value: 'Mon–Fri 8am–5pm PST' },
               { icon: MapPin, label: 'Headquarters', value: 'Union City, CA 94587' },
             ].map(({ icon: Icon, label, value }) => (
@@ -38,21 +53,29 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             <div className="lg:col-span-3">
               <h2 className="text-lg font-bold text-[#1a2026] mb-4">Send Us a Message</h2>
-              <form className="space-y-4">
+              {submitted && (
+                <div className="bg-[#f5f7f8] border border-[#d1d9de] p-4 mb-4 text-sm text-[#1a2026]" role="status">
+                  Thanks — your message has been sent. We'll get back to you within 24 hours.
+                </div>
+              )}
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-[#1a2026] mb-1.5">Name *</label>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full px-4 py-2.5 border border-[#d1d9de] text-sm focus:outline-none focus:border-black transition-colors" />
+                    <label htmlFor="contact-name" className="block text-xs font-bold text-[#1a2026] mb-1.5">Name *</label>
+                    <input id="contact-name" type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full px-4 py-2.5 border border-[#d1d9de] text-sm focus:outline-none focus:border-black transition-colors" />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-[#1a2026] mb-1.5">Email *</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-4 py-2.5 border border-[#d1d9de] text-sm focus:outline-none focus:border-black transition-colors" />
+                    <label htmlFor="contact-email" className="block text-xs font-bold text-[#1a2026] mb-1.5">Email *</label>
+                    <input id="contact-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-4 py-2.5 border border-[#d1d9de] text-sm focus:outline-none focus:border-black transition-colors" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-[#1a2026] mb-1.5">Message *</label>
-                  <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={5} className="w-full px-4 py-2.5 border border-[#d1d9de] text-sm focus:outline-none focus:border-black resize-none transition-colors" />
+                  <label htmlFor="contact-message" className="block text-xs font-bold text-[#1a2026] mb-1.5">Message *</label>
+                  <textarea id="contact-message" value={message} onChange={(e) => setMessage(e.target.value)} rows={5} className="w-full px-4 py-2.5 border border-[#d1d9de] text-sm focus:outline-none focus:border-black resize-none transition-colors" />
                 </div>
+                {error && (
+                  <p className="text-xs text-red-600" role="alert">{error}</p>
+                )}
                 <button type="submit" className="bg-black text-white py-2.5 px-8 font-bold text-sm hover:bg-gray-900 transition-colors">Send Message</button>
               </form>
             </div>

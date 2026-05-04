@@ -6,6 +6,18 @@ export default function RewardsLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [signedIn, setSignedIn] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    if (!email.trim() || !password) {
+      setError('Please enter your email and password.');
+      return;
+    }
+    setSignedIn(true);
+  };
 
   return (
     <>
@@ -28,8 +40,21 @@ export default function RewardsLoginPage() {
           <p className="text-sm text-[#333b42]">Or sign in with</p>
         </div>
 
+        {signedIn ? (
+          <div className="text-center py-10 border border-[#e5e5e5] bg-[#f5f7f8] mb-6">
+            <h2 className="text-xl font-bold text-[#1a2026] mb-2">You're signed in</h2>
+            <p className="text-sm text-[#333b42] mb-6">Welcome back, {email}.</p>
+            <Link
+              to="/"
+              className="inline-block bg-black text-white px-8 py-3 font-bold text-sm hover:bg-gray-900 transition-colors"
+            >
+              Continue Shopping
+            </Link>
+          </div>
+        ) : (
+        <>
         {/* Login Form */}
-        <form className="space-y-4 mb-6">
+        <form className="space-y-4 mb-6" onSubmit={handleSubmit}>
           <div>
             <label className="block text-sm mb-2">
               * Email
@@ -65,10 +90,14 @@ export default function RewardsLoginPage() {
             <p className="mb-2">
               By signing in, you agree to Ivy Crew's{' '}
               <Link to="/terms-of-service" className="underline">Terms of Use</Link> and{' '}
-              <Link to="/terms-of-service" className="underline">TM Rewards Program Terms & Conditions</Link>. To learn more about how we use and protect your data, please see our{' '}
+              <Link to="/terms-of-service" className="underline">Ivy Crew Rewards Program Terms & Conditions</Link>. To learn more about how we use and protect your data, please see our{' '}
               <Link to="/privacy-policy" className="underline">Privacy Policy</Link>.
             </p>
           </div>
+
+          {error && (
+            <p className="text-xs text-red-600" role="alert">{error}</p>
+          )}
 
           <button
             type="submit"
@@ -77,6 +106,8 @@ export default function RewardsLoginPage() {
             SIGN IN
           </button>
         </form>
+        </>
+        )}
 
         {/* Links */}
         <div className="text-center space-y-2 mb-8">
@@ -85,7 +116,7 @@ export default function RewardsLoginPage() {
             <button type="button" className="text-sm underline">Reset Here</button>
           </div>
           <div>
-            <span className="text-sm text-[#333b42]">Looking for your TM Rewards points? </span>
+            <span className="text-sm text-[#333b42]">Looking for your Ivy Crew Rewards points? </span>
             <button type="button" className="text-sm underline">Look them up.</button>
           </div>
         </div>
@@ -100,7 +131,7 @@ export default function RewardsLoginPage() {
             Sign Up
           </Link>
           <p className="text-sm text-[#333b42] mt-2">
-            Learn More at <Link to="/rewards" className="underline">TM Rewards</Link>
+            Learn More at <Link to="/rewards" className="underline">Ivy Crew Rewards</Link>
           </p>
         </div>
 

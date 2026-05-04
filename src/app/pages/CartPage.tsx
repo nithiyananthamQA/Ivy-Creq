@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
-import { useCart } from '../context/CartContext';
+import { useCart, parsePrice, formatINR, FREE_SHIPPING_THRESHOLD } from '../context/CartContext';
 
 export default function CartPage() {
   const { items, removeFromCart, updateQuantity, itemCount, subtotal } = useCart();
@@ -100,7 +100,7 @@ export default function CartPage() {
 
                         {/* Line Total */}
                         <p className="text-sm font-bold text-[#1a2026] mt-3">
-                          ${(parseFloat(item.product.price.replace('$', '')) * item.quantity).toFixed(2)}
+                          {formatINR(parsePrice(item.product.price) * item.quantity)}
                         </p>
                       </div>
                     </div>
@@ -118,7 +118,7 @@ export default function CartPage() {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between text-sm">
                   <span className="text-[#333b42]">Subtotal</span>
-                  <span className="text-[#090c0f]">${subtotal.toFixed(2)}</span>
+                  <span className="text-[#090c0f]">{formatINR(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-[#333b42]">Estimated Taxes</span>
@@ -126,14 +126,14 @@ export default function CartPage() {
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-[#333b42]">Shipping</span>
-                  <span className="text-[#090c0f]">{subtotal >= 150 ? 'FREE' : '--'}</span>
+                  <span className="text-[#090c0f]">{subtotal >= FREE_SHIPPING_THRESHOLD ? 'FREE' : '--'}</span>
                 </div>
               </div>
 
               <div className="border-t border-[#d1d9de] pt-4 mb-6">
                 <div className="flex justify-between text-base font-bold">
                   <span className="text-[#090c0f]">Total</span>
-                  <span className="text-[#090c0f]">${subtotal.toFixed(2)}</span>
+                  <span className="text-[#090c0f]">{formatINR(subtotal)}</span>
                 </div>
               </div>
 
@@ -145,9 +145,9 @@ export default function CartPage() {
                 Checkout
               </Link>
 
-              {items.length > 0 && subtotal < 150 && (
+              {items.length > 0 && subtotal < FREE_SHIPPING_THRESHOLD && (
                 <p className="text-xs text-[#6c7782] text-center mt-3">
-                  Add ${(150 - subtotal).toFixed(2)} more for free shipping
+                  Add {formatINR(FREE_SHIPPING_THRESHOLD - subtotal)} more for free shipping
                 </p>
               )}
             </div>

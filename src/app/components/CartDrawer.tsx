@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { X, Minus, Plus, Trash2 } from 'lucide-react';
-import { useCart } from '../context/CartContext';
+import { useCart, formatINR } from '../context/CartContext';
 
 export default function CartDrawer() {
   const { items, removeFromCart, updateQuantity, itemCount, subtotal, isCartOpen, setCartOpen } = useCart();
@@ -148,7 +148,7 @@ export default function CartDrawer() {
           <div className="flex-shrink-0 border-t border-[#e2dfda] bg-white p-4">
             <div className="flex justify-between items-center mb-4">
               <span className="text-sm font-bold text-[#1a2026]">Subtotal</span>
-              <span className="text-sm font-bold text-[#1a2026]">${subtotal.toFixed(2)}</span>
+              <span className="text-sm font-bold text-[#1a2026]">{formatINR(subtotal)}</span>
             </div>
             <Link
               to="/cart"

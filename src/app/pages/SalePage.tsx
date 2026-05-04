@@ -4,8 +4,8 @@ import { menProducts, womenProducts } from '../data/products';
 import type { Product } from '../data/products';
 
 const saleProducts: Product[] = [
-  ...menProducts.map(p => ({ ...p, id: p.id, badge: 'SALE' as const })),
-  ...womenProducts.map(p => ({ ...p, id: p.id + 100, badge: 'SALE' as const })),
+  ...menProducts.map(p => ({ ...p, badge: 'SALE' as const })),
+  ...womenProducts.map(p => ({ ...p, badge: 'SALE' as const })),
 ];
 
 export default function SalePage() {

@@ -13,7 +13,7 @@ const faqs = [
       },
       {
         question: 'Do you offer free shipping?',
-        answer: 'Yes! We offer free standard shipping on all orders ₹2,000 and above. TM Rewards members enjoy free shipping on every order, regardless of order total.',
+        answer: 'Yes! We offer free standard shipping on all orders ₹2,000 and above. Ivy Crew Rewards members enjoy free shipping on every order, regardless of order total.',
       },
       {
         question: 'Can I cancel or modify my order?',
@@ -47,8 +47,8 @@ const faqs = [
     category: 'Account & Rewards',
     items: [
       {
-        question: 'How do I join TM Rewards?',
-        answer: 'Joining TM Rewards is free and easy. Simply create an account on our website and you\'ll automatically be enrolled. Start earning points on every purchase, get exclusive offers, and enjoy free shipping.',
+        question: 'How do I join Ivy Crew Rewards?',
+        answer: 'Joining Ivy Crew Rewards is free and easy. Simply create an account on our website and you\'ll automatically be enrolled. Start earning points on every purchase, get exclusive offers, and enjoy free shipping.',
       },
       {
         question: 'Do you have physical store locations?',

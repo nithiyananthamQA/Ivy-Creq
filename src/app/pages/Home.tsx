@@ -295,6 +295,15 @@ function MensCollectionSection() {
               <ProductCard key={product.id} product={product} loading={index < 2 ? 'eager' : 'lazy'} />
             ))}
           </div>
+
+          <div className="text-center mt-8 md:mt-12">
+            <Link
+              to="/men"
+              className="inline-block border-2 border-[#1a2026] text-[#1a2026] px-10 py-3 font-bold text-sm hover:bg-[#1a2026] hover:text-white transition-colors"
+            >
+              View All Men's
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -390,10 +399,10 @@ export default function Home() {
       />
       <HeroBanner />
       <NewArrivalsSection />
+      <MensCollectionSection />
       <LazySection fallbackHeight="600px">
         <WomensCollectionSection />
       </LazySection>
-      <MensCollectionSection />
       <LazySection fallbackHeight="100px">
         <FabricTechnologySection />
       </LazySection>

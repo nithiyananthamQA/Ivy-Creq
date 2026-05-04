@@ -29,8 +29,8 @@ const sections = [
     content: 'All content on this website, including text, images, logos, and graphics, is the property of Ivy Crew and is protected by copyright and trademark laws. You may not reproduce, distribute, or create derivative works without our express written consent.',
   },
   {
-    title: '6. TM Rewards Program',
-    content: 'The TM Rewards Program is subject to its own terms and conditions. By participating in the program, you agree to those additional terms, which are available on the TM Rewards page.',
+    title: '6. Ivy Crew Rewards Program',
+    content: 'The Ivy Crew Rewards Program is subject to its own terms and conditions. By participating in the program, you agree to those additional terms, which are available on the Ivy Crew Rewards page.',
   },
   {
     title: '7. Limitation of Liability',

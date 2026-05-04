@@ -2,14 +2,21 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { Lock, ChevronLeft } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
-import { useCart } from '../context/CartContext';
+import {
+  useCart,
+  parsePrice,
+  formatINR,
+  FREE_SHIPPING_THRESHOLD,
+  FLAT_SHIPPING_RATE,
+  TAX_RATE,
+} from '../context/CartContext';
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
   const [submitted, setSubmitted] = useState(false);
 
-  const shipping = subtotal >= 150 ? 0 : 9.95;
-  const tax = subtotal * 0.0825;
+  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : FLAT_SHIPPING_RATE;
+  const tax = subtotal * TAX_RATE;
   const total = subtotal + shipping + tax;
 
   const [form, setForm] = useState({
@@ -81,7 +88,7 @@ export default function CheckoutPage() {
 
   return (
     <>
-      <SEOHead title="Checkout" description="Complete your purchase at TravisMathew." />
+      <SEOHead title="Checkout" description="Complete your purchase at Ivy Crew." />
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[60px] py-8 md:py-12">
         {/* Back link */}
         <Link to="/cart" className="inline-flex items-center gap-1 text-sm text-[#6c7782] hover:text-[#1a2026] transition-colors mb-6">
@@ -115,7 +122,7 @@ export default function CheckoutPage() {
                       <p className="text-[11px] text-[#6c7782]">Qty: {item.quantity}</p>
                     </div>
                     <p className="text-xs font-bold text-[#1a2026] shrink-0">
-                      ${(parseFloat(item.product.price.replace('$', '')) * item.quantity).toFixed(2)}
+                      {formatINR(parsePrice(item.product.price) * item.quantity)}
                     </p>
                   </div>
                 ))}
@@ -124,19 +131,19 @@ export default function CheckoutPage() {
               <div className="space-y-2 border-t border-[#d1d9de] pt-4 text-sm">
                 <div className="flex justify-between">
                   <span className="text-[#333b42]">Subtotal</span>
-                  <span className="text-[#1a2026]">${subtotal.toFixed(2)}</span>
+                  <span className="text-[#1a2026]">{formatINR(subtotal)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[#333b42]">Shipping</span>
-                  <span className="text-[#1a2026]">{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+                  <span className="text-[#1a2026]">{shipping === 0 ? 'FREE' : formatINR(shipping)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[#333b42]">Tax</span>
-                  <span className="text-[#1a2026]">${tax.toFixed(2)}</span>
+                  <span className="text-[#1a2026]">{formatINR(tax)}</span>
                 </div>
                 <div className="flex justify-between font-bold text-base border-t border-[#d1d9de] pt-3 mt-3">
                   <span className="text-[#1a2026]">Total</span>
-                  <span className="text-[#1a2026]">${total.toFixed(2)}</span>
+                  <span className="text-[#1a2026]">{formatINR(total)}</span>
                 </div>
               </div>
             </div>
@@ -269,7 +276,7 @@ export default function CheckoutPage() {
                 className="w-full bg-black text-white py-3.5 px-6 font-bold text-sm hover:bg-gray-900 transition-colors flex items-center justify-center gap-2"
               >
                 <Lock className="w-4 h-4" />
-                Place Order — ${total.toFixed(2)}
+                Place Order — {formatINR(total)}
               </button>
             </form>
           </div>

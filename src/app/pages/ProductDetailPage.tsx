@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, useEffect, Fragment } from 'react';
 import { useParams, Link } from 'react-router';
 import { Heart, ChevronLeft, ChevronRight, Truck, RotateCcw, Shield, X, ZoomIn } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
@@ -669,18 +669,21 @@ export default function ProductDetailPage() {
               <div className="grid grid-cols-2 gap-y-2 text-xs">
                 <span className="text-[#6c7782]">Style</span>
                 <span className="text-[#1a2026]">{styleCode}</span>
-                <span className="text-[#6c7782]">Product</span>
-                <span className="text-[#1a2026]">T-Shirt / Knit Wear</span>
-                <span className="text-[#6c7782]">Sleeve</span>
-                <span className="text-[#1a2026]">Half Sleeve</span>
-                <span className="text-[#6c7782]">Fabric</span>
-                <span className="text-[#1a2026]">Premium Cotton Blend</span>
-                <span className="text-[#6c7782]">Fit</span>
-                <span className="text-[#1a2026]">Regular Fit</span>
-                <span className="text-[#6c7782]">Care</span>
-                <span className="text-[#1a2026]">Machine Wash Cold</span>
-                <span className="text-[#6c7782]">Origin</span>
-                <span className="text-[#1a2026]">Made in India</span>
+                {[
+                  ['Product', product.productType],
+                  ['Sleeve', product.sleeve],
+                  ['Fabric', product.fabric],
+                  ['Fit', product.fit],
+                  ['Care', product.care],
+                  ['Origin', product.origin],
+                ]
+                  .filter(([, value]) => Boolean(value))
+                  .map(([label, value]) => (
+                    <Fragment key={label}>
+                      <span className="text-[#6c7782]">{label}</span>
+                      <span className="text-[#1a2026]">{value}</span>
+                    </Fragment>
+                  ))}
               </div>
             </div>
 

@@ -9,6 +9,22 @@ export default function RewardsSignupPage() {
   const [password, setPassword] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    if (!firstName.trim() || !lastName.trim() || !email.trim() || !password) {
+      setError('Please fill in all required fields.');
+      return;
+    }
+    if (!agreedToTerms) {
+      setError('Please agree to the terms to continue.');
+      return;
+    }
+    setSubmitted(true);
+  };
 
   return (
     <>
@@ -66,8 +82,23 @@ export default function RewardsSignupPage() {
           </p>
         </div>
 
+        {submitted ? (
+          <div className="text-center py-10 border border-[#e5e5e5] bg-[#f5f7f8] mb-6">
+            <h2 className="text-xl font-bold text-[#1a2026] mb-2">Welcome to Ivy Crew Rewards!</h2>
+            <p className="text-sm text-[#333b42] mb-6">
+              We've sent a confirmation to {email}. Start earning points on your next purchase.
+            </p>
+            <Link
+              to="/"
+              className="inline-block bg-black text-white px-8 py-3 font-bold text-sm hover:bg-gray-900 transition-colors"
+            >
+              Continue Shopping
+            </Link>
+          </div>
+        ) : (
+        <>
         {/* Signup Form */}
-        <form className="space-y-4 mb-6">
+        <form className="space-y-4 mb-6" onSubmit={handleSubmit}>
           <div>
             <label className="block text-sm mb-2">* First Name</label>
             <input
@@ -124,9 +155,13 @@ export default function RewardsSignupPage() {
               By joining, you agree to receive emails from Ivy Crew, and you acknowledge that you have read the{' '}
               <Link to="/privacy-policy" className="underline">Privacy Policy</Link>. You can unsubscribe at any time. View our{' '}
               <Link to="/terms-of-service" className="underline">Terms of Use</Link> and{' '}
-              <Link to="/terms-of-service" className="underline">TM Reward Program Terms & Conditions</Link>.
+              <Link to="/terms-of-service" className="underline">Ivy Crew Rewards Program Terms & Conditions</Link>.
             </label>
           </div>
+
+          {error && (
+            <p className="text-xs text-red-600" role="alert">{error}</p>
+          )}
 
           <button
             type="submit"
@@ -135,13 +170,15 @@ export default function RewardsSignupPage() {
             SIGN UP
           </button>
         </form>
+        </>
+        )}
 
         {/* Sign In Link */}
         <div className="text-center py-6 border-t border-[#e5e5e5]">
           <p className="text-sm mb-2">Already a Member?</p>
           <Link to="/rewards/login" className="text-sm underline">Sign In</Link>
           <p className="text-sm text-[#333b42] mt-2">
-            Learn More at <Link to="/rewards" className="underline">TM Rewards</Link>
+            Learn More at <Link to="/rewards" className="underline">Ivy Crew Rewards</Link>
           </p>
         </div>
       </div>
