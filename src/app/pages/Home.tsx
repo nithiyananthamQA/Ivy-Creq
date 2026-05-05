@@ -5,7 +5,7 @@ import SEOHead from '../components/SEOHead';
 import { fabricFeatures } from '../components/FabricFeatures';
 import {
   newArrivals, womenProducts, menFeatured,
-  imgBannerImage, imgBannerImage1, imgBannerImage3,
+  imgBannerImage, imgBannerImage1, imgMensBanner,
 } from '../data/products';
 
 const Slider = lazy(() => import('react-slick'));
@@ -36,7 +36,7 @@ function LazySection({ children, fallbackHeight = '200px' }: { children: React.R
 function HeroBanner() {
   return (
     <section className="relative w-full">
-      <div className="relative aspect-[390/500] md:aspect-[1024/600] lg:aspect-[1920/700]">
+      <div className="relative aspect-[390/520] md:aspect-[1024/600] lg:aspect-[1920/700]">
         <img
           src={imgBannerImage}
           alt="Ivy Crew — Premium performance apparel for men and women"
@@ -48,20 +48,20 @@ function HeroBanner() {
         />
         {/* Mobile — pinned to bottom with gradient fade */}
         <div className="absolute inset-x-0 bottom-0 md:hidden">
-          <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent pt-16 pb-5 px-4">
-            <div className="text-right text-white bg-black/40 backdrop-blur-[2px] border border-white/15 rounded-sm px-5 py-5">
-              <h1 className="text-2xl font-bold mb-2 drop-shadow-md">
-                Look Sharp. Feel&nbsp;Unstoppable.
+          <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent pt-12 pb-4 px-4">
+            <div className="text-center text-white bg-black/40 backdrop-blur-[2px] border border-white/15 rounded-sm px-5 py-4">
+              <h1 className="text-xl font-bold mb-1.5 leading-tight drop-shadow-md">
+                Performance,&nbsp;Tailored.
               </h1>
-              <p className="text-sm mb-4 text-white/90 drop-shadow-sm">
-                Premium apparel engineered with performance fabrics — so you look your best from the office to the weekend.
+              <p className="text-xs mb-3.5 text-white/90 leading-snug drop-shadow-sm">
+                Premium apparel engineered to move with you.
               </p>
-              <div className="flex flex-col gap-3 items-stretch">
-                <Link to="/men" className="bg-white text-black px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center">
-                  Shop Men's Collection
+              <div className="flex gap-2.5">
+                <Link to="/men" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs hover:bg-gray-100 transition-colors text-center">
+                  Shop Men's
                 </Link>
-                <Link to="/women" className="bg-white text-black px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center">
-                  Shop Women's Collection
+                <Link to="/women" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs hover:bg-gray-100 transition-colors text-center">
+                  Shop Women's
                 </Link>
               </div>
             </div>
@@ -71,12 +71,12 @@ function HeroBanner() {
         {/* Desktop — centered right */}
         <div className="absolute inset-0 hidden md:flex items-center justify-end">
           <div className="text-right text-white px-12 lg:px-20">
-            <div className="bg-black/30 backdrop-blur-[3px] border border-white/15 rounded-sm px-10 py-10 lg:px-12 lg:py-12 max-w-xl lg:max-w-2xl">
+            <div className="bg-black/30 backdrop-blur-[3px] border border-white/15 rounded-sm px-10 py-10 lg:px-12 lg:py-12 max-w-2xl lg:max-w-3xl">
               <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-md">
-                Look Sharp. Feel&nbsp;Unstoppable.
+                Performance,&nbsp;Tailored.
               </h1>
               <p className="text-lg mb-8 text-white/90 drop-shadow-sm">
-                Premium apparel engineered with performance fabrics — so you look your best from the office to the weekend.
+                Premium apparel engineered to move with you — from boardroom to&nbsp;fairway.
               </p>
               <div className="flex flex-row gap-4 justify-end">
                 <Link to="/men" className="bg-white text-black px-6 lg:px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center whitespace-nowrap">
@@ -124,13 +124,10 @@ function NewArrivalsSection() {
 
   return (
     <section className="py-8 md:py-12 lg:py-16 max-w-[1920px] mx-auto overflow-x-clip">
-      <div className="px-4 md:px-8 flex items-center justify-between mb-6 md:mb-8">
+      <div className="px-4 md:px-8 mb-6 md:mb-8">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2026]">
           New Arrivals
         </h2>
-        <Link to="/new-arrivals" className="hidden md:inline-block text-sm font-bold text-[#1a2026] border border-[#1a2026] px-5 py-2 hover:bg-[#1a2026] hover:text-white transition-colors">
-          View All
-        </Link>
       </div>
 
       {/* Mobile: horizontal scroll — one card at a time */}
@@ -141,10 +138,6 @@ function NewArrivalsSection() {
               <ProductCard product={product} loading="eager" />
             </div>
           ))}
-          <Link to="/new-arrivals" className="w-[50vw] shrink-0 snap-start flex flex-col items-center justify-center bg-[#f5f7f8] border border-[#e5e5e5] active:border-black transition-colors rounded">
-            <span className="text-sm font-bold text-[#1a2026] mb-1">View All</span>
-            <span className="text-xs text-[#6c7782]">New Arrivals {'\u2192'}</span>
-          </Link>
         </div>
       </div>
 
@@ -160,6 +153,15 @@ function NewArrivalsSection() {
           </Slider>
         </Suspense>
       </div>
+
+      <div className="text-center mt-8 md:mt-12 px-4">
+        <Link
+          to="/new-arrivals"
+          className="inline-block border-2 border-[#1a2026] text-[#1a2026] px-8 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-[#1a2026] hover:text-white transition-colors"
+        >
+          View All New Arrivals
+        </Link>
+      </div>
     </section>
   );
 }
@@ -167,34 +169,34 @@ function NewArrivalsSection() {
 
 function WomensCollectionSection() {
   return (
-    <section className="py-8 md:py-12 lg:py-16 bg-[#f5f7f8]">
+    <section className="py-8 md:py-12 lg:py-16 bg-white">
       <div className="max-w-[1920px] mx-auto">
         {/* Banner — edge-to-edge on mobile, padded on desktop */}
         <div className="relative mb-6 md:mb-12 md:mx-8">
-          <div className="relative aspect-[390/300] md:aspect-[1024/400] lg:aspect-[1920/500]">
+          <div className="relative aspect-[390/440] md:aspect-[1024/600] lg:aspect-[1920/780]">
             <img
               src={imgBannerImage1}
               alt="Women's Collection"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-left md:object-center"
               loading="lazy"
               decoding="async"
               width={1920}
-              height={500}
+              height={780}
             />
-            {/* Mobile — pinned to bottom, wider glass card */}
+            {/* Mobile — pinned to bottom, gradient fade + glass card */}
             <div className="absolute inset-x-0 bottom-0 md:hidden">
-              <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent pt-14 pb-4 px-3">
-                <div className="text-white text-right bg-black/40 backdrop-blur-[2px] border border-white/15 rounded-sm px-5 py-5 w-[90%] ml-auto">
+              <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent pt-12 pb-4 px-4">
+                <div className="text-white bg-black/40 backdrop-blur-[2px] border border-white/15 rounded-sm px-5 py-4">
                   <p className="text-[10px] uppercase tracking-[0.2em] text-white/80 mb-1.5">Women's Collection</p>
-                  <h3 className="text-xl font-bold mb-2 leading-tight drop-shadow-md">
-                    Effortless Style, All Day
+                  <h3 className="text-lg font-bold mb-1.5 leading-tight drop-shadow-md">
+                    Move with Confidence.
                   </h3>
-                  <p className="text-xs text-white/90 mb-4 drop-shadow-sm">
-                    Versatile layers and everyday essentials in performance fabrics that keep you cool, dry, and confident.
+                  <p className="text-xs text-white/90 mb-3 leading-snug drop-shadow-sm">
+                    Performance essentials cut for the way you live.
                   </p>
                   <Link
                     to="/women"
-                    className="inline-block bg-white text-[#1a2026] px-8 py-3 font-bold text-sm hover:bg-gray-200 transition-colors"
+                    className="inline-block bg-white text-[#1a2026] px-6 py-2.5 font-bold text-xs hover:bg-gray-200 transition-colors"
                   >
                     Shop Women's
                   </Link>
@@ -202,23 +204,44 @@ function WomensCollectionSection() {
               </div>
             </div>
 
-            {/* Desktop — centered right */}
-            <div className="absolute inset-0 hidden md:flex items-center justify-end">
-              <div className="text-white px-12 lg:px-20 max-w-md lg:max-w-lg text-right">
-                <div className="bg-black/30 backdrop-blur-[3px] border border-white/15 rounded-sm px-8 py-8">
-                  <p className="text-sm uppercase tracking-[0.2em] text-white/80 mb-2">Women's Collection</p>
-                  <h3 className="text-3xl lg:text-4xl font-bold mb-3 leading-tight drop-shadow-md">
-                    Effortless Style, All Day
-                  </h3>
-                  <p className="text-base text-white/90 mb-6 drop-shadow-sm">
-                    Versatile layers and everyday essentials in performance fabrics that keep you cool, dry, and confident.
-                  </p>
+            {/* Desktop — wide unified glass card with text + stats row (mirrors men's) */}
+            <div className="absolute inset-x-0 bottom-0 hidden md:flex justify-center pb-6 lg:pb-10 px-4 lg:px-8">
+              <div className="bg-black/30 backdrop-blur-[3px] border border-white/15 rounded-sm px-8 lg:px-12 py-5 lg:py-6 w-full max-w-7xl">
+                <div className="flex items-center gap-6 lg:gap-10">
+                  <div className="flex-1 text-white">
+                    <p className="text-sm uppercase tracking-[0.2em] text-white/80 mb-2">Women's Collection</p>
+                    <h3 className="text-2xl lg:text-4xl font-bold mb-2 leading-tight drop-shadow-md">
+                      Move with Confidence.
+                    </h3>
+                    <p className="text-base lg:text-lg text-white/90 drop-shadow-sm">
+                      Performance essentials cut for the way you live — refined, breathable, ready for anything.
+                    </p>
+                  </div>
                   <Link
                     to="/women"
-                    className="inline-block bg-white text-[#1a2026] px-8 py-3 font-bold text-sm hover:bg-gray-200 transition-colors"
+                    className="shrink-0 inline-block bg-white text-[#1a2026] px-6 lg:px-8 py-3 font-bold text-xs uppercase tracking-wider hover:bg-gray-200 transition-colors whitespace-nowrap"
                   >
                     Shop Women's
                   </Link>
+                </div>
+                {/* Stats row inside the same card — compact */}
+                <div className="mt-3 pt-3 border-t border-white/15 grid grid-cols-4 gap-2 text-white">
+                  <div className="px-3 py-1 border-l border-white/15 first:border-l-0">
+                    <p className="text-lg lg:text-xl font-bold drop-shadow-md leading-tight">40+</p>
+                    <p className="text-xs text-white/80 mt-0.5 drop-shadow-sm">New This Season</p>
+                  </div>
+                  <div className="px-3 py-1 border-l border-white/15">
+                    <p className="text-lg lg:text-xl font-bold drop-shadow-md leading-tight">MoveKnit</p>
+                    <p className="text-xs text-white/80 mt-0.5 drop-shadow-sm">Signature Fabric</p>
+                  </div>
+                  <div className="px-3 py-1 border-l border-white/15">
+                    <p className="text-lg lg:text-xl font-bold drop-shadow-md leading-tight">All-Day</p>
+                    <p className="text-xs text-white/80 mt-0.5 drop-shadow-sm">Comfort</p>
+                  </div>
+                  <div className="px-3 py-1 border-l border-white/15">
+                    <p className="text-lg lg:text-xl font-bold drop-shadow-md leading-tight">Free</p>
+                    <p className="text-xs text-white/80 mt-0.5 drop-shadow-sm">Shipping ₹2,000+</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -239,7 +262,7 @@ function WomensCollectionSection() {
           <div className="text-center mt-8 md:mt-12">
             <Link
               to="/women"
-              className="inline-block border-2 border-[#1a2026] text-[#1a2026] px-10 py-3 font-bold text-sm hover:bg-[#1a2026] hover:text-white transition-colors"
+              className="inline-block border-2 border-[#1a2026] text-[#1a2026] px-8 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-[#1a2026] hover:text-white transition-colors"
             >
               View All Women's
             </Link>
@@ -254,44 +277,77 @@ function MensCollectionSection() {
   return (
     <section className="py-8 md:py-12 lg:py-16 bg-white">
       <div className="max-w-[1920px] mx-auto">
-        {/* Content Banner — edge-to-edge on mobile */}
-        <div className="bg-[#1a2026] text-white py-10 md:py-14 px-6 md:px-12 mb-6 md:mb-12 md:mx-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <p className="text-sm uppercase tracking-[0.2em] text-white/60 mb-3">Men's Collection</p>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-                Built to Perform,<br />Made to Impress
-              </h2>
-              <p className="text-white/70 text-sm md:text-base max-w-md mb-6">
-                Premium fabrics with UPF protection, 4-way stretch, and quick-dry technology — modern fits for every occasion.
-              </p>
-              <Link
-                to="/men"
-                className="inline-block bg-white text-[#1a2026] px-8 py-3 font-bold text-sm hover:bg-gray-200 transition-colors"
-              >
-                Shop Men's
-              </Link>
-            </div>
-
-            <div className="hidden md:grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="bg-white/10 backdrop-blur-sm p-5 border border-white/10 hover:border-white/30 transition-colors duration-300">
-                  <p className="text-2xl font-bold">50+</p>
-                  <p className="text-xs text-white/60 mt-1">New Styles This Season</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm p-5 border border-white/10 hover:border-white/30 transition-colors duration-300">
-                  <p className="text-2xl font-bold">4-Way</p>
-                  <p className="text-xs text-white/60 mt-1">Stretch Fabric</p>
+        {/* Banner — edge-to-edge on mobile, padded on desktop */}
+        <div className="relative mb-6 md:mb-12 md:mx-8">
+          <div className="relative aspect-[390/440] md:aspect-[1024/600] lg:aspect-[1920/780]">
+            <img
+              src={imgMensBanner}
+              alt="Men's Collection"
+              className="w-full h-full object-cover object-center"
+              loading="lazy"
+              decoding="async"
+              width={1920}
+              height={700}
+            />
+            {/* Mobile — pinned to bottom, gradient fade + glass card */}
+            <div className="absolute inset-x-0 bottom-0 md:hidden">
+              <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent pt-12 pb-4 px-4">
+                <div className="text-white bg-black/40 backdrop-blur-[2px] border border-white/15 rounded-sm px-5 py-4">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/80 mb-1.5">Men's Collection</p>
+                  <h3 className="text-lg font-bold mb-1.5 leading-tight drop-shadow-md">
+                    Built to Move. Made to Stand Out.
+                  </h3>
+                  <p className="text-xs text-white/90 mb-3 leading-snug drop-shadow-sm">
+                    UPF 50, 4-way stretch, quick-dry — engineered for the modern man.
+                  </p>
+                  <Link
+                    to="/men"
+                    className="inline-block bg-white text-[#1a2026] px-6 py-2.5 font-bold text-xs hover:bg-gray-200 transition-colors"
+                  >
+                    Shop Men's
+                  </Link>
                 </div>
               </div>
-              <div className="space-y-4 mt-6">
-                <div className="bg-white/10 backdrop-blur-sm p-5 border border-white/10 hover:border-white/30 transition-colors duration-300">
-                  <p className="text-2xl font-bold">UPF 50</p>
-                  <p className="text-xs text-white/60 mt-1">Sun Protection</p>
+            </div>
+
+            {/* Desktop — wide unified glass card with text + stats row */}
+            <div className="absolute inset-x-0 bottom-0 hidden md:flex justify-center pb-6 lg:pb-10 px-4 lg:px-8">
+              <div className="bg-black/30 backdrop-blur-[3px] border border-white/15 rounded-sm px-8 lg:px-12 py-5 lg:py-6 w-full max-w-7xl">
+                <div className="flex items-center gap-6 lg:gap-10">
+                  <div className="flex-1 text-white">
+                    <p className="text-sm uppercase tracking-[0.2em] text-white/80 mb-2">Men's Collection</p>
+                    <h3 className="text-2xl lg:text-4xl font-bold mb-2 leading-tight drop-shadow-md">
+                      Built to Move. Made to Stand Out.
+                    </h3>
+                    <p className="text-base lg:text-lg text-white/90 drop-shadow-sm">
+                      UPF 50, 4-way stretch, quick-dry — engineered for the modern man, on and off the course.
+                    </p>
+                  </div>
+                  <Link
+                    to="/men"
+                    className="shrink-0 inline-block bg-white text-[#1a2026] px-6 lg:px-8 py-3 font-bold text-xs uppercase tracking-wider hover:bg-gray-200 transition-colors whitespace-nowrap"
+                  >
+                    Shop Men's
+                  </Link>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm p-5 border border-white/10 hover:border-white/30 transition-colors duration-300">
-                  <p className="text-2xl font-bold">Free</p>
-                  <p className="text-xs text-white/60 mt-1">Shipping ₹2,000+</p>
+                {/* Stats row inside the same card — compact */}
+                <div className="mt-3 pt-3 border-t border-white/15 grid grid-cols-4 gap-2 text-white">
+                  <div className="px-3 py-1 border-l border-white/15 first:border-l-0">
+                    <p className="text-lg lg:text-xl font-bold drop-shadow-md leading-tight">50+</p>
+                    <p className="text-xs text-white/80 mt-0.5 drop-shadow-sm">New This Season</p>
+                  </div>
+                  <div className="px-3 py-1 border-l border-white/15">
+                    <p className="text-lg lg:text-xl font-bold drop-shadow-md leading-tight">4-Way</p>
+                    <p className="text-xs text-white/80 mt-0.5 drop-shadow-sm">Stretch</p>
+                  </div>
+                  <div className="px-3 py-1 border-l border-white/15">
+                    <p className="text-lg lg:text-xl font-bold drop-shadow-md leading-tight">UPF 50</p>
+                    <p className="text-xs text-white/80 mt-0.5 drop-shadow-sm">Sun Shield</p>
+                  </div>
+                  <div className="px-3 py-1 border-l border-white/15">
+                    <p className="text-lg lg:text-xl font-bold drop-shadow-md leading-tight">Free</p>
+                    <p className="text-xs text-white/80 mt-0.5 drop-shadow-sm">Shipping ₹2,000+</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -308,7 +364,7 @@ function MensCollectionSection() {
           <div className="text-center mt-8 md:mt-12">
             <Link
               to="/men"
-              className="inline-block border-2 border-[#1a2026] text-[#1a2026] px-10 py-3 font-bold text-sm hover:bg-[#1a2026] hover:text-white transition-colors"
+              className="inline-block border-2 border-[#1a2026] text-[#1a2026] px-8 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-[#1a2026] hover:text-white transition-colors"
             >
               View All Men's
             </Link>
@@ -335,54 +391,36 @@ function FabricTechnologySection() {
           </p>
         </div>
 
-        {/* Mobile: 2-column grid with cards */}
-        <div className="grid grid-cols-2 gap-3 md:hidden">
+        {/* Mobile: 2-column minimal grid */}
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:hidden">
           {fabricFeatures.map(({ Icon, label, desc }) => (
-            <div key={label} className="bg-white/[0.06] border border-white/10 rounded-sm p-4 flex flex-col items-center text-center">
-              <div className="w-12 h-12 mb-2.5 text-white">
+            <div key={label} className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 mb-3 text-white">
                 <Icon className="w-12 h-12" />
               </div>
               <p className="text-xs font-semibold text-white mb-1">{label}</p>
-              <p className="text-[10px] leading-snug text-white/50">{desc}</p>
+              <p className="text-[10px] leading-snug text-white/55">{desc}</p>
             </div>
           ))}
         </div>
 
-        {/* Desktop: horizontal strip with dividers */}
-        <div className="hidden md:grid md:grid-cols-4 lg:grid-cols-8 gap-0">
+        {/* Desktop: 4-per-row minimal grid with subtle dividers */}
+        <div className="hidden md:grid md:grid-cols-4 gap-y-10 lg:gap-y-12 mt-2">
           {fabricFeatures.map(({ Icon, label, desc }, i) => (
             <div
               key={label}
-              className={`flex flex-col items-center text-center px-4 lg:px-5 py-6 ${
-                i > 0 ? 'border-l border-white/10' : ''
+              className={`flex flex-col items-center text-center px-6 ${
+                i % 4 !== 0 ? 'md:border-l md:border-white/10' : ''
               }`}
             >
-              <div className="w-14 h-14 mb-3 text-white">
-                <Icon className="w-14 h-14" />
+              <div className="w-14 h-14 lg:w-16 lg:h-16 mb-4 text-white">
+                <Icon className="w-14 h-14 lg:w-16 lg:h-16" />
               </div>
-              <p className="text-xs font-semibold text-white mb-1.5">{label}</p>
-              <p className="text-[10px] leading-snug text-white/45">{desc}</p>
+              <p className="text-sm lg:text-base font-semibold text-white mb-1.5">{label}</p>
+              <p className="text-xs leading-snug text-white/55">{desc}</p>
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function BottomBanner() {
-  return (
-    <section className="relative w-full">
-      <div className="relative aspect-[390/400] md:aspect-[1024/500] lg:aspect-[1920/600]">
-        <img
-          src={imgBannerImage3}
-          alt="Explore More"
-          className="w-full h-full object-cover"
-          loading="lazy"
-          decoding="async"
-          width={1920}
-          height={600}
-        />
       </div>
     </section>
   );
@@ -403,9 +441,6 @@ export default function Home() {
       </LazySection>
       <LazySection fallbackHeight="100px">
         <FabricTechnologySection />
-      </LazySection>
-      <LazySection fallbackHeight="400px">
-        <BottomBanner />
       </LazySection>
     </>
   );

@@ -2,6 +2,7 @@
 import imgBannerImage from '../../assets/banners/homepage-hero-banner.webp';
 import imgBannerImage1 from '../../assets/banners/homepage-secondary-banner.webp';
 import imgBannerImage3 from '../../assets/banners/homepage-bottom-banner.webp';
+import imgMensBanner from '../../assets/banners/homepage-mens-banner.webp';
 // Category images
 import imgShopMensOuterwear from '../../assets/categories/shop-mens-outerwear.webp';
 import imgShopMensPolos from '../../assets/categories/shop-mens-polos.webp';
@@ -9,10 +10,6 @@ import imgShopMensPants from '../../assets/categories/shop-mens-pants.webp';
 import imgShopMensFootwear from '../../assets/categories/shop-mens-footwear.webp';
 import imgShopMensTees from '../../assets/categories/shop-mens-tees.webp';
 // New arrival product images
-import imgHeaterProPolo from '../../assets/new-arrivals/heater-pro-polo.webp';
-import imgClubsideBomber from '../../assets/new-arrivals/clubside-bomber.webp';
-import imgCloudCrewTee from '../../assets/new-arrivals/cloud-crew-tee.webp';
-import imgPerformanceQuarterZip from '../../assets/new-arrivals/performance-quarter-zip.webp';
 // Women's product images
 import imgMoveknitDress1 from '../../assets/womens/moveknit-dress-1.webp';
 import imgMoveknitDress2 from '../../assets/womens/moveknit-dress-2.webp';
@@ -240,68 +237,6 @@ export interface Category {
   image: string;
 }
 
-export const newArrivals: Product[] = [
-  {
-    id: 101,
-    name: 'Heater Pro Color Block Polo',
-    price: '₹1,899',
-    image: imgHeaterProPolo,
-    colors: ['#d8ccbb', '#6478c6', '#1d3f43'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Engineered with 4-way stretch and moisture-wicking fabric, the Heater Pro Color Block Polo keeps you cool and comfortable from the first tee to the 19th hole.',
-    productType: 'Polo',
-    sleeve: 'Half Sleeve',
-    fabric: '4-Way Stretch Performance Knit',
-    fit: 'Tailored Fit',
-    care: 'Machine Wash Cold',
-    origin: 'Made in India',
-  },
-  {
-    id: 102,
-    name: 'Clubside Varsity Bomber',
-    price: '₹3,999',
-    image: imgClubsideBomber,
-    colors: ['#333b42'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'A modern take on the classic varsity bomber. Premium materials and a tailored fit make this jacket the perfect layer for any occasion.',
-    productType: 'Bomber Jacket',
-    sleeve: 'Long Sleeve',
-    fabric: 'Wool Blend with Satin Lining',
-    fit: 'Tailored Fit',
-    care: 'Dry Clean Only',
-    origin: 'Made in India',
-  },
-  {
-    id: 103,
-    name: 'Cloud Crew Long Sleeve T-Shirt',
-    price: '₹1,199',
-    image: imgCloudCrewTee,
-    colors: ['#333b42', '#dcdbd9', '#1d3f43'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Ultra-soft cloud fabric meets a relaxed crew neck silhouette. The perfect everyday layer that moves with you.',
-    productType: 'T-Shirt',
-    sleeve: 'Long Sleeve',
-    fabric: 'Cloud Soft Cotton',
-    fit: 'Relaxed Fit',
-    care: 'Machine Wash Cold',
-    origin: 'Made in India',
-  },
-  {
-    id: 104,
-    name: 'Performance Quarter Zip',
-    price: '₹1,499',
-    image: imgPerformanceQuarterZip,
-    colors: ['#525449', '#bccbcf'],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    description: 'Lightweight performance fabric with UPF 50 sun protection. A versatile quarter zip built for layering on and off the course.',
-    productType: 'Quarter Zip',
-    sleeve: 'Long Sleeve',
-    fabric: 'Lightweight Performance Knit, UPF 50',
-    fit: 'Regular Fit',
-    care: 'Machine Wash Cold',
-    origin: 'Made in India',
-  },
-];
 
 const WOMENS_DEFAULTS = {
   fit: 'Regular Fit',
@@ -744,7 +679,15 @@ export const menFeatured: Product[] = [
   menProducts[4],  // Sky Landscape Polo
 ];
 
-export const allProducts: Product[] = [...newArrivals, ...womenProducts, ...menProducts];
+// New Arrivals — placeholder picks from men's collection (uniform white studio backdrop)
+export const newArrivals: Product[] = [
+  menProducts[7],  // Black Neon Accent Polo (black + neon)
+  menProducts[4],  // Sky Landscape Polo (light blue)
+  menProducts[5],  // Green Stripe Polo (dark green)
+  menProducts[8],  // Navy Tipped Polo (navy + orange)
+];
+
+export const allProducts: Product[] = [...womenProducts, ...menProducts];
 
 export function getProductById(id: number): Product | undefined {
   return allProducts.find(p => p.id === id);
@@ -776,6 +719,7 @@ export {
   imgBannerImage,
   imgBannerImage1,
   imgBannerImage3,
+  imgMensBanner,
   imgIcon,
   imgYourPrivacyChoicesIcon,
 };
