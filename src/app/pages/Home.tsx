@@ -36,37 +36,48 @@ function LazySection({ children, fallbackHeight = '200px' }: { children: React.R
 function HeroBanner() {
   return (
     <section className="relative w-full">
-      <div className="relative aspect-[390/520] md:aspect-[1024/600] lg:aspect-[1920/700]">
+      {/* Mobile-only image strip (matches desktop framing, no people cropped) */}
+      <div className="relative aspect-[1920/816] md:hidden">
         <img
           src={imgBannerImage}
           alt="Ivy Crew — Premium performance apparel for men and women"
-          className="w-full h-full object-cover object-[30%_center] md:object-center"
+          className="w-full h-full object-cover object-center"
+          sizes="100vw"
+          width={1920}
+          height={816}
+          fetchPriority="high"
+        />
+      </div>
+
+      {/* Mobile-only text section under the image */}
+      <div className="md:hidden bg-[#1a2026] text-white text-center px-5 py-6">
+        <h1 className="text-2xl font-bold mb-2 leading-tight">
+          Performance,&nbsp;Tailored.
+        </h1>
+        <p className="text-sm mb-4 text-white/80 leading-snug">
+          Premium apparel engineered to move with you.
+        </p>
+        <div className="flex gap-3">
+          <Link to="/men" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-colors text-center">
+            Shop Men's
+          </Link>
+          <Link to="/women" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-colors text-center">
+            Shop Women's
+          </Link>
+        </div>
+      </div>
+
+      {/* Desktop — image with overlay (unchanged) */}
+      <div className="relative hidden md:block md:aspect-[1024/600] lg:aspect-[1920/700]">
+        <img
+          src={imgBannerImage}
+          alt="Ivy Crew — Premium performance apparel for men and women"
+          className="w-full h-full object-cover object-center"
           sizes="100vw"
           width={1920}
           height={700}
           fetchPriority="high"
         />
-        {/* Mobile — pinned to bottom with gradient fade */}
-        <div className="absolute inset-x-0 bottom-0 md:hidden">
-          <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent pt-12 pb-4 px-4">
-            <div className="text-center text-white bg-black/40 backdrop-blur-[2px] border border-white/15 rounded-sm px-5 py-4">
-              <h1 className="text-xl font-bold mb-1.5 leading-tight drop-shadow-md">
-                Performance,&nbsp;Tailored.
-              </h1>
-              <p className="text-xs mb-3.5 text-white/90 leading-snug drop-shadow-sm">
-                Premium apparel engineered to move with you.
-              </p>
-              <div className="flex gap-2.5">
-                <Link to="/men" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs hover:bg-gray-100 transition-colors text-center">
-                  Shop Men's
-                </Link>
-                <Link to="/women" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs hover:bg-gray-100 transition-colors text-center">
-                  Shop Women's
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Desktop — centered right */}
         <div className="absolute inset-0 hidden md:flex items-center justify-end">
@@ -171,38 +182,48 @@ function WomensCollectionSection() {
   return (
     <section className="py-8 md:py-12 lg:py-16 bg-white">
       <div className="max-w-[1920px] mx-auto">
-        {/* Banner — edge-to-edge on mobile, padded on desktop */}
-        <div className="relative mb-6 md:mb-12 md:mx-8">
-          <div className="relative aspect-[390/440] md:aspect-[1024/600] lg:aspect-[1920/780]">
+        {/* Mobile-only: image strip (no people cropped) */}
+        <div className="md:hidden">
+          <div className="relative aspect-[1920/816]">
             <img
               src={imgBannerImage1}
               alt="Women's Collection"
-              className="w-full h-full object-cover object-left md:object-center"
+              className="w-full h-full object-cover object-center"
+              loading="lazy"
+              decoding="async"
+              width={1920}
+              height={816}
+            />
+          </div>
+          <div className="bg-[#1a2026] text-white px-5 py-6">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-white/70 mb-1.5">Women's Collection</p>
+            <h3 className="text-xl font-bold mb-2 leading-tight">
+              Move with Confidence.
+            </h3>
+            <p className="text-xs text-white/80 mb-4 leading-snug">
+              Performance essentials cut for the way you live.
+            </p>
+            <Link
+              to="/women"
+              className="inline-block bg-white text-[#1a2026] px-6 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-gray-200 transition-colors"
+            >
+              Shop Women's
+            </Link>
+          </div>
+        </div>
+
+        {/* Desktop banner — image with overlay (unchanged) */}
+        <div className="relative mb-6 md:mb-12 md:mx-8 hidden md:block">
+          <div className="relative md:aspect-[1024/600] lg:aspect-[1920/780]">
+            <img
+              src={imgBannerImage1}
+              alt="Women's Collection"
+              className="w-full h-full object-cover object-center"
               loading="lazy"
               decoding="async"
               width={1920}
               height={780}
             />
-            {/* Mobile — pinned to bottom, gradient fade + glass card */}
-            <div className="absolute inset-x-0 bottom-0 md:hidden">
-              <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent pt-12 pb-4 px-4">
-                <div className="text-white bg-black/40 backdrop-blur-[2px] border border-white/15 rounded-sm px-5 py-4">
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/80 mb-1.5">Women's Collection</p>
-                  <h3 className="text-lg font-bold mb-1.5 leading-tight drop-shadow-md">
-                    Move with Confidence.
-                  </h3>
-                  <p className="text-xs text-white/90 mb-3 leading-snug drop-shadow-sm">
-                    Performance essentials cut for the way you live.
-                  </p>
-                  <Link
-                    to="/women"
-                    className="inline-block bg-white text-[#1a2026] px-6 py-2.5 font-bold text-xs hover:bg-gray-200 transition-colors"
-                  >
-                    Shop Women's
-                  </Link>
-                </div>
-              </div>
-            </div>
 
             {/* Desktop — wide unified glass card with text + stats row (mirrors men's) */}
             <div className="absolute inset-x-0 bottom-0 hidden md:flex justify-center pb-6 lg:pb-10 px-4 lg:px-8">
@@ -277,9 +298,39 @@ function MensCollectionSection() {
   return (
     <section className="py-8 md:py-12 lg:py-16 bg-white">
       <div className="max-w-[1920px] mx-auto">
-        {/* Banner — edge-to-edge on mobile, padded on desktop */}
-        <div className="relative mb-6 md:mb-12 md:mx-8">
-          <div className="relative aspect-[390/440] md:aspect-[1024/600] lg:aspect-[1920/780]">
+        {/* Mobile-only: image strip (no people cropped) */}
+        <div className="md:hidden">
+          <div className="relative aspect-[1920/816]">
+            <img
+              src={imgMensBanner}
+              alt="Men's Collection"
+              className="w-full h-full object-cover object-center"
+              loading="lazy"
+              decoding="async"
+              width={1920}
+              height={816}
+            />
+          </div>
+          <div className="bg-[#1a2026] text-white px-5 py-6">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-white/70 mb-1.5">Men's Collection</p>
+            <h3 className="text-xl font-bold mb-2 leading-tight">
+              Built to Move. Made to Stand Out.
+            </h3>
+            <p className="text-xs text-white/80 mb-4 leading-snug">
+              UPF 50, 4-way stretch, quick-dry — engineered for the modern man.
+            </p>
+            <Link
+              to="/men"
+              className="inline-block bg-white text-[#1a2026] px-6 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-gray-200 transition-colors"
+            >
+              Shop Men's
+            </Link>
+          </div>
+        </div>
+
+        {/* Desktop banner — image with overlay (unchanged) */}
+        <div className="relative mb-6 md:mb-12 md:mx-8 hidden md:block">
+          <div className="relative md:aspect-[1024/600] lg:aspect-[1920/780]">
             <img
               src={imgMensBanner}
               alt="Men's Collection"
@@ -289,26 +340,6 @@ function MensCollectionSection() {
               width={1920}
               height={700}
             />
-            {/* Mobile — pinned to bottom, gradient fade + glass card */}
-            <div className="absolute inset-x-0 bottom-0 md:hidden">
-              <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent pt-12 pb-4 px-4">
-                <div className="text-white bg-black/40 backdrop-blur-[2px] border border-white/15 rounded-sm px-5 py-4">
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/80 mb-1.5">Men's Collection</p>
-                  <h3 className="text-lg font-bold mb-1.5 leading-tight drop-shadow-md">
-                    Built to Move. Made to Stand Out.
-                  </h3>
-                  <p className="text-xs text-white/90 mb-3 leading-snug drop-shadow-sm">
-                    UPF 50, 4-way stretch, quick-dry — engineered for the modern man.
-                  </p>
-                  <Link
-                    to="/men"
-                    className="inline-block bg-white text-[#1a2026] px-6 py-2.5 font-bold text-xs hover:bg-gray-200 transition-colors"
-                  >
-                    Shop Men's
-                  </Link>
-                </div>
-              </div>
-            </div>
 
             {/* Desktop — wide unified glass card with text + stats row */}
             <div className="absolute inset-x-0 bottom-0 hidden md:flex justify-center pb-6 lg:pb-10 px-4 lg:px-8">
