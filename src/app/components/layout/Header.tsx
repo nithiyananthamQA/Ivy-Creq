@@ -3,7 +3,7 @@ import { Menu, User, ShoppingCart, Heart, X } from 'lucide-react';
 import { Link } from 'react-router';
 import { useFavorites } from '../../context/FavoritesContext';
 import { useCart } from '../../context/CartContext';
-import BlackLogo from '../../../assets/logo-black.svg';
+import BlackLogo from '../../../assets/logo-ivy-crew-transparent.webp';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,7 +19,7 @@ export default function Header() {
 
       {/* Main header */}
       <div className="max-w-[1920px] mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Mobile menu button */}
           <button
             className="lg:hidden p-2"
@@ -30,8 +30,8 @@ export default function Header() {
           </button>
 
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
-            <img src={BlackLogo} alt="Ivy Crew" className="h-8 lg:h-10 w-auto" />
+          <Link to="/" className="flex-shrink-0 flex items-center h-full">
+            <img src={BlackLogo} alt="Ivy Crew" className="h-14 lg:h-32 w-auto" width={128} height={128} />
           </Link>
 
           {/* Desktop Navigation */}
@@ -73,7 +73,7 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 bg-white z-50">
           <div className="flex justify-between items-center p-4 border-b">
-            <img src={BlackLogo} alt="Ivy Crew" className="h-8 w-auto" />
+            <img src={BlackLogo} alt="Ivy Crew" className="h-10 w-auto" width={40} height={40} />
             <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu">
               <X className="w-6 h-6" />
             </button>

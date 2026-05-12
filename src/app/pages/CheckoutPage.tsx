@@ -111,7 +111,7 @@ export default function CheckoutPage() {
                       <img
                         src={item.product.image1 || item.product.image}
                         alt={item.product.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                         width={56}
                         height={70}
                       />

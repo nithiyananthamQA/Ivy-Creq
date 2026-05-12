@@ -671,20 +671,21 @@ export const categories: Category[] = [
 ];
 
 // Featured men's products for homepage (curated selection — all white background)
+// Order avoids placing similar hero-shot poses next to each other (prevents AI-generated look)
 export const menFeatured: Product[] = [
-  menProducts[0],  // White Abstract Polo (BEST SELLER)
-  menProducts[2],  // Blue Floral Polo (NEW)
-  menProducts[5],  // Green Stripe Polo
-  menProducts[8],  // Navy Tipped Polo (BEST SELLER)
-  menProducts[4],  // Sky Landscape Polo
+  menProducts[0],  // White Abstract — hand at collar pose
+  menProducts[8],  // Navy Tipped — straight-on, orange accent
+  menProducts[2],  // Blue Floral — outdoor scene (pose break)
+  menProducts[5],  // Green Stripe — head-turn pose
+  menProducts[4],  // Sky Landscape — straight-on, light blue
 ];
 
-// New Arrivals — placeholder picks from men's collection (uniform white studio backdrop)
+// New Arrivals — placeholder picks from men's collection (interleaved poses)
 export const newArrivals: Product[] = [
-  menProducts[7],  // Black Neon Accent Polo (black + neon)
-  menProducts[4],  // Sky Landscape Polo (light blue)
-  menProducts[5],  // Green Stripe Polo (dark green)
-  menProducts[8],  // Navy Tipped Polo (navy + orange)
+  menProducts[6],  // Black Geometric — head tilt
+  menProducts[4],  // Sky Landscape — straight-on, light
+  menProducts[5],  // Green Stripe — head turn
+  menProducts[7],  // Black Neon — straight-on, dark + neon
 ];
 
 export const allProducts: Product[] = [...womenProducts, ...menProducts];

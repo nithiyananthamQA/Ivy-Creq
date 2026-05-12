@@ -25,7 +25,7 @@ export default function ProductCard({ product, hoverable = true, loading = 'lazy
       onMouseEnter={() => { if (hoverable) { setIsHovered(true); } }}
       onMouseLeave={() => hoverable && setIsHovered(false)}
     >
-      <div className="relative aspect-[335/421.59] overflow-hidden">
+      <div className="relative aspect-[335/421.59] overflow-hidden bg-white">
         {product.badge && (
           <div className="absolute top-0 left-0 bg-black text-white text-[10px] font-medium px-2.5 py-1 tracking-[0.2px] z-10">
             {product.badge}
@@ -34,7 +34,7 @@ export default function ProductCard({ product, hoverable = true, loading = 'lazy
         <img
           src={product.thumb || product.image1 || product.image}
           alt={product.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           loading={loading}
           decoding={loading === 'eager' ? 'sync' : 'async'}
           fetchPriority={loading === 'eager' ? 'high' : undefined}
@@ -45,7 +45,7 @@ export default function ProductCard({ product, hoverable = true, loading = 'lazy
           <img
             src={product.image2}
             alt={product.name}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 hidden md:block ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 hidden md:block ${isHovered ? 'opacity-100' : 'opacity-0'}`}
             loading="lazy"
             decoding="async"
             width={335}
