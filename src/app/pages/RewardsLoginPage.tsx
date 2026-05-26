@@ -151,9 +151,10 @@ export default function RewardsLoginPage() {
               <Link to="/new-arrivals" className="block w-full bg-black text-white py-3 font-bold text-sm hover:bg-gray-900">
                 Shop Men's New Arrivals
               </Link>
-              <Link to="/women" className="block w-full bg-black text-white py-3 font-bold text-sm hover:bg-gray-900">
+              {/* Women's collection hidden for launch — re-enable when stocked */}
+              {/* <Link to="/women" className="block w-full bg-black text-white py-3 font-bold text-sm hover:bg-gray-900">
                 Shop Women's New Arrivals
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

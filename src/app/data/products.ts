@@ -660,7 +660,9 @@ const menTshirts: Product[] = Array.from({ length: 77 }, (_, i) => {
   };
 });
 
-export const menProducts: Product[] = [...menPolos, ...menTshirts];
+// Polos hidden for launch — restore `[...menPolos, ...menTshirts]` to re-enable.
+// Data for menPolos / menPolosBase is kept in this file untouched.
+export const menProducts: Product[] = [...menTshirts];
 
 export const categories: Category[] = [
   { name: "Shop Men's Outerwear", image: imgShopMensOuterwear },
@@ -670,22 +672,22 @@ export const categories: Category[] = [
   { name: "Shop Men's Tees", image: imgShopMensTees },
 ];
 
-// Featured men's products for homepage (curated selection — all white background)
-// Order avoids placing similar hero-shot poses next to each other (prevents AI-generated look)
+// Featured men's products for homepage — picks from the T-shirt collection.
+// Polos hidden for launch; when restored, revisit these picks (originally curated polos).
 export const menFeatured: Product[] = [
-  menProducts[0],  // White Abstract — hand at collar pose
-  menProducts[8],  // Navy Tipped — straight-on, orange accent
-  menProducts[2],  // Blue Floral — outdoor scene (pose break)
-  menProducts[5],  // Green Stripe — head-turn pose
-  menProducts[4],  // Sky Landscape — straight-on, light blue
+  menProducts[0],
+  menProducts[8],
+  menProducts[2],
+  menProducts[5],
+  menProducts[4],
 ];
 
-// New Arrivals — placeholder picks from men's collection (interleaved poses)
+// New Arrivals — placeholder picks from men's T-shirt collection.
 export const newArrivals: Product[] = [
-  menProducts[6],  // Black Geometric — head tilt
-  menProducts[4],  // Sky Landscape — straight-on, light
-  menProducts[5],  // Green Stripe — head turn
-  menProducts[7],  // Black Neon — straight-on, dark + neon
+  menProducts[6],
+  menProducts[4],
+  menProducts[5],
+  menProducts[7],
 ];
 
 export const allProducts: Product[] = [...womenProducts, ...menProducts];

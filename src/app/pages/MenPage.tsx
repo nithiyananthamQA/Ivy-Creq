@@ -8,13 +8,10 @@ const PAGE_SIZE = 16;
 
 type Filter = 'all' | MenCategory;
 
+// Polos / Pants / Outerwear / Footwear hidden for launch — re-enable when stocked
 const FILTER_OPTIONS: { value: Filter; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'polos', label: 'Polos' },
   { value: 'tees', label: 'Tees' },
-  { value: 'pants', label: 'Pants' },
-  { value: 'outerwear', label: 'Outerwear' },
-  { value: 'footwear', label: 'Footwear' },
 ];
 
 const FILTER_LABEL: Record<Filter, string> = {
@@ -67,7 +64,7 @@ export default function MenPage() {
     <>
       <SEOHead
         title="Men's Collection"
-        description="Shop men's premium polos, pants, outerwear, tees, and footwear at Ivy Crew. Built for comfort and style on and off the course."
+        description="Shop men's premium T-shirts at Ivy Crew. Soft, breathable fabrics built for comfort and everyday style."
       />
 
       {/* Hero — Bold typographic split */}

@@ -1,12 +1,12 @@
 import ProductCard from '../components/ProductCard';
 import SEOHead from '../components/SEOHead';
-import { menProducts, womenProducts, newArrivals } from '../data/products';
+import { menProducts, newArrivals } from '../data/products';
 import type { Product } from '../data/products';
 
+// Women's collection hidden for launch — add `...womenProducts.slice(0, 3).map(...)` back when re-enabled
 const bestSellers: Product[] = [
   ...menProducts.filter(p => p.badge === 'BEST SELLER'),
   ...menProducts.filter(p => !p.badge).slice(0, 2).map(p => ({ ...p, badge: 'BEST SELLER' })),
-  ...womenProducts.slice(0, 3).map(p => ({ ...p, badge: 'BEST SELLER' })),
   ...newArrivals.slice(0, 2).map(p => ({ ...p, badge: 'BEST SELLER' })),
 ];
 
@@ -15,7 +15,7 @@ export default function BestSellersPage() {
     <>
       <SEOHead
         title="Best Sellers"
-        description="Shop Ivy Crew's best selling men's and women's apparel. Our most popular polos, pants, outerwear, and more."
+        description="Shop Ivy Crew's best selling men's apparel. Our most popular T-shirts and everyday essentials."
       />
 
       {/* Hero */}

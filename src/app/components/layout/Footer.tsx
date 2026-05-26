@@ -90,7 +90,8 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link to="/" className="hover:underline">Home</Link></li>
               <li><Link to="/men" className="hover:underline">Men</Link></li>
-              <li><Link to="/women" className="hover:underline">Women</Link></li>
+              {/* Women's collection hidden for launch — re-enable when stocked */}
+              {/* <li><Link to="/women" className="hover:underline">Women</Link></li> */}
               <li><Link to="/sale" className="hover:underline">Sale</Link></li>
               <li><Link to="/new-arrivals" className="hover:underline">New Arrivals</Link></li>
             </ul>

@@ -45,7 +45,7 @@ const getMockResponse = (userMessage: string): string => {
   }
   
   if (message.includes('men') || message.includes("men's")) {
-    return "Check out our men's collection! We have everything from performance polos to casual wear, designed with style and comfort in mind.";
+    return "Check out our men's collection! Our T-shirt range is designed with style and comfort in mind — soft fabrics, modern fits, and everyday versatility.";
   }
   
   if (message.includes('sale') || message.includes('discount') || message.includes('deal')) {

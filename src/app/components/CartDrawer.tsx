@@ -67,13 +67,14 @@ export default function CartDrawer() {
                   >
                     Shop Men's New Arrivals
                   </Link>
-                  <Link
+                  {/* Women's collection hidden for launch — re-enable when stocked */}
+                  {/* <Link
                     to="/women"
                     onClick={onClose}
                     className="block bg-black text-white px-[16px] py-[11px] font-bold text-[14px] text-center hover:bg-gray-900 transition-colors"
                   >
                     Shop Women's New Arrivals
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>

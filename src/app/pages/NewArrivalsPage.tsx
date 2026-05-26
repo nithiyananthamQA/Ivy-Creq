@@ -1,12 +1,12 @@
 import ProductCard from '../components/ProductCard';
 import SEOHead from '../components/SEOHead';
-import { newArrivals, menProducts, womenProducts } from '../data/products';
+import { newArrivals, menProducts } from '../data/products';
 import type { Product } from '../data/products';
 
+// Women's collection hidden for launch — add `...womenProducts.filter(...)` back when re-enabled
 const allNewArrivals: Product[] = [
   ...newArrivals.map(p => ({ ...p, franchise: "MEN'S" as const })),
   ...menProducts.filter(p => p.badge === 'NEW'),
-  ...womenProducts.filter(p => p.badge === 'NEW'),
 ];
 
 export default function NewArrivalsPage() {
@@ -14,14 +14,14 @@ export default function NewArrivalsPage() {
     <>
       <SEOHead
         title="New Arrivals"
-        description="Discover the latest arrivals at Ivy Crew. Shop new men's and women's polos, pants, outerwear, dresses, and accessories."
+        description="Discover the latest arrivals at Ivy Crew. Shop new men's T-shirts and everyday essentials."
       />
 
       {/* Hero */}
       <section className="bg-[#f5f7f8] py-12 md:py-16 lg:py-20 text-center px-4">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a2026] mb-4">New Arrivals</h1>
         <p className="text-base md:text-lg text-[#333b42] max-w-2xl mx-auto">
-          Fresh styles just landed. Be the first to shop our newest collections for men and women.
+          Fresh styles just landed. Be the first to shop our newest collection for men.
         </p>
       </section>
 

@@ -61,9 +61,10 @@ function HeroBanner() {
           <Link to="/men" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-colors text-center">
             Shop Men's
           </Link>
-          <Link to="/women" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-colors text-center">
+          {/* Women's collection hidden for launch — re-enable when stocked */}
+          {/* <Link to="/women" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-colors text-center">
             Shop Women's
-          </Link>
+          </Link> */}
         </div>
       </div>
 
@@ -93,9 +94,10 @@ function HeroBanner() {
                 <Link to="/men" className="bg-white text-black px-6 lg:px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center whitespace-nowrap">
                   Shop Men's Collection
                 </Link>
-                <Link to="/women" className="bg-white text-black px-6 lg:px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center whitespace-nowrap">
+                {/* Women's collection hidden for launch — re-enable when stocked */}
+                {/* <Link to="/women" className="bg-white text-black px-6 lg:px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center whitespace-nowrap">
                   Shop Women's Collection
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -418,7 +420,7 @@ function FabricTechnologySection() {
             Engineered for Performance
           </h2>
           <p className="text-sm md:text-base text-white/60 max-w-lg mx-auto">
-            Every Ivy Crew polo is crafted with advanced fabric technology — so you look sharp and feel comfortable, all day long.
+            Every Ivy Crew piece is crafted with advanced fabric technology — so you look sharp and feel comfortable, all day long.
           </p>
         </div>
 
@@ -467,9 +469,12 @@ export default function Home() {
       <HeroBanner />
       <NewArrivalsSection />
       <MensCollectionSection />
-      <LazySection fallbackHeight="600px">
-        <WomensCollectionSection />
-      </LazySection>
+      {/* Women's collection hidden for launch — swap `false` to `true` to re-enable */}
+      {false && (
+        <LazySection fallbackHeight="600px">
+          <WomensCollectionSection />
+        </LazySection>
+      )}
       <LazySection fallbackHeight="100px">
         <FabricTechnologySection />
       </LazySection>

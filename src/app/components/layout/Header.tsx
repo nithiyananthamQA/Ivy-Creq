@@ -38,7 +38,8 @@ export default function Header() {
           <nav className="hidden lg:flex items-center space-x-8" aria-label="Main navigation">
             <Link to="/" className="text-[#333b42] hover:text-black">Home</Link>
             <Link to="/men" className="text-[#333b42] hover:text-black">Men</Link>
-            <Link to="/women" className="text-[#333b42] hover:text-black">Women</Link>
+            {/* Women's collection hidden for launch — re-enable when stocked */}
+            {/* <Link to="/women" className="text-[#333b42] hover:text-black">Women</Link> */}
             <Link to="/sale" className="text-[#333b42] hover:text-black">Sale</Link>
             <Link to="/new-arrivals" className="text-[#333b42] hover:text-black">New Arrivals</Link>
             <Link to="/best-sellers" className="text-[#333b42] hover:text-black">Best Sellers</Link>
@@ -81,7 +82,8 @@ export default function Header() {
           <nav className="flex flex-col p-4 space-y-4" aria-label="Mobile navigation">
             <Link to="/" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Home</Link>
             <Link to="/men" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Men</Link>
-            <Link to="/women" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Women</Link>
+            {/* Women's collection hidden for launch — re-enable when stocked */}
+            {/* <Link to="/women" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Women</Link> */}
             <Link to="/sale" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Sale</Link>
             <Link to="/new-arrivals" className="text-lg" onClick={() => setMobileMenuOpen(false)}>New Arrivals</Link>
             <Link to="/best-sellers" className="text-lg" onClick={() => setMobileMenuOpen(false)}>Best Sellers</Link>

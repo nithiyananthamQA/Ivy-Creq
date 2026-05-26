@@ -1,11 +1,11 @@
 import ProductCard from '../components/ProductCard';
 import SEOHead from '../components/SEOHead';
-import { menProducts, womenProducts } from '../data/products';
+import { menProducts } from '../data/products';
 import type { Product } from '../data/products';
 
+// Women's collection hidden for launch — add `...womenProducts.map(...)` back when re-enabled
 const saleProducts: Product[] = [
   ...menProducts.map(p => ({ ...p, badge: 'SALE' as const })),
-  ...womenProducts.map(p => ({ ...p, badge: 'SALE' as const })),
 ];
 
 export default function SalePage() {
@@ -13,14 +13,14 @@ export default function SalePage() {
     <>
       <SEOHead
         title="Sale"
-        description="Shop sale items at Ivy Crew. Find great deals on premium men's and women's apparel, polos, pants, and more."
+        description="Shop sale items at Ivy Crew. Find great deals on premium men's T-shirts and everyday essentials."
       />
 
       {/* Hero */}
       <section className="bg-black text-white py-12 md:py-16 lg:py-20 text-center px-4">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Sale</h1>
         <p className="text-base md:text-lg max-w-2xl mx-auto">
-          Great styles at great prices. Shop our latest markdowns on men's and women's apparel.
+          Great styles at great prices. Shop our latest markdowns on men's apparel.
         </p>
       </section>
 

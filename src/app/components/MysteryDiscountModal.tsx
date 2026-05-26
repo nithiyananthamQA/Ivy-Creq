@@ -43,13 +43,14 @@ export default function MysteryDiscountModal({ isOpen, onClose }: MysteryDiscoun
               >
                 Men
               </Link>
-              <Link
+              {/* Women's collection hidden for launch — re-enable when stocked */}
+              {/* <Link
                 to="/women"
                 onClick={onClose}
                 className="block w-full bg-black text-white py-3 px-4 font-bold text-sm hover:bg-gray-900 transition-colors text-center"
               >
                 Women
-              </Link>
+              </Link> */}
               <Link
                 to="/new-arrivals"
                 onClick={onClose}
