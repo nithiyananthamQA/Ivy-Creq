@@ -8,7 +8,7 @@ const PAGE_SIZE = 16;
 
 type Filter = 'all' | MenCategory;
 
-// Polos / Pants / Outerwear / Footwear hidden for launch — re-enable when stocked
+// Only Tees are stocked. Add filter entries here when new categories ship.
 const FILTER_OPTIONS: { value: Filter; label: string }[] = [
   { value: 'all', label: 'All' },
   { value: 'tees', label: 'Tees' },
