@@ -10,10 +10,15 @@ import {
   FLAT_SHIPPING_RATE,
   TAX_RATE,
 } from '../context/CartContext';
+import { openRazorpayCheckout, type RazorpaySuccess } from '../lib/razorpay';
+
+const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID as string | undefined;
 
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
   const [submitted, setSubmitted] = useState(false);
+  const [paying, setPaying] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : FLAT_SHIPPING_RATE;
   const tax = subtotal * TAX_RATE;
@@ -23,22 +28,105 @@ export default function CheckoutPage() {
     email: '',
     firstName: '',
     lastName: '',
+    phone: '',
     address: '',
     city: '',
     state: '',
     zip: '',
-    cardNumber: '',
-    expiry: '',
-    cvc: '',
   });
 
   const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm(prev => ({ ...prev, [field]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    clearCart();
-    setSubmitted(true);
+    if (paying) return;
+    setError(null);
+
+    if (!RAZORPAY_KEY_ID) {
+      setError('Payment is not configured. Please contact support.');
+      return;
+    }
+
+    setPaying(true);
+    try {
+      const amountPaise = Math.round(total * 100);
+
+      const createRes = await fetch('/api/razorpay/create-order', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          amount: amountPaise,
+          currency: 'INR',
+          receipt: `ivycrew_${Date.now()}`,
+          notes: {
+            email: form.email,
+            customer: `${form.firstName} ${form.lastName}`.trim(),
+            city: form.city,
+          },
+        }),
+      });
+
+      const rawText = await createRes.text();
+      if (!createRes.ok) {
+        let detail = `HTTP ${createRes.status}`;
+        try {
+          const data = JSON.parse(rawText);
+          if (data?.error) detail = data.error;
+        } catch {
+          // Non-JSON response (e.g. dev server returned an HTML 404).
+          if (rawText.startsWith('<')) detail = `Endpoint /api/razorpay/create-order not reachable (got HTML ${createRes.status}). Run via wrangler pages dev so functions/ runs.`;
+        }
+        throw new Error(detail);
+      }
+      let orderResp: { orderId: string; amount: number; keyId: string };
+      try {
+        orderResp = JSON.parse(rawText);
+      } catch {
+        throw new Error('Order endpoint returned non-JSON response');
+      }
+      const { orderId, amount, keyId } = orderResp;
+
+      await openRazorpayCheckout({
+        amountPaise: amount,
+        orderId,
+        keyId: keyId || RAZORPAY_KEY_ID,
+        prefill: {
+          name: `${form.firstName} ${form.lastName}`.trim(),
+          email: form.email,
+          contact: form.phone,
+        },
+        notes: {
+          address: `${form.address}, ${form.city}, ${form.state} ${form.zip}`,
+        },
+        onSuccess: async (resp: RazorpaySuccess) => {
+          try {
+            const verifyRes = await fetch('/api/razorpay/verify', {
+              method: 'POST',
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify(resp),
+            });
+            const data = await verifyRes.json();
+            if (!verifyRes.ok || !data.ok) {
+              throw new Error(data.error || 'Payment verification failed');
+            }
+            clearCart();
+            setSubmitted(true);
+          } catch (err) {
+            setError(err instanceof Error ? err.message : 'Payment verification failed');
+          } finally {
+            setPaying(false);
+          }
+        },
+        onDismiss: () => {
+          setPaying(false);
+          setError('Payment cancelled. You can try again whenever you’re ready.');
+        },
+      });
+    } catch (err) {
+      setPaying(false);
+      setError(err instanceof Error ? err.message : 'Something went wrong starting payment');
+    }
   };
 
   if (submitted) {
@@ -160,14 +248,24 @@ export default function CheckoutPage() {
                   <span className="w-1 h-4 bg-black inline-block" />
                   Contact
                 </h2>
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  required
-                  value={form.email}
-                  onChange={update('email')}
-                  className={inputClass}
-                />
+                <div className="space-y-3">
+                  <input
+                    type="email"
+                    placeholder="Email address"
+                    required
+                    value={form.email}
+                    onChange={update('email')}
+                    className={inputClass}
+                  />
+                  <input
+                    type="tel"
+                    placeholder="Phone number"
+                    required
+                    value={form.phone}
+                    onChange={update('phone')}
+                    className={inputClass}
+                  />
+                </div>
               </section>
 
               {/* Shipping */}
@@ -232,51 +330,34 @@ export default function CheckoutPage() {
                 </div>
               </section>
 
-              {/* Payment */}
-              <section className="mb-8">
-                <h2 className="text-sm font-bold text-[#1a2026] mb-4 flex items-center gap-2">
+              {/* Payment notice */}
+              <section className="mb-6">
+                <h2 className="text-sm font-bold text-[#1a2026] mb-3 flex items-center gap-2">
                   <span className="w-1 h-4 bg-black inline-block" />
                   Payment
                 </h2>
-                <div className="space-y-3">
-                  <input
-                    type="text"
-                    placeholder="Card number"
-                    required
-                    value={form.cardNumber}
-                    onChange={update('cardNumber')}
-                    className={inputClass}
-                    maxLength={19}
-                  />
-                  <div className="grid grid-cols-2 gap-3">
-                    <input
-                      type="text"
-                      placeholder="MM / YY"
-                      required
-                      value={form.expiry}
-                      onChange={update('expiry')}
-                      className={inputClass}
-                      maxLength={7}
-                    />
-                    <input
-                      type="text"
-                      placeholder="CVC"
-                      required
-                      value={form.cvc}
-                      onChange={update('cvc')}
-                      className={inputClass}
-                      maxLength={4}
-                    />
-                  </div>
+                <div className="border border-[#e5e5e5] bg-[#f9fafb] p-4 text-sm text-[#47515c] flex items-start gap-3">
+                  <Lock className="w-4 h-4 mt-0.5 text-[#1a2026] flex-shrink-0" />
+                  <p>
+                    You’ll be redirected to Razorpay’s secure checkout to complete payment.
+                    We accept UPI, cards, net banking, and wallets.
+                  </p>
                 </div>
               </section>
 
+              {error && (
+                <p className="mb-4 text-sm text-red-600" role="alert">
+                  {error}
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="w-full bg-black text-white py-3.5 px-6 font-bold text-sm hover:bg-gray-900 transition-colors flex items-center justify-center gap-2"
+                disabled={paying}
+                className="w-full bg-black text-white py-3.5 px-6 font-bold text-sm hover:bg-gray-900 transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 <Lock className="w-4 h-4" />
-                Place Order — {formatINR(total)}
+                {paying ? 'Processing…' : `Pay ${formatINR(total)}`}
               </button>
             </form>
           </div>

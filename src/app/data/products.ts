@@ -248,22 +248,18 @@ export const categories: Category[] = [
   { name: "Shop Men's Tees", image: imgShopMensTees },
 ];
 
-// Featured men's products for homepage — picks from the T-shirt collection.
-export const menFeatured: Product[] = [
-  menProducts[0],
-  menProducts[8],
-  menProducts[2],
-  menProducts[5],
-  menProducts[4],
-];
+// Featured men's products for homepage — diverse mix: different models, colours, and poses.
+// Looked up by product id (id = 400 + tshirt number) so picks survive any reordering.
+const featuredIds = [423, 441, 438, 446, 465, 466, 432, 414, 455, 467];
+export const menFeatured: Product[] = featuredIds
+  .map(id => menProducts.find(p => p.id === id))
+  .filter((p): p is Product => p !== undefined);
 
-// New Arrivals — placeholder picks from men's T-shirt collection.
-export const newArrivals: Product[] = [
-  menProducts[6],
-  menProducts[4],
-  menProducts[5],
-  menProducts[7],
-];
+// New Arrivals — curated picks (different models + colours from featured).
+const newArrivalIds = [413, 436, 452, 409];
+export const newArrivals: Product[] = newArrivalIds
+  .map(id => menProducts.find(p => p.id === id))
+  .filter((p): p is Product => p !== undefined);
 
 export const allProducts: Product[] = [...womenProducts, ...menProducts];
 
