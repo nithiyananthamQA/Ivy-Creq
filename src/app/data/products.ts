@@ -3,6 +3,38 @@ import imgBannerImage from '../../assets/banners/homepage-hero-banner.webp';
 import imgBannerImage1 from '../../assets/banners/homepage-secondary-banner.webp';
 import imgBannerImage3 from '../../assets/banners/homepage-bottom-banner.webp';
 import imgMensBanner from '../../assets/banners/homepage-mens-banner.webp';
+// New hero auto-slider banners (3 slides)
+import imgHeroSlide1 from '../../assets/banners/hero-slide-1.webp';
+import imgHeroSlide2 from '../../assets/banners/hero-slide-2.webp';
+import imgHeroSlide3 from '../../assets/banners/hero-slide-3.webp';
+import imgHeroSlide1Mobile from '../../assets/banners/hero-slide-1-mobile.webp';
+import imgHeroSlide2Mobile from '../../assets/banners/hero-slide-2-mobile.webp';
+import imgHeroSlide3Mobile from '../../assets/banners/hero-slide-3-mobile.webp';
+// New bottom banner (replaces old)
+import imgBottomBanner from '../../assets/banners/bottom-banner.webp';
+import imgBottomBannerMobile from '../../assets/banners/bottom-banner-mobile.webp';
+// Category tiles (4 — solid / designer / classic / printed)
+import imgCategorySolid from '../../assets/categories/category-solid.webp';
+import imgCategoryDesigner from '../../assets/categories/category-designer.webp';
+import imgCategoryClassic from '../../assets/categories/category-classic.webp';
+import imgCategoryPrinted from '../../assets/categories/category-printed.webp';
+import imgCategorySolidMobile from '../../assets/categories/category-solid-mobile.webp';
+import imgCategoryDesignerMobile from '../../assets/categories/category-designer-mobile.webp';
+import imgCategoryClassicMobile from '../../assets/categories/category-classic-mobile.webp';
+import imgCategoryPrintedMobile from '../../assets/categories/category-printed-mobile.webp';
+// Lifestyle 3-set slider (6 images, paired)
+import imgLifestyle1a from '../../assets/lifestyle/lifestyle-1a.webp';
+import imgLifestyle1b from '../../assets/lifestyle/lifestyle-1b.webp';
+import imgLifestyle2a from '../../assets/lifestyle/lifestyle-2a.webp';
+import imgLifestyle2b from '../../assets/lifestyle/lifestyle-2b.webp';
+import imgLifestyle3a from '../../assets/lifestyle/lifestyle-3a.webp';
+import imgLifestyle3b from '../../assets/lifestyle/lifestyle-3b.webp';
+import imgLifestyle1aMobile from '../../assets/lifestyle/lifestyle-1a-mobile.webp';
+import imgLifestyle1bMobile from '../../assets/lifestyle/lifestyle-1b-mobile.webp';
+import imgLifestyle2aMobile from '../../assets/lifestyle/lifestyle-2a-mobile.webp';
+import imgLifestyle2bMobile from '../../assets/lifestyle/lifestyle-2b-mobile.webp';
+import imgLifestyle3aMobile from '../../assets/lifestyle/lifestyle-3a-mobile.webp';
+import imgLifestyle3bMobile from '../../assets/lifestyle/lifestyle-3b-mobile.webp';
 // Category images
 import imgShopMensOuterwear from '../../assets/categories/shop-mens-outerwear.webp';
 import imgShopMensPolos from '../../assets/categories/shop-mens-polos.webp';
@@ -296,4 +328,36 @@ export {
   imgMensBanner,
   imgIcon,
   imgYourPrivacyChoicesIcon,
+  // Hero slider
+  imgHeroSlide1,
+  imgHeroSlide2,
+  imgHeroSlide3,
+  imgHeroSlide1Mobile,
+  imgHeroSlide2Mobile,
+  imgHeroSlide3Mobile,
+  // Bottom banner
+  imgBottomBanner,
+  imgBottomBannerMobile,
+  // Category tiles
+  imgCategorySolid,
+  imgCategoryDesigner,
+  imgCategoryClassic,
+  imgCategoryPrinted,
+  imgCategorySolidMobile,
+  imgCategoryDesignerMobile,
+  imgCategoryClassicMobile,
+  imgCategoryPrintedMobile,
+  // Lifestyle slider
+  imgLifestyle1a,
+  imgLifestyle1b,
+  imgLifestyle2a,
+  imgLifestyle2b,
+  imgLifestyle3a,
+  imgLifestyle3b,
+  imgLifestyle1aMobile,
+  imgLifestyle1bMobile,
+  imgLifestyle2aMobile,
+  imgLifestyle2bMobile,
+  imgLifestyle3aMobile,
+  imgLifestyle3bMobile,
 };

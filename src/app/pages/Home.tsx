@@ -5,7 +5,14 @@ import SEOHead from '../components/SEOHead';
 import { fabricFeatures } from '../components/FabricFeatures';
 import {
   newArrivals, womenProducts, menFeatured,
-  imgBannerImage, imgBannerImage1, imgMensBanner,
+  imgBannerImage1, imgMensBanner,
+  imgHeroSlide1, imgHeroSlide2, imgHeroSlide3,
+  imgHeroSlide1Mobile, imgHeroSlide2Mobile, imgHeroSlide3Mobile,
+  imgBottomBanner, imgBottomBannerMobile,
+  imgCategorySolid, imgCategoryDesigner, imgCategoryClassic, imgCategoryPrinted,
+  imgCategorySolidMobile, imgCategoryDesignerMobile, imgCategoryClassicMobile, imgCategoryPrintedMobile,
+  imgLifestyle1a, imgLifestyle1b, imgLifestyle2a, imgLifestyle2b, imgLifestyle3a, imgLifestyle3b,
+  imgLifestyle1aMobile, imgLifestyle1bMobile, imgLifestyle2aMobile, imgLifestyle2bMobile, imgLifestyle3aMobile, imgLifestyle3bMobile,
 } from '../data/products';
 
 const Slider = lazy(() => import('react-slick'));
@@ -33,75 +40,251 @@ function LazySection({ children, fallbackHeight = '200px' }: { children: React.R
   );
 }
 
+// 3 hero slides for auto-sliding banner; first slide is eagerly loaded for LCP.
+const HERO_SLIDES: { desktop: string; mobile: string; alt: string }[] = [
+  { desktop: imgHeroSlide1, mobile: imgHeroSlide1Mobile, alt: 'Ivy Crew — premium performance apparel' },
+  { desktop: imgHeroSlide2, mobile: imgHeroSlide2Mobile, alt: 'Ivy Crew — engineered for the modern man' },
+  { desktop: imgHeroSlide3, mobile: imgHeroSlide3Mobile, alt: 'Ivy Crew — built to move, made to stand out' },
+];
+
 function HeroBanner() {
+  const settings = {
+    dots: true,
+    arrows: false,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    speed: 900,
+    pauseOnHover: false,
+    fade: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+  // Full-bleed photography hero: image fills 100vh on desktop, aspect-driven on
+  // mobile. NO text overlay on the image — the photo carries the entire mood.
+  // Brand statement + CTA live below in a clean white panel with generous space.
   return (
     <section className="relative w-full">
-      {/* Mobile-only image strip (matches desktop framing, no people cropped) */}
-      <div className="relative aspect-[1920/816] md:hidden">
-        <img
-          src={imgBannerImage}
-          alt="Ivy Crew — Premium performance apparel for men and women"
-          className="w-full h-full object-cover object-center"
-          sizes="100vw"
-          width={1920}
-          height={816}
-          fetchPriority="high"
-        />
-      </div>
+      <Suspense
+        fallback={
+          <div className="aspect-[16/9] md:h-screen md:aspect-auto bg-[#1a2026]" />
+        }
+      >
+        <Slider {...settings} className="hero-slider hero-slider-full">
+          {HERO_SLIDES.map((slide, i) => (
+            <div key={i}>
+              <picture>
+                <source media="(max-width: 767px)" srcSet={slide.mobile} />
+                <img
+                  src={slide.desktop}
+                  alt={slide.alt}
+                  className="w-full aspect-[16/9] md:aspect-auto md:h-screen object-cover object-center block"
+                  sizes="100vw"
+                  width={2560}
+                  height={1440}
+                  fetchPriority={i === 0 ? 'high' : 'low'}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+              </picture>
+            </div>
+          ))}
+        </Slider>
+      </Suspense>
 
-      {/* Mobile-only text section under the image */}
-      <div className="md:hidden bg-[#1a2026] text-white text-center px-5 py-6">
-        <h1 className="text-2xl font-bold mb-2 leading-tight">
-          Performance,&nbsp;Tailored.
-        </h1>
-        <p className="text-sm mb-4 text-white/80 leading-snug">
-          Premium apparel engineered to move with you.
-        </p>
-        <div className="flex gap-3">
-          <Link to="/men" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-colors text-center">
-            Shop Men's
+      {/* Editorial text panel below the slider — clean white space, premium typography */}
+      <div className="bg-white border-t border-[#e5e5e5]">
+        <div className="max-w-5xl mx-auto px-6 md:px-10 py-14 md:py-20 lg:py-24 text-center">
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#6c7782] mb-5 md:mb-7">
+            Spring &mdash; Summer 2026
+          </p>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#0b0f12] leading-[1.05] tracking-tight mb-5 md:mb-7">
+            Built for the way you live.
+          </h1>
+          <p className="text-base md:text-lg text-[#47515c] leading-relaxed max-w-2xl mx-auto mb-8 md:mb-10">
+            Premium polos &amp; tees, engineered with soft cotton blends, modern fits,
+            and quiet confidence. Everyday essentials, reimagined.
+          </p>
+          <Link
+            to="/men"
+            className="inline-block bg-[#0b0f12] text-white px-10 md:px-12 py-3.5 md:py-4 font-bold text-xs md:text-sm uppercase tracking-[0.2em] hover:bg-[#1a2026] transition-colors"
+          >
+            Shop the Collection
           </Link>
-          {/* Women's collection hidden for launch — re-enable when stocked */}
-          {/* <Link to="/women" className="flex-1 bg-white text-black px-4 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-gray-100 transition-colors text-center">
-            Shop Women's
-          </Link> */}
         </div>
       </div>
+    </section>
+  );
+}
 
-      {/* Desktop — image with overlay (unchanged) */}
-      <div className="relative hidden md:block md:aspect-[1024/600] lg:aspect-[1920/700]">
-        <img
-          src={imgBannerImage}
-          alt="Ivy Crew — Premium performance apparel for men and women"
-          className="w-full h-full object-cover object-center"
-          sizes="100vw"
-          width={1920}
-          height={700}
-          fetchPriority="high"
-        />
+// --- Categories Section: 4 portrait tiles ---
+const CATEGORY_TILES = [
+  { desktop: imgCategorySolid,    mobile: imgCategorySolidMobile,    label: "Solid Polo's",    href: '/men' },
+  { desktop: imgCategoryDesigner, mobile: imgCategoryDesignerMobile, label: "Designer Polo's", href: '/men' },
+  { desktop: imgCategoryClassic,  mobile: imgCategoryClassicMobile,  label: "Classic Polo's",  href: '/men' },
+  { desktop: imgCategoryPrinted,  mobile: imgCategoryPrintedMobile,  label: 'Printed Polo',    href: '/men' },
+];
 
-        {/* Desktop — centered right */}
-        <div className="absolute inset-0 hidden md:flex items-center justify-end">
-          <div className="text-right text-white px-12 lg:px-20">
-            <div className="bg-black/30 backdrop-blur-[3px] border border-white/15 rounded-sm px-10 py-10 lg:px-12 lg:py-12 max-w-2xl lg:max-w-3xl">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-4 drop-shadow-md">
-                Performance,&nbsp;Tailored.
-              </h1>
-              <p className="text-lg mb-8 text-white/90 drop-shadow-sm">
-                Premium apparel engineered to move with you — from boardroom to&nbsp;fairway.
-              </p>
-              <div className="flex flex-row gap-4 justify-end">
-                <Link to="/men" className="bg-white text-black px-6 lg:px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center whitespace-nowrap">
-                  Shop Men's Collection
-                </Link>
-                {/* Women's collection hidden for launch — re-enable when stocked */}
-                {/* <Link to="/women" className="bg-white text-black px-6 lg:px-8 py-3 font-bold text-sm hover:bg-gray-100 transition-colors text-center whitespace-nowrap">
-                  Shop Women's Collection
-                </Link> */}
+function CategoriesSection() {
+  return (
+    <section className="py-8 md:py-12 lg:py-16 bg-white">
+      <div className="max-w-[1920px] mx-auto px-4 md:px-8">
+        <div className="mb-6 md:mb-8">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2026]">
+            Shop by Category
+          </h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+          {CATEGORY_TILES.map((tile, i) => (
+            <Link key={tile.label} to={tile.href} className="group block">
+              <div className="relative aspect-[3712/4608] overflow-hidden bg-[#f5f7f8]">
+                <picture>
+                  <source media="(max-width: 767px)" srcSet={tile.mobile} />
+                  <img
+                    src={tile.desktop}
+                    alt={tile.label}
+                    className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+                    loading={i < 2 ? 'eager' : 'lazy'}
+                    width={600}
+                    height={745}
+                  />
+                </picture>
               </div>
-            </div>
+              <p className="mt-3 text-center text-sm md:text-base text-[#1a2026] tracking-wide">
+                {tile.label}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- Lifestyle 3-set auto-slider: each slide shows 2 portrait images side-by-side ---
+const LIFESTYLE_SETS: { left: { desktop: string; mobile: string }; right: { desktop: string; mobile: string } }[] = [
+  {
+    left:  { desktop: imgLifestyle1a, mobile: imgLifestyle1aMobile },
+    right: { desktop: imgLifestyle1b, mobile: imgLifestyle1bMobile },
+  },
+  {
+    left:  { desktop: imgLifestyle2a, mobile: imgLifestyle2aMobile },
+    right: { desktop: imgLifestyle2b, mobile: imgLifestyle2bMobile },
+  },
+  {
+    left:  { desktop: imgLifestyle3a, mobile: imgLifestyle3aMobile },
+    right: { desktop: imgLifestyle3b, mobile: imgLifestyle3bMobile },
+  },
+];
+
+function LifestyleSliderSection() {
+  const settings = {
+    dots: true,
+    arrows: false,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    speed: 800,
+    pauseOnHover: true,
+    fade: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+  return (
+    <section className="py-8 md:py-12 lg:py-16 bg-white">
+      <div className="max-w-[1920px] mx-auto px-4 md:px-8 mb-6 md:mb-8">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2026]">
+          Worn the Ivy Way
+        </h2>
+      </div>
+      <div className="max-w-[1920px] mx-auto px-0 md:px-8">
+        <Suspense fallback={<div className="aspect-[2/1] md:aspect-[16/9] bg-[#f5f7f8]" />}>
+          <Slider {...settings} className="lifestyle-slider">
+            {LIFESTYLE_SETS.map((set, i) => (
+              <div key={i}>
+                <div className="grid grid-cols-2 gap-1 md:gap-3 lg:gap-4">
+                  <picture>
+                    <source media="(max-width: 767px)" srcSet={set.left.mobile} />
+                    <img
+                      src={set.left.desktop}
+                      alt={`Lifestyle set ${i + 1} — left`}
+                      className="w-full h-full object-cover object-center aspect-[3712/4608]"
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      width={900}
+                      height={1117}
+                    />
+                  </picture>
+                  <picture>
+                    <source media="(max-width: 767px)" srcSet={set.right.mobile} />
+                    <img
+                      src={set.right.desktop}
+                      alt={`Lifestyle set ${i + 1} — right`}
+                      className="w-full h-full object-cover object-center aspect-[3712/4608]"
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      width={900}
+                      height={1117}
+                    />
+                  </picture>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </Suspense>
+      </div>
+    </section>
+  );
+}
+
+// --- Bottom hero banner with overlay text ---
+function BottomBannerSection() {
+  return (
+    <section className="relative w-full">
+      <div className="relative aspect-[1920/816] md:aspect-[16/9] lg:aspect-[1920/780]">
+        <picture>
+          <source media="(max-width: 767px)" srcSet={imgBottomBannerMobile} />
+          <img
+            src={imgBottomBanner}
+            alt="Built to Move. Made to Stand Out."
+            className="w-full h-full object-cover object-center"
+            loading="lazy"
+            decoding="async"
+            width={1920}
+            height={780}
+          />
+        </picture>
+        {/* Overlay: card on the right (desktop) / centered text (mobile) */}
+        <div className="absolute inset-0 hidden md:flex items-end justify-start pb-8 lg:pb-12 px-6 lg:px-12">
+          <div className="bg-black/35 backdrop-blur-[3px] border border-white/15 rounded-sm px-8 lg:px-12 py-6 lg:py-8 max-w-xl text-white">
+            <p className="text-xs uppercase tracking-[0.25em] text-white/80 mb-2">Men's Collection</p>
+            <h2 className="text-2xl lg:text-4xl font-bold mb-3 leading-tight drop-shadow-md">
+              Built to Move. Made to Stand Out.
+            </h2>
+            <p className="text-sm lg:text-base text-white/90 mb-5 drop-shadow-sm">
+              Performance essentials cut for the way you live — refined, breathable, ready for anything.
+            </p>
+            <Link
+              to="/men"
+              className="inline-block bg-white text-[#1a2026] px-6 lg:px-8 py-3 font-bold text-xs uppercase tracking-wider hover:bg-gray-200 transition-colors"
+            >
+              Shop Men's
+            </Link>
           </div>
         </div>
+      </div>
+      {/* Mobile text */}
+      <div className="md:hidden bg-[#1a2026] text-white text-center px-5 py-6">
+        <p className="text-[10px] uppercase tracking-[0.25em] text-white/70 mb-1.5">Men's Collection</p>
+        <h2 className="text-xl font-bold mb-2 leading-tight">
+          Built to Move. Made to Stand Out.
+        </h2>
+        <p className="text-xs text-white/80 mb-4 leading-snug">
+          Performance essentials cut for the way you live.
+        </p>
+        <Link
+          to="/men"
+          className="inline-block bg-white text-[#1a2026] px-6 py-2.5 font-bold text-xs uppercase tracking-wider hover:bg-gray-200 transition-colors"
+        >
+          Shop Men's
+        </Link>
       </div>
     </section>
   );
@@ -467,8 +650,21 @@ export default function Home() {
         description="Shop men's and women's premium performance apparel at Ivy Crew. UV-protective, quick-dry, wrinkle-resistant clothing built for style and comfort. Free shipping on orders ₹2,000+."
       />
       <HeroBanner />
-      <NewArrivalsSection />
-      <MensCollectionSection />
+      <LazySection fallbackHeight="600px">
+        <CategoriesSection />
+      </LazySection>
+      <LazySection fallbackHeight="500px">
+        <NewArrivalsSection />
+      </LazySection>
+      <LazySection fallbackHeight="600px">
+        <LifestyleSliderSection />
+      </LazySection>
+      <LazySection fallbackHeight="600px">
+        <MensCollectionSection />
+      </LazySection>
+      <LazySection fallbackHeight="500px">
+        <BottomBannerSection />
+      </LazySection>
       {/* Women's collection hidden for launch — swap `false` to `true` to re-enable */}
       {false && (
         <LazySection fallbackHeight="600px">
