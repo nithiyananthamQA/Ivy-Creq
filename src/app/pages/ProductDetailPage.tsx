@@ -1,12 +1,12 @@
 import { useState, useRef, useCallback, useEffect, Fragment } from 'react';
-import { useParams, Link } from 'react-router';
+import { useParams, Link, Navigate } from 'react-router';
 import { Heart, ChevronLeft, ChevronRight, Truck, RotateCcw, Shield, X, ZoomIn } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import SizeGuideModal from '../components/SizeGuideModal';
 import FabricFeatures from '../components/FabricFeatures';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
-import { getProductById, getMobileImages, getMobileHdImages } from '../data/products';
+import { getProductById, getProductBySlug, getProductSlug, getMobileImages, getMobileHdImages } from '../data/products';
 
 const LENS_SIZE = 140;
 const ZOOM = 2;
@@ -292,8 +292,9 @@ function MobileImageViewer({
 
 /* ─── Product detail page ────────────────────────────────────────────────── */
 export default function ProductDetailPage() {
-  const { id } = useParams<{ id: string }>();
-  const product = getProductById(Number(id));
+  const { slug = '' } = useParams<{ slug: string }>();
+  // Legacy numeric URLs (/product/401) still resolve, then redirect to the slug URL below.
+  const product = /^\d+$/.test(slug) ? getProductById(Number(slug)) : getProductBySlug(slug);
   const { addToCart } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
 
@@ -378,6 +379,10 @@ export default function ProductDetailPage() {
   }, []);
 
   /* ── early return ──────────────────────────────────────────────────── */
+  if (product && slug !== getProductSlug(product)) {
+    return <Navigate to={`/product/${getProductSlug(product)}`} replace />;
+  }
+
   if (!product) {
     return (
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[60px] py-16 text-center">

@@ -198,20 +198,86 @@ function tshirtSeries(globMap: Record<string, { default: string }>, productNum: 
   return out;
 }
 
-// Mock metadata for the 77 t-shirts (placeholder pools — replace with real product data later)
-const TSHIRT_NAME_POOL = [
-  'Classic Crew Tee',
-  'Heritage Pocket Tee',
-  'Essential Cotton Tee',
-  'Vintage Wash Tee',
-  'Tailored Fit Tee',
-  'Soft Touch Tee',
-  'Athletic Stripe Tee',
-  'Performance Active Tee',
-  'Statement Graphic Tee',
-  'Modern Relaxed Tee',
-  'Premium Pima Tee',
-  'Refined Crew Tee',
+// One unique name per t-shirt, in image order (index 0 = tshirt-1). Names drive the
+// product URL slug, so each must stay unique. Other metadata below is still placeholder pools.
+const TSHIRT_NAMES = [
+  'Denim Blue Micro Print Polo Tee',
+  'Sage Green Textured Print Polo Tee',
+  'Blush Pink Floral Print Polo Tee',
+  'Ivory Micro Print Polo Tee',
+  'Berry Floral Print Polo Tee',
+  'Blue Abstract Print Polo Tee',
+  'White Leaf Print Polo Tee',
+  'Sky Blue Mountain Stripe Polo Tee',
+  'Green Black Colour Block Polo Tee',
+  'Black Neon Leaf Panel Polo Tee',
+  'Black Neon Badge Polo Tee',
+  'Olive Brown Solid Polo Tee',
+  'Aqua Floral Print Polo Tee',
+  'Navy Tipped Placket Polo Tee',
+  'Olive Pinstripe Polo Tee',
+  'Sage Green Solid Polo Tee',
+  'Lilac Floral Line Art Polo Tee',
+  'Green Cream Chevron Polo Tee',
+  'Black Tonal Print Polo Tee',
+  'Sky Blue Coral Colour Block Polo Tee',
+  'Maroon Solid Polo Tee',
+  'Navy Mountain Stripe Polo Tee',
+  'Navy Solid Polo Tee',
+  'Sky Blue Chevron Polo Tee',
+  'Petrol Blue Solid Polo Tee',
+  'Peach Pocket Polo Tee',
+  'Navy Striped Polo Tee',
+  'White Solid Polo Tee',
+  'Charcoal Solid Polo Tee',
+  'Cream Solid Polo Tee',
+  'Charcoal Striped Polo Tee',
+  'Pink Floral Line Art Polo Tee',
+  'Rose Pink Solid Polo Tee',
+  'Mustard Solid Polo Tee',
+  'Pink Side Print Polo Tee',
+  'White Blue Gradient Stripe Polo Tee',
+  'Mustard Colour Block Polo Tee',
+  'Rust Blue Chevron Polo Tee',
+  'Mint Motif Print Polo Tee',
+  'Aqua Solid Polo Tee',
+  'Yellow Chest Graphic Polo Tee',
+  'Coral Melange Polo Tee',
+  'Olive Leaf Print Polo Tee',
+  'Olive Green Solid Polo Tee',
+  'Navy Oar Graphic Polo Tee',
+  'Coral Diagonal Colour Block Polo Tee',
+  'Sky Blue Oar Graphic Polo Tee',
+  'Black Solid Polo Tee',
+  'Off White Solid Polo Tee',
+  'Grey Wave Line Polo Tee',
+  'Sky Blue Wave Panel Polo Tee',
+  'White Red Navy Diagonal Polo Tee',
+  'White Floral Line Art Polo Tee',
+  'Black Contrast Collar Polo Tee',
+  'Red Navy Colour Block Polo Tee',
+  'Baby Pink Solid Polo Tee',
+  'Black Jersey Polo Tee',
+  'Grey Melange Polo Tee',
+  'Red Tipped Collar Polo Tee',
+  'Mustard Motif Print Polo Tee',
+  'Black Striped Collar Polo Tee',
+  'Raspberry Tipped Collar Polo Tee',
+  'Black Orange Tipped Polo Tee',
+  'Midnight Neon Tipped Polo Tee',
+  'Bottle Green Tipped Polo Tee',
+  'Navy Printed Collar Polo Tee',
+  'Sage Botanical Print Polo Tee',
+  'White Pink Collar Polo Tee',
+  'Ice Blue Solid Polo Tee',
+  'Cobalt Twin Tipped Polo Tee',
+  'White Mountain Stripe Polo Tee',
+  'Ivory Blue Stripe Polo Tee',
+  'White Red Brush Stripe Polo Tee',
+  'Beige Wave Stripe Polo Tee',
+  'White Motif Print Polo Tee',
+  'Mint Solid Polo Tee',
+  'White Classic Polo Tee',
 ];
 const TSHIRT_PRICE_POOL = ['₹799', '₹899', '₹999', '₹1,099', '₹1,199', '₹1,299', '₹1,399'];
 const TSHIRT_COLOR_POOL: string[][] = [
@@ -248,7 +314,7 @@ const menTshirts: Product[] = Array.from({ length: 77 }, (_, i) => {
   const thumb = tshirtLookup(tshirtThumbGlob, `tshirt-${n}-1.webp`);
   return {
     id: 400 + n,
-    name: `${TSHIRT_NAME_POOL[i % TSHIRT_NAME_POOL.length]} ${String(n).padStart(2, '0')}`,
+    name: TSHIRT_NAMES[i],
     price: TSHIRT_PRICE_POOL[i % TSHIRT_PRICE_POOL.length],
     image1: std[0],
     image2: std[1] ?? std[0],
@@ -297,6 +363,16 @@ export const allProducts: Product[] = [...womenProducts, ...menProducts];
 
 export function getProductById(id: number): Product | undefined {
   return allProducts.find(p => p.id === id);
+}
+
+// URL slug from the product name, e.g. "Classic Crew Tee 01" -> "classic-crew-tee-01".
+// Keep in sync with slugify() in scripts/generate-sitemap.mjs.
+export function getProductSlug(product: Product): string {
+  return product.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+export function getProductBySlug(slug: string): Product | undefined {
+  return allProducts.find(p => getProductSlug(p) === slug);
 }
 
 // Mobile-optimized images (loaded via glob for zero-config mapping)

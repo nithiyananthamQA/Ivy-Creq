@@ -4,10 +4,10 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "node scripts/generate-sitemap.mjs && vite build",
     "dev": "vite",
-    "dev:pages": "vite build && wrangler pages dev dist --port 8788",
-    "deploy": "vite build && wrangler pages deploy dist --project-name=ivy-crew"
+    "dev:pages": "npm run build && wrangler pages dev dist --port 8788",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name=ivy-crew"
   },
   "dependencies": {
     "@popperjs/core": "2.11.8",

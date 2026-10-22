@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { useFavorites } from '../context/FavoritesContext';
 import { useCart } from '../context/CartContext';
-import type { Product } from '../data/products';
+import { getProductSlug, type Product } from '../data/products';
 
 interface ProductCardProps {
   product: Product;
@@ -20,7 +20,7 @@ export default function ProductCard({ product, hoverable = true, loading = 'lazy
 
   return (
     <Link
-      to={`/product/${product.id}`}
+      to={`/product/${getProductSlug(product)}`}
       className="group relative bg-white cursor-pointer block"
       onMouseEnter={() => { if (hoverable) { setIsHovered(true); } }}
       onMouseLeave={() => hoverable && setIsHovered(false)}
