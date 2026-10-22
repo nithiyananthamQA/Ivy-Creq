@@ -4,7 +4,7 @@ import SEOHead from '../components/SEOHead';
 export default function NotFoundPage() {
   return (
     <>
-      <SEOHead title="Page Not Found" description="The page you're looking for doesn't exist." />
+      <SEOHead title="Page Not Found" description="The page you're looking for doesn't exist." noindex />
       <section className="py-16 md:py-24 px-4 md:px-8 lg:px-[60px]">
         <div className="max-w-[500px] mx-auto text-center">
           <p className="text-8xl font-black text-[#1a2026]/10 mb-4">404</p>
